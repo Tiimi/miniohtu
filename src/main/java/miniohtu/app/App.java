@@ -1,13 +1,14 @@
 package miniohtu.app;
 
-/**
- * Hello world!
- *
- */
 public class App 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        // testing...
+        try {
+            ViiteDB.resetDB("viite.db");
+        } catch(ClassNotFoundException e) {
+            System.err.println(e);
+        }
     }
 }
