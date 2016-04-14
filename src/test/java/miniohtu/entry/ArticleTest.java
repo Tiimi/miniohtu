@@ -42,7 +42,10 @@ public class ArticleTest {
     public void tearDown() {
     }
 
-    
+    @Test
+    public void mandatoryKonstructorTest() {
+        mandatoryKonstructor(mandatory);
+    }
     public void mandatoryKonstructor(Article a) {
         assertEquals("id", a.getId());
         assertEquals("author", a.getAuthor());
