@@ -16,9 +16,9 @@ import static org.junit.Assert.*;
  *
  * @author antti
  */
-public class App {
+public class AppTest {
     
-    public App() {
+    public AppTest() {
     }
     
     @BeforeClass
