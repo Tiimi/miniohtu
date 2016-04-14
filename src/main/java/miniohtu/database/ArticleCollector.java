@@ -1,8 +1,9 @@
 
-package miniohtu.app;
+package miniohtu.database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import miniohtu.entry.Article;
 
 public class ArticleCollector implements Collector<Article> {
 

@@ -1,5 +1,5 @@
 
-package miniohtu.app;
+package miniohtu.entry;
 
 public class Article {
     // Required fields

@@ -1,7 +1,9 @@
 
-package miniohtu.app;
+package miniohtu.database;
 
+import miniohtu.database.Collector;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,6 +18,12 @@ public class Database<Entry> {
         try {
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:" + name);
+            DatabaseMetaData metaData = connection.getMetaData();
+            ResultSet result = metaData.getTables(null, null, "ARTICLE", null);
+            if (result.next()) {       
+            } else {
+                createArticleTable();
+            }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -24,7 +32,7 @@ public class Database<Entry> {
     
     public void createArticleTable() throws SQLException {
         Statement statement = connection.createStatement();
-        statement.executeUpdate("DROP TABLE IF EXISTS ARTICLE");
+        //statement.executeUpdate("DROP TABLE IF EXISTS ARTICLE");
         
         String sql = "CREATE TABLE ARTICLE ("
                 + "id       STRING  NOT NULL,"

@@ -1,5 +1,5 @@
 
-package miniohtu.app;
+package miniohtu.database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

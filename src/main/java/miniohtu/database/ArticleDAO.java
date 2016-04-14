@@ -1,8 +1,9 @@
 
-package miniohtu.app;
+package miniohtu.database;
 
 import java.sql.SQLException;
 import java.util.List;
+import miniohtu.entry.Article;
 
 public class ArticleDAO implements EntryDAO<Article> {
 
