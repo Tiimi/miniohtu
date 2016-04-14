@@ -1,4 +1,3 @@
-
 package miniohtu.database;
 
 import java.sql.SQLException;
@@ -8,11 +7,11 @@ import miniohtu.entry.Article;
 public class ArticleDAO implements EntryDAO<Article> {
 
     private Database db;
-    
+
     public ArticleDAO(Database db) {
         this.db = db;
     }
-    
+
     @Override
     public void add(Article entry) throws SQLException {
         String sql = "INSERT INTO ARTICLE"
@@ -23,10 +22,10 @@ public class ArticleDAO implements EntryDAO<Article> {
                 + s(entry.getJournal()) + ", "
                 + entry.getYear() + ", "
                 + entry.getVolume() + " );";
-        
+
         db.update(sql);
     }
-    
+
     private String s(String s) {
         return "'" + s + "'";
     }
@@ -34,38 +33,38 @@ public class ArticleDAO implements EntryDAO<Article> {
     @Override
     public List<Article> findAll() throws SQLException {
         return db.queryAndCollect("SELECT * FROM ARTICLE", rs -> {
-           return new Article(
-               rs.getString("id"),
-               rs.getString("author"),
-               rs.getString("title"),
-               rs.getString("journal"),
-               rs.getInt("volume"),
-               rs.getInt("number"),
-               rs.getInt("year"),
-               rs.getString("pages"),
-               rs.getString("month"),
-               rs.getString("note"),
-               rs.getString("key")); 
+            return new Article(
+                    rs.getString("id"),
+                    rs.getString("author"),
+                    rs.getString("title"),
+                    rs.getString("journal"),
+                    rs.getInt("year"),
+                    rs.getInt("volume"),
+                    rs.getInt("number"),
+                    rs.getString("pages"),
+                    rs.getString("month"),
+                    rs.getString("note"),
+                    rs.getString("key"));
         });
     }
 
     @Override
     public Article find(String id) throws SQLException {
-        List<Article> matches = db.queryAndCollect("SELECT * FROM ARTICLE WHERE ID=" + id, rs -> {
+        List<Article> matches = db.queryAndCollect("SELECT * FROM ARTICLE WHERE ID='"+ id + "'", rs -> {
             return new Article(
-                rs.getString("id"),
-                rs.getString("author"),
-                rs.getString("title"),
-                rs.getString("journal"),
-                rs.getInt("volume"),
-                rs.getInt("number"),
-                rs.getInt("year"),
-                rs.getString("pages"),
-                rs.getString("month"),
-                rs.getString("note"),
-                rs.getString("key"));
+                    rs.getString("id"),
+                    rs.getString("author"),
+                    rs.getString("title"),
+                    rs.getString("journal"),
+                    rs.getInt("year"),
+                    rs.getInt("volume"),
+                    rs.getInt("number"),
+                    rs.getString("pages"),
+                    rs.getString("month"),
+                    rs.getString("note"),
+                    rs.getString("key"));
         });
-        
+
         return matches.isEmpty() ? null : matches.get(0);
     }
 }
