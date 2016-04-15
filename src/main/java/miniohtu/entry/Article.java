@@ -51,7 +51,8 @@ public class Article {
 
     @Override
     public String toString() {
-        return "Article title: " + this.title + " \nWritten by: " + this.author;
+        return "Article title: " + this.title + " \nWritten by: " + this.author + " - year: " + this.year +
+                "\nJournal: " + this.journal + " - volume: " + this.volume;
     }
     
     public String getId() {
