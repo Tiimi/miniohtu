@@ -84,10 +84,8 @@ public class TextUI {
         String month = io.nextString();
         io.print("note: ");
         String note = io.nextString();
-        io.print("id: ");
-        String id = io.nextString();
 
-        Article a = new Article(id, author, title, journal, year, volume, number, pages, month, note, key);
+        Article a = new Article(key, author, title, journal, year, volume, number, pages, month, note);
 
         try {
             articleDAO.add(a);
@@ -102,7 +100,7 @@ public class TextUI {
     private void listaa() {
         try {
             for (Article article : articleDAO.findAll()) {
-                io.print(article.toString());
+                io.print(article.toString() + "\n");
             }
         } catch (SQLException ex) {
             io.print("VIRHE");

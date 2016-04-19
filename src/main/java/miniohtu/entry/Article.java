@@ -15,10 +15,9 @@ public class Article {
     private String pages;
     private String month;
     private String note;
-    private String key;
     
     public Article(String id, String author, String title, String journal, int year, int volume, 
-            int number, String pages, String month, String note, String key) {
+            int number, String pages, String month, String note) {
         this.id = id;
         this.author = author;
         this.title = title;
@@ -30,7 +29,6 @@ public class Article {
         this.pages = pages;
         this.month = month;
         this.note = note;
-        this.key = key;
     }
     
     // Required fields only.
@@ -42,11 +40,10 @@ public class Article {
         this.year = year;
         this. volume = volume;
         
-        this.number = -1;
+        this.number = Integer.MAX_VALUE;
         this.pages = null;
         this.month = null;
         this.note = null;
-        this.key = null;
     }
 
     @Override
@@ -95,7 +92,4 @@ public class Article {
         return note;
     }
 
-    public String getKey() {
-        return key;
-    }
 }
