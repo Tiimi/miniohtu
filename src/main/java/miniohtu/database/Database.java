@@ -22,7 +22,7 @@ public class Database<Entry> {
             ResultSet result = metaData.getTables(null, null, "ARTICLE", null);
             if (result.next()) {
             } else {
-                createArticleTable();
+                createTables();
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -30,7 +30,13 @@ public class Database<Entry> {
 
     }
 
-    public void createArticleTable() throws SQLException {
+    public void createTables() throws SQLException {
+        createArticleTable();
+        createBookTable();
+        createBookletTable();
+    }
+    
+    private void createArticleTable() throws SQLException {
         Statement statement = connection.createStatement();
         //statement.executeUpdate("DROP TABLE IF EXISTS ARTICLE");
 
@@ -49,6 +55,31 @@ public class Database<Entry> {
 
         statement.execute(sql);
         statement.close();
+    }
+    
+    private void createBookTable() throws SQLException {
+        Statement statement = connection.createStatement();
+        
+        String sql = "CREATE TABLE BOOK ("
+                + "id       STRING  NOT NULL,"
+                + "author   STRING  NOT NULL,"
+                + "title    STRING  NOT NULL,"
+                + "journal  STRING  NOT NULL,"
+                + "year     INTEGER NOT NULL,"
+                + "volume   INTEGER NOT NULL,"
+                + "number   INTEGER,"
+                + "series   STRING,"
+                + "address  STRING,"
+                + "edition  INTEGER,"
+                + "month    STRING,"
+                + "note     STRING,"
+                + "key      STRING )";
+        
+        statement.execute(sql);
+        statement.close();
+    }
+    
+    private void createBookletTable() throws SQLException {
     }
 
     public List<Entry> queryAndCollect(String query, Collector<Entry> col) throws SQLException {
