@@ -23,7 +23,7 @@ public class ViiteBibtex {
                 + ((a.getPages() == null) ? "" : "  pages = {" + a.getPages() + "},\n")
                 + ((a.getMonth() == null) ? "" : "  month = " + a.getMonth() + ",\n")
                 + ((a.getNote() == null) ? "" : "  note = {" + a.getNote() + "},\n")
-                + ((a.getVolume() == Integer.MAX_VALUE) ? "" : "  volume = " + a.getVolume() + ",\n")
+                + "  volume = " + a.getVolume() + ",\n"
                 + "}";
         return bibtex;
     }
