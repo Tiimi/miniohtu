@@ -23,7 +23,7 @@ public class ArticleTest {
     
     public ArticleTest() {
         mandatory = new Article("id", "author", "title", "journal", 1, 2);
-        allParam = new Article("id", "author", "title", "journal", 1, 2, 3, "2-3","month","note", "key");
+        allParam = new Article("id", "author", "title", "journal", 1, 2, 3, "2-3","month","note");
     }
     
     @BeforeClass
@@ -62,6 +62,6 @@ public class ArticleTest {
         assertEquals("2-3", allParam.getPages());
         assertEquals("month", allParam.getMonth());
         assertEquals("note", allParam.getNote());
-        assertEquals("key", allParam.getKey());
+        assertEquals("id", allParam.getId());
     }
 }

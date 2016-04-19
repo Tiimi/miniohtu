@@ -9,7 +9,7 @@ scenario "create a new article", {
         database = new Database("test1.db")   
         //clear testing db (if one was created before)
         database.resetDB()
-        io = new IOStub("lisaa","artikkeli","abc123","pentti","title","journal","2000","1","1","1-2","month","note","id","listaa","lopeta")
+        io = new IOStub("lisaa","artikkeli","abc123","pentti","title","journal","2000","1","1","1-2","month","note","listaa","lopeta")
         test = new TextUI(io, database)
     }
     when 'a new article is added', {
