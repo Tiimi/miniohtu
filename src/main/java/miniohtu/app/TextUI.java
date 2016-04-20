@@ -1,43 +1,39 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package miniohtu.app;
 
 import miniohtu.database.Database;
 import miniohtu.entry.Article;
 import miniohtu.database.ArticleDAO;
 import java.sql.SQLException;
+import java.util.InputMismatchException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import miniohtu.IO.IO;
+import miniohtu.database.BookDAO;
 
-/**
- *
- * @author antti
- */
 public class TextUI {
 
-    private final String help = "Komennot\n lisaa\n listaa\n lopeta\n";
-    private final String addHelp = "Valitse lisättävä viite typpi:\nartikkeli\n\nperu peruu toiminnon\n";
+    private final String help = "Komennot\n lisaa\n listaa\n tallenna\nlopeta\n";
+    private final String addHelp = "\nValitse lisättävä viite typpi:\n article\n book\n booklet\n\n(peru peruu toiminnon)\n>";
     private final String wrongCommand = "Väärä komento: ";
     private final IO io;
     private final Database db;
+
     private final ArticleDAO articleDAO;
+    private final BookDAO bookDAO;
 
     public TextUI(IO io, Database db) {
         this.io = io;
         this.db = db;
         this.articleDAO = new ArticleDAO(this.db);
+        this.bookDAO = new BookDAO(this.db);
     }
 
     public void run() {
-        io.print(help);
+        
         while (true) {
-            io.print(">");
+            io.print(help);
+            io.print("> ");
             String komento = io.nextString();
-            io.print("KOMENTO: " + komento);
             if (komento.equals("lopeta")) {
                 break;
             }
@@ -47,43 +43,49 @@ public class TextUI {
 
     public void runCommand(String komento) {
         if (komento.equals("lisaa")) {
-            lisaa();
+            add();
         } else if (komento.equals("listaa")) {
-            listaa();
+            list();
+        } else if (komento.equals("tallenna")) {
+            save();
         } else {
-            io.print(wrongCommand + komento);
+            io.print(wrongCommand + komento + "\n");
         }
 
     }
 
-    public void lisaa() {
+    public void add() {
         io.print(addHelp);
         String komento = io.nextString();
         if (komento.equals("peru")) {
             return;
+        } else if (komento.equals("artikkeli")) {
+            addArticle();
+        } else if (komento.equals("book")) {
+            addBook();
+        } else if (komento.equals("booklet")) {
+            addBooklet();
+        } else {
+            io.print("Viite tyyppiä: " + komento + "\n\n");
         }
-        io.print("\nSyötä kentät: ");
 
-        io.print("citation key: ");
-        String key = io.nextString();
-        io.print("author: ");
-        String author = io.nextString();
-        io.print("title: ");
-        String title = io.nextString();
-        io.print("journal: ");
-        String journal = io.nextString();
-        io.print("year: ");
-        int year = io.nextInt();
-        io.print("volume: ");
-        int volume = io.nextInt();
-        io.print("number: ");
-        int number = io.nextInt();
-        io.print("pages: ");
-        String pages = io.nextString();
-        io.print("month: ");
-        String month = io.nextString();
-        io.print("note: ");
-        String note = io.nextString();
+    }
+
+    private void addArticle() {
+        io.print("Syötä pakolliset kentät:\n");
+
+        String key = askString("citation key");
+        String author = askString("author");
+        String title = askString("title");
+        String journal = askString("journal");
+        int year = askInteger("year");
+        
+        io.print("\nSyötä valinnaiset kentät:\n");
+        int volume = askInteger("volume");
+        int number = askInteger("number");
+        String pages = askString("pages");
+        String month = askString("month");
+        String note = askString("note");
 
         Article a = new Article(key, author, title, journal, year, volume, number, pages, month, note);
 
@@ -92,18 +94,83 @@ public class TextUI {
             io.print("Artikkeli lisätty.");
         } catch (SQLException ex) {
             io.print("Lisäyt epäonnistui. SQLException");
+            io.print(ex.getMessage());
         }
-
-        
     }
 
-    private void listaa() {
+    private void addBook() {
+        io.print("Syötä pakolliset kentät:\n");
+        String citKey = askString("citation key");
+        String author = askString("author");
+        String title = askString("title");
+        String publisher = askString("publisher");
+        int year = askInteger("year");
+
+        io.print("\nSyötä valinnaiset kentät:\n");
+        int volume = askInteger("volume");
+        int series = askInteger("series");
+        String address = askString("address");
+        int edition = askInteger("edition");
+        int month = askInteger("month");
+        String note = askString("note");
+        String ISBN = askString("isbn");
+
+    }
+    
+    private void addBooklet() {
+        io.print("Syötä pakolliset kentät:\n");
+        String key = askString("citation key");
+        String title = askString("title");
+        
+        io.print("\nSyötä valinnaiset kentät:\n");
+        String author = askString("author");
+        String howpublished = askString("howpublished");
+        int month = askInteger("month");
+        int year = askInteger("year");
+        String note = askString("note");
+    }
+
+    private int askInteger(String kentanNimi) {
+        int kokonaisluku = 0;
+        while (true) {
+            io.print(kentanNimi + ": ");
+            try {
+                kokonaisluku = io.nextInt();
+                break;
+            } catch (NumberFormatException e) {
+                io.print("Virhe: anna kokonaisluku");
+            }
+        }
+
+        return kokonaisluku;
+    }
+
+    private String askString(String kentanNimi) {
+        io.print(kentanNimi + ": ");
+        return io.nextString();
+    }
+
+    private void list() {
         try {
+            io.print("ARTICLES:\n\n");
             for (Article article : articleDAO.findAll()) {
                 io.print(article.toString() + "\n");
             }
         } catch (SQLException ex) {
-            io.print("VIRHE");
+            io.print("SQL VIRHE");
         }
+        try {
+            io.print("BOOKS:\n\n");
+            for (Article article : articleDAO.findAll()) {
+                io.print(article.toString() + "\n");
+            }
+        } catch (SQLException ex) {
+            io.print("SQL VIRHE");
+        }
+        io.print("\n");
+    }
+
+    private void save() {
+
     }
 }

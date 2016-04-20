@@ -21,7 +21,7 @@ public class ConsoleIO implements IO {
 
     @Override
     public void print(String s) {
-        System.out.println(s);
+        System.out.print(s);
     }
 
     @Override
@@ -30,8 +30,9 @@ public class ConsoleIO implements IO {
     }
 
     @Override
-    public int nextInt() {
-        return scanner.nextInt();
+    public int nextInt() throws NumberFormatException {
+        String input = scanner.nextLine();
+        return Integer.parseInt(input);
     }
 
     

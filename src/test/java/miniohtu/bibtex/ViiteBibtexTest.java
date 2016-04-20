@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package miniohtu.bibtex;
 
 import miniohtu.entry.Article;
@@ -13,10 +8,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author antti
- */
 public class ViiteBibtexTest {
 
     public ViiteBibtexTest() {
@@ -48,7 +39,7 @@ public class ViiteBibtexTest {
                 + "  year = {2000},\n"
                 + "  volume = 1,\n"
                 + "}";
-        assertEquals(expected, ViiteBibtex.toBibtexEntry(article));
+        assertEquals(expected, ViiteBibtex.toBibtex(article));
     }
     
     @Test
@@ -65,6 +56,6 @@ public class ViiteBibtexTest {
                 + "  note = {This is a note},\n"
                 + "  volume = 1,\n"
                 + "}";             
-                assertEquals(expected, ViiteBibtex.toBibtexEntry(article));
+                assertEquals(expected, ViiteBibtex.toBibtex(article));
     }
 }

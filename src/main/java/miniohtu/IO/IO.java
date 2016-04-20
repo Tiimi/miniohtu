@@ -13,6 +13,6 @@ public interface IO {
     
     public void print(String s);
     public String nextString();
-    public int nextInt();
+    public int nextInt() throws NumberFormatException;
     
 }
