@@ -17,7 +17,7 @@ public class ArticleCollector implements Collector<Article> {
         int number      = rs.getInt("number");
         int year        = rs.getInt("year");
         String pages    = rs.getString("pages");
-        String month    = rs.getString("month");
+        int month    = rs.getInt("month");
         String note     = rs.getString("note");
         
         return new Article(id, author, title, journal, volume, number, year, pages, month, note);

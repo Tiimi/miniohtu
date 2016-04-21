@@ -22,8 +22,8 @@ public class ArticleTest {
     private Article allParam;
     
     public ArticleTest() {
-        mandatory = new Article("id", "author", "title", "journal", 1, 2);
-        allParam = new Article("id", "author", "title", "journal", 1, 2, 3, "2-3","month","note");
+        mandatory = new Article("id", "author", "title", "journal", 1);
+        allParam = new Article("id", "author", "title", "journal", 1, 2, 3, "2-3",1,"note");
     }
     
     @BeforeClass
@@ -52,7 +52,6 @@ public class ArticleTest {
         assertEquals("title", a.getTitle());
         assertEquals("journal", a.getJournal());
         assertEquals(1, a.getYear());
-        assertEquals(2, a.getVolume()); 
     }
     
     @Test 
@@ -60,7 +59,7 @@ public class ArticleTest {
         mandatoryKonstructor(allParam);
         assertEquals(3, allParam.getNumber());
         assertEquals("2-3", allParam.getPages());
-        assertEquals("month", allParam.getMonth());
+        assertEquals(1, allParam.getMonth());
         assertEquals("note", allParam.getNote());
         assertEquals("id", allParam.getId());
     }

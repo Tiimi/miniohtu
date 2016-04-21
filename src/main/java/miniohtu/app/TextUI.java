@@ -85,7 +85,7 @@ public class TextUI {
         int volume = askInteger("volume");
         int number = askInteger("number");
         String pages = askString("pages");
-        String month = askString("month");
+        int month = askInteger("month");
         String note = askString("note");
 
         Article a = new Article(key, author, title, journal, year, volume, number, pages, month, note);
@@ -94,7 +94,7 @@ public class TextUI {
             articleDAO.add(a);
             io.print("Artikkeli lisätty.");
         } catch (SQLException ex) {
-            io.print("Lisäyt epäonnistui. SQLException");
+            io.print("Lisäys epäonnistui. SQLException");
             io.print(ex.getMessage());
         }
     }

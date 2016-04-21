@@ -42,7 +42,7 @@ public class ArticleDAO implements EntryDAO<Article> {
                     rs.getInt("volume"),
                     rs.getInt("number"),
                     rs.getString("pages"),
-                    rs.getString("month"),
+                    rs.getInt("month"),
                     rs.getString("note"));
         });
     }
@@ -59,7 +59,7 @@ public class ArticleDAO implements EntryDAO<Article> {
                     rs.getInt("volume"),
                     rs.getInt("number"),
                     rs.getString("pages"),
-                    rs.getString("month"),
+                    rs.getInt("month"),
                     rs.getString("note"));
         });
 

@@ -31,20 +31,19 @@ public class ViiteBibtexTest {
 
     @Test
     public void mandatoryFieldArticleToBibTest() {
-        Article article = new Article("article", "Petteri Petterinen", "The Title", "The Journal", 2000, 1);
+        Article article = new Article("article", "Petteri Petterinen", "The Title", "The Journal", 2000);
         String expected = "@ARTICLE{article},\n"
                 + "  author = {Petteri Petterinen},\n"
                 + "  title = {The Title},\n"
                 + "  yournal = {The Journal},\n"
                 + "  year = {2000},\n"
-                + "  volume = 1,\n"
                 + "}";
         assertEquals(expected, ViiteBibtex.toBibtex(article));
     }
     
     @Test
     public void allFieldsArticleToBibTest() {
-                Article article = new Article("article", "Petteri Petterinen", "The Title", "The Journal", 2000, 1,1,"1-2","2","This is a note");
+                Article article = new Article("article", "Petteri Petterinen", "The Title", "The Journal", 2000, 1,1,"1-2", 2,"This is a note");
                 String expected = "@ARTICLE{article},\n"
                 + "  author = {Petteri Petterinen},\n"
                 + "  title = {The Title},\n"

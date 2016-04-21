@@ -35,7 +35,7 @@ public class Database<Entry> {
         createBookTable();
         createBookletTable();
     }
-    
+
     private void createArticleTable() throws SQLException {
         Statement statement = connection.createStatement();
         //statement.executeUpdate("DROP TABLE IF EXISTS ARTICLE");
@@ -46,20 +46,20 @@ public class Database<Entry> {
                 + "title    STRING  NOT NULL,"
                 + "journal  STRING  NOT NULL,"
                 + "year     INTEGER NOT NULL,"
-                + "volume   INTEGER NOT NULL,"
+                + "volume   INTEGER,"
                 + "number   INTEGER,"
                 + "pages    STRING,"
-                + "month    STRING,"
+                + "month    INTEGER,"
                 + "note     STRING,"
                 + "key      STRING )";
 
         statement.execute(sql);
         statement.close();
     }
-    
+
     private void createBookTable() throws SQLException {
         Statement statement = connection.createStatement();
-        
+
         String sql = "CREATE TABLE BOOK ("
                 + "id       STRING  NOT NULL,"
                 + "author   STRING  NOT NULL,"
@@ -73,14 +73,14 @@ public class Database<Entry> {
                 + "month    STRING,"
                 + "note     STRING,"
                 + "key      STRING )";
-        
+
         statement.execute(sql);
         statement.close();
     }
-    
+
     private void createBookletTable() throws SQLException {
         Statement statement = connection.createStatement();
-        
+
         String sql = "CREATE TABLE BOOKLET ("
                 + "id       STRING  NOT NULL,"
                 + "title    STRING  NOT NULL,"
@@ -90,7 +90,7 @@ public class Database<Entry> {
                 + "month    STRING,"
                 + "year INTEGER,"
                 + "note     STRING,"
-                + "key      STRING )";      
+                + "key      STRING )";
         statement.execute(sql);
         statement.close();
     }
@@ -129,6 +129,8 @@ public class Database<Entry> {
             statement.setQueryTimeout(30);  // set timeout to 30 sec.
 
             statement.executeUpdate("DROP TABLE IF EXISTS article");
+            statement.executeUpdate("DROP TABLE IF EXISTS book");
+            statement.executeUpdate("DROP TABLE IF EXISTS booklet");
             statement.executeUpdate(
                     "CREATE TABLE article ("
                     + "id string,"
@@ -139,8 +141,36 @@ public class Database<Entry> {
                     + "number integer,"
                     + "year integer,"
                     + "pages string,"
+                    + "month integer,"        
                     + "publisher string,"
                     + "address string)"
+            );
+            statement.executeUpdate(
+                    "CREATE TABLE BOOK ("
+                    + "id       STRING  NOT NULL,"
+                    + "author   STRING  NOT NULL,"
+                    + "title    STRING  NOT NULL,"
+                    + "publisher  STRING  NOT NULL,"
+                    + "year     INTEGER NOT NULL,"
+                    + "volume   INTEGER,"
+                    + "series   STRING,"
+                    + "address  STRING,"
+                    + "edition  INTEGER,"
+                    + "month    STRING,"
+                    + "note     STRING,"
+                    + "key      STRING )"
+            );
+            statement.executeUpdate(
+                    "CREATE TABLE BOOKLET ("
+                    + "id       STRING  NOT NULL,"
+                    + "title    STRING  NOT NULL,"
+                    + "author   STRING,"
+                    + "howpublished   STRING,"
+                    + "address  STRING,"
+                    + "month    STRING,"
+                    + "year INTEGER,"
+                    + "note     STRING,"
+                    + "key      STRING )"
             );
         } catch (SQLException e) {
             // if the error message is "out of memory", 

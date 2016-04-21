@@ -1,57 +1,58 @@
-
 package miniohtu.entry;
 
 public class Article {
+
     // Required fields
+
     private String id;
     private String author;
     private String title;
     private String journal;
     private int year;
-    private int volume;
-    
+
     // Optional fields
+    private int volume;
     private int number;
     private String pages;
-    private String month;
+    private int month;
     private String note;
-    
-    public Article(String id, String author, String title, String journal, int year, int volume, 
-            int number, String pages, String month, String note) {
+
+    public Article(String id, String author, String title, String journal, int year, int volume,
+            int number, String pages, int month, String note) {
         this.id = id;
         this.author = author;
         this.title = title;
         this.journal = journal;
         this.year = year;
+
         this.volume = volume;
-        
         this.number = number;
         this.pages = pages;
         this.month = month;
         this.note = note;
     }
-    
+
     // Required fields only.
-    public Article(String id, String author, String title, String journal, int year, int volume) {
+    public Article(String id, String author, String title, String journal, int year) {
         this.id = id;
         this.author = author;
         this.title = title;
         this.journal = journal;
         this.year = year;
-        this. volume = volume;
-        
+
+        this.volume = Integer.MAX_VALUE;
         this.number = Integer.MAX_VALUE;
         this.pages = null;
-        this.month = null;
+        this.month = Integer.MAX_VALUE;
         this.note = null;
     }
 
     @Override
     public String toString() {
-        return "Article title: " + this.title + " \nWritten by: " + this.author + " - year: " + this.year +
-                "\nJournal: " + this.journal + " - volume: " + this.volume;
+        return "Article title: " + this.title + " \nWritten by: " + this.author + " - year: " + this.year
+                + "\nJournal: " + this.journal + " - volume: " + this.volume;
     }
-    
+
     public String getId() {
         return id;
     }
@@ -84,7 +85,7 @@ public class Article {
         return pages;
     }
 
-    public String getMonth() {
+    public int getMonth() {
         return month;
     }
 

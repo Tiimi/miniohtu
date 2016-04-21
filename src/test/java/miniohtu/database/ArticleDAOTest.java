@@ -53,14 +53,13 @@ public class ArticleDAOTest {
     public void findTest() throws SQLException {
         String dbName = "unit_test.db";
         ArticleDAO articleDAO = new ArticleDAO(new Database(dbName));
-        articleDAO.add(new Article("i_am_id", "a", "b", "c", 0, 1));
+        articleDAO.add(new Article("i_am_id", "a", "b", "c", 0));
         Article article = articleDAO.find("i_am_id");
         assertEquals("i_am_id", article.getId());
         assertEquals("a", article.getAuthor());
         assertEquals("b", article.getTitle());
         assertEquals("c", article.getJournal());
-        assertEquals(0, article.getYear());
-        assertEquals(1, article.getVolume());      
+        assertEquals(0, article.getYear());      
         new File(dbName).delete();
     }
 }

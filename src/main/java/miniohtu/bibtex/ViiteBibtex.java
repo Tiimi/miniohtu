@@ -13,9 +13,9 @@ public class ViiteBibtex {
                 + "  year = {" + a.getYear() + "},\n"
                 + ((a.getNumber() == Integer.MAX_VALUE) ? "" : "  number = " + a.getNumber() + ",\n")
                 + ((a.getPages() == null) ? "" : "  pages = {" + a.getPages() + "},\n")
-                + ((a.getMonth() == null) ? "" : "  month = " + a.getMonth() + ",\n")
+                + ((a.getMonth() == Integer.MAX_VALUE) ? "" : "  month = " + a.getMonth() + ",\n")
                 + ((a.getNote() == null) ? "" : "  note = {" + a.getNote() + "},\n")
-                + "  volume = " + a.getVolume() + ",\n"
+                + ((a.getVolume()  == Integer.MAX_VALUE) ? "" : " volume = " + a.getVolume() + ",\n")
                 + "}";
         return bibtex;
     }
