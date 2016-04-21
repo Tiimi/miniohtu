@@ -71,4 +71,10 @@ public class Booklet {
     public String getKey() {
         return key;
     }
+    
+    @Override
+    public String toString() {
+        return "Booklet{" + "citationKey=" + citationKey + ", title=" + title + ", author=" + author + ", howPublished=" + howPublished 
+                + ", address=" + address + ", month=" + month + ", year=" + year + ", note=" + note + ", key=" + key + "}";
+    }
 }

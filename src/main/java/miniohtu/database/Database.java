@@ -33,7 +33,6 @@ public class Database<Entry> {
 
     private void createArticleTable() throws SQLException {
         Statement statement = connection.createStatement();
-        //statement.executeUpdate("DROP TABLE IF EXISTS ARTICLE");
 
         String sql = "CREATE TABLE ARTICLE ("
                 + "citationKey  STRING  NOT NULL,"
@@ -80,9 +79,9 @@ public class Database<Entry> {
                 + "citationKey  STRING  NOT NULL,"
                 + "title        STRING  NOT NULL,"
                 + "author       STRING,"
-                + "howpublished STRING,"
+                + "howPublished STRING,"
                 + "address      STRING,"
-                + "month        STRING,"
+                + "month        INTEGER,"
                 + "year         INTEGER,"
                 + "note         STRING,"
                 + "key          STRING )";      

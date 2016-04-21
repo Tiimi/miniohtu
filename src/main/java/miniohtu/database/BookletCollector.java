@@ -9,7 +9,7 @@ public class BookletCollector implements Collector<Booklet> {
 
     @Override
     public Object collect(ResultSet rs) throws SQLException {
-        String id           = rs.getString("id");
+        String citationKey  = rs.getString("citationKey");
         String title        = rs.getString("title");
         
         String author       = rs.getString("author");
@@ -20,6 +20,6 @@ public class BookletCollector implements Collector<Booklet> {
         String note         = rs.getString("note");
         String key          = rs.getString("key");
         
-        return new Booklet(id, title, author, howPublished, address, month, year, note, key);
+        return new Booklet(citationKey, title, author, howPublished, address, month, year, note, key);
     }
 }

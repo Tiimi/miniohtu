@@ -15,7 +15,7 @@ public class BookletDAO implements EntryDAO<Booklet> {
     @Override
     public void add(Booklet entry) throws SQLException {
         String sql = "INSERT INTO BOOKLET"
-                + "(CITATIONKEY, TITLE, AUTHOR, HOWPUBLISHED, ADDRESS, MONTH, YEAR, NOTE, KEY)"
+                + "(CITATIONKEY, TITLE, AUTHOR, HOWPUBLISHED, ADDRESS, MONTH, YEAR, NOTE, KEY) VALUES ("
                 + s(entry.getCitationKey()) + ", "
                 + s(entry.getTitle()) + ", "
                 + s(entry.getAuthor()) + ", "
