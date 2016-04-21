@@ -18,13 +18,8 @@ import static org.junit.Assert.*;
  */
 public class ArticleTest {
     
-    private Article mandatory;
-    private Article allParam;
-    
-    public ArticleTest() {
-        mandatory = new Article("id", "author", "title", "journal", 1);
-        allParam = new Article("id", "author", "title", "journal", 1, 2, 3, "2-3",1,"note");
-    }
+    private Article requiredFields;
+    private Article allFields;
     
     @BeforeClass
     public static void setUpClass() {
@@ -36,6 +31,9 @@ public class ArticleTest {
     
     @Before
     public void setUp() {
+        requiredFields = new Article("article", "Ville", "Artikkeli", "Journaali", 2016);
+        allFields = new Article("article2", "Ville", "Toinen artikkeli", "Journaali", 2016, 1, 
+                2, "1-10", 4, "Note");
     }
     
     @After
@@ -43,24 +41,32 @@ public class ArticleTest {
     }
 
     @Test
-    public void mandatoryKonstructorTest() {
-        mandatoryKonstructor(mandatory);
-    }
-    public void mandatoryKonstructor(Article a) {
-        assertEquals("id", a.getId());
-        assertEquals("author", a.getAuthor());
-        assertEquals("title", a.getTitle());
-        assertEquals("journal", a.getJournal());
-        assertEquals(1, a.getYear());
+    public void requiredFieldsAreCorrect() {
+        assertEquals("article", requiredFields.getId());
+        assertEquals("Ville", requiredFields.getAuthor());
+        assertEquals("Artikkeli", requiredFields.getTitle());
+        assertEquals("Journaali", requiredFields.getJournal());
+        assertEquals(2016, requiredFields.getYear());
+        
+        assertEquals(Integer.MAX_VALUE, requiredFields.getVolume());
+        assertEquals(Integer.MAX_VALUE, requiredFields.getNumber());
+        assertEquals(null, requiredFields.getPages());
+        assertEquals(Integer.MAX_VALUE, requiredFields.getMonth());
+        assertEquals(null, requiredFields.getNote());
     }
     
-    @Test 
-    public void allParametersConstructoTest() {
-        mandatoryKonstructor(allParam);
-        assertEquals(3, allParam.getNumber());
-        assertEquals("2-3", allParam.getPages());
-        assertEquals(1, allParam.getMonth());
-        assertEquals("note", allParam.getNote());
-        assertEquals("id", allParam.getId());
+    @Test
+    public void allFieldsAreCorrect() {
+        assertEquals("article2", allFields.getId());
+        assertEquals("Ville", allFields.getAuthor());
+        assertEquals("Toinen artikkeli", allFields.getTitle());
+        assertEquals("Journaali", allFields.getJournal());
+        assertEquals(2016, allFields.getYear());
+        
+        assertEquals(1, allFields.getVolume());
+        assertEquals(2, allFields.getNumber());
+        assertEquals("1-10", allFields.getPages());
+        assertEquals(4, allFields.getMonth());
+        assertEquals("Note", allFields.getNote());
     }
 }

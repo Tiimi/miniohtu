@@ -18,19 +18,14 @@ public class Database<Entry> {
         try {
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:" + name);
-            DatabaseMetaData metaData = connection.getMetaData();
-            ResultSet result = metaData.getTables(null, null, "ARTICLE", null);
-            if (result.next()) {
-            } else {
-                createTables();
-            }
+            createTables();
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-
     }
 
     public void createTables() throws SQLException {
+        dropTables();
         createArticleTable();
         createBookTable();
         createBookletTable();
@@ -118,74 +113,12 @@ public class Database<Entry> {
         statement.close();
         connection.commit();
     }
-
-    public static void resetDB(String dbname) throws ClassNotFoundException {
-        // load the sqlite-JDBC driver using the current class loader
-        Connection connection = null;
-        Class.forName("org.sqlite.JDBC");
-        try {
-            // create a database connection
-            connection = DriverManager.getConnection(String.format("jdbc:sqlite:%s", dbname));
-            Statement statement = connection.createStatement();
-            statement.setQueryTimeout(30);  // set timeout to 30 sec.
-
-            statement.executeUpdate("DROP TABLE IF EXISTS article");
-            statement.executeUpdate("DROP TABLE IF EXISTS book");
-            statement.executeUpdate("DROP TABLE IF EXISTS booklet");
-            statement.executeUpdate(
-                    "CREATE TABLE article ("
-                    + "id string,"
-                    + "author string,"
-                    + "title string,"
-                    + "journal string,"
-                    + "volume integer,"
-                    + "number integer,"
-                    + "year integer,"
-                    + "pages string,"
-                    + "month integer,"        
-                    + "publisher string,"
-                    + "address string)"
-            );
-            statement.executeUpdate(
-                    "CREATE TABLE BOOK ("
-                    + "id       STRING  NOT NULL,"
-                    + "author   STRING  NOT NULL,"
-                    + "title    STRING  NOT NULL,"
-                    + "publisher  STRING  NOT NULL,"
-                    + "year     INTEGER NOT NULL,"
-                    + "volume   INTEGER,"
-                    + "series   STRING,"
-                    + "address  STRING,"
-                    + "edition  INTEGER,"
-                    + "month    STRING,"
-                    + "note     STRING,"
-                    + "key      STRING )"
-            );
-            statement.executeUpdate(
-                    "CREATE TABLE BOOKLET ("
-                    + "id       STRING  NOT NULL,"
-                    + "title    STRING  NOT NULL,"
-                    + "author   STRING,"
-                    + "howpublished   STRING,"
-                    + "address  STRING,"
-                    + "month    STRING,"
-                    + "year INTEGER,"
-                    + "note     STRING,"
-                    + "key      STRING )"
-            );
-        } catch (SQLException e) {
-            // if the error message is "out of memory", 
-            // it probably means no database file is found
-            System.err.println(e.getMessage());
-        } finally {
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                // connection close failed.
-                System.err.println(e);
-            }
-        }
+    
+    public void dropTables() throws SQLException {
+        Statement statement = connection.createStatement();
+        statement.executeUpdate("DROP TABLE IF EXISTS article");
+        statement.executeUpdate("DROP TABLE IF EXISTS book");
+        statement.executeUpdate("DROP TABLE IF EXISTS booklet");
+        statement.close();
     }
 }

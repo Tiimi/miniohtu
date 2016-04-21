@@ -40,18 +40,18 @@ public class BookDAO implements EntryDAO<Book> {
     public List<Book> findAll() throws SQLException {
         return db.queryAndCollect("SELECT * FROM BOOK", rs -> {
             return new Book(
-                    rs.getString("id"),
-                    rs.getString("author"),
-                    rs.getString("title"),
-                    rs.getString("publisher"),
-                    rs.getInt("year"),
-                    rs.getInt("volume"),
-                    rs.getString("series"),
-                    rs.getString("address"),
-                    rs.getInt("edition"),
-                    rs.getString("month"),
-                    rs.getString("note"),
-                    rs.getString("key"));            
+                rs.getString("id"),
+                rs.getString("author"),
+                rs.getString("title"),
+                rs.getString("publisher"),
+                rs.getInt("year"),
+                rs.getInt("volume"),
+                rs.getString("series"),
+                rs.getString("address"),
+                rs.getInt("edition"),
+                rs.getString("month"),
+                rs.getString("note"),
+                rs.getString("key"));            
         });
     }
     
@@ -59,18 +59,18 @@ public class BookDAO implements EntryDAO<Book> {
     public Book find(String id) throws SQLException {
         List<Book> matches = db.queryAndCollect("SELECT * FROM ARTICLE WHERE ID='" + id + "'", rs -> {
             return new Book(
-                    rs.getString("id"),
-                    rs.getString("author"),
-                    rs.getString("title"),
-                    rs.getString("publisher"),
-                    rs.getInt("year"),
-                    rs.getInt("volume"),
-                    rs.getString("series"),
-                    rs.getString("address"),
-                    rs.getInt("edition"),
-                    rs.getString("month"),
-                    rs.getString("note"),
-                    rs.getString("key"));            
+                rs.getString("id"),
+                rs.getString("author"),
+                rs.getString("title"),
+                rs.getString("publisher"),
+                rs.getInt("year"),
+                rs.getInt("volume"),
+                rs.getString("series"),
+                rs.getString("address"),
+                rs.getInt("edition"),
+                rs.getString("month"),
+                rs.getString("note"),
+                rs.getString("key"));            
         });
         
         return matches.isEmpty() ? null : matches.get(0);
