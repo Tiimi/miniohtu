@@ -64,7 +64,7 @@ public class TextUI {
         String komento = io.nextString();
         if (komento.equals("peru")) {
             return;
-        } else if (komento.equals("artikkeli")) {
+        } else if (komento.equals("article")) {
             addArticle();
         } else if (komento.equals("book")) {
             addBook();
@@ -142,7 +142,7 @@ public class TextUI {
         int year = askInteger("year");
         String note = askString("note");
         
-        Booklet booklet = new Booklet(key, title, author, howpublished, address, month, year, note, key);
+        Booklet booklet = new Booklet(key,title, author, howpublished, address, month, year, note, key);
         try {
         bookletDAO.add(booklet);
         } catch (SQLException e) {
