@@ -1,5 +1,7 @@
 package miniohtu.app;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import miniohtu.database.Database;
 import miniohtu.entry.Article;
 import miniohtu.database.ArticleDAO;
@@ -8,6 +10,7 @@ import java.util.InputMismatchException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import miniohtu.IO.IO;
+import miniohtu.bibtex.ViiteBibtex;
 import miniohtu.database.BookDAO;
 import miniohtu.database.BookletDAO;
 import miniohtu.entry.Book;
@@ -30,11 +33,11 @@ public class TextUI {
         this.db = db;
         this.articleDAO = new ArticleDAO(this.db);
         this.bookDAO = new BookDAO(this.db);
-        this.bookletDAO = new BookletDAO(this.db);   
+        this.bookletDAO = new BookletDAO(this.db);
     }
 
     public void run() {
-        
+
         while (true) {
             io.print(help);
             io.print("> ");
@@ -84,7 +87,7 @@ public class TextUI {
         String title = askString("title");
         String journal = askString("journal");
         int year = askInteger("year");
-        
+
         io.print("\nSyötä valinnaiset kentät:\n");
         int volume = askInteger("volume");
         int number = askInteger("number");
@@ -104,23 +107,23 @@ public class TextUI {
     }
 
     private void addBook() {
-            io.print("Syötä pakolliset kentät:\n");
-            String citationKey = askString("citation key");
-            String author = askString("author");
-            String title = askString("title");
-            String publisher = askString("publisher");
-            int year = askInteger("year");
-            
-            io.print("\nSyötä valinnaiset kentät:\n");
-            int volume = askInteger("volume");
-            int series = askInteger("series");
-            String address = askString("address");
-            int edition = askInteger("edition");
-            int month = askInteger("month");
-            String note = askString("note");
-            String key = askString("key");
-            
-            try {
+        io.print("Syötä pakolliset kentät:\n");
+        String citationKey = askString("citation key");
+        String author = askString("author");
+        String title = askString("title");
+        String publisher = askString("publisher");
+        int year = askInteger("year");
+
+        io.print("\nSyötä valinnaiset kentät:\n");
+        int volume = askInteger("volume");
+        int series = askInteger("series");
+        String address = askString("address");
+        int edition = askInteger("edition");
+        int month = askInteger("month");
+        String note = askString("note");
+        String key = askString("key");
+
+        try {
             Book b = new Book(citationKey, author, title, publisher, year, volume, series, address, edition, month, note, key);
             bookDAO.add(b);
         } catch (SQLException ex) {
@@ -128,12 +131,12 @@ public class TextUI {
             io.print(ex.getMessage() + "\n");
         }
     }
-    
-    private void addBooklet()  {
+
+    private void addBooklet() {
         io.print("Syötä pakolliset kentät:\n");
         String citationKey = askString("citation key");
         String title = askString("title");
-        
+
         io.print("\nSyötä valinnaiset kentät:\n");
         String author = askString("author");
         String howPublished = askString("howPublished");
@@ -142,10 +145,10 @@ public class TextUI {
         int year = askInteger("year");
         String note = askString("note");
         String key = askString("key");
-        
+
         Booklet booklet = new Booklet(citationKey, title, author, howPublished, address, month, year, note, key);
         try {
-        bookletDAO.add(booklet);
+            bookletDAO.add(booklet);
         } catch (SQLException e) {
             io.print("SQL exception\n");
             io.print(e.getMessage() + "\n");
@@ -175,17 +178,20 @@ public class TextUI {
     private void list() {
         try {
             io.print("ARTICLES:\n\n");
-            for (Article article : articleDAO.findAll())
+            for (Article article : articleDAO.findAll()) {
                 io.print(article.toString() + "\n");
-            
+            }
+
             io.print("BOOKS:\n\n");
-            for (Book book : bookDAO.findAll())
+            for (Book book : bookDAO.findAll()) {
                 io.print(book.toString() + "\n");
-            
+            }
+
             io.print("BOOKLET:\n\n");
-            for (Booklet booklet : bookletDAO.findAll())
+            for (Booklet booklet : bookletDAO.findAll()) {
                 io.print(booklet.toString() + "\n");
-            
+            }
+
         } catch (SQLException ex) {
             io.print("SQL VIRHE");
         }
@@ -193,6 +199,32 @@ public class TextUI {
     }
 
     private void save() {
-
+        io.print("Anna polku tiedostoon (esim. /home/pentti/tiedostonnimi.tex)\n");
+        String polku = askString("polku");
+        String s = "";
+        try {
+            for (Article article : articleDAO.findAll()) {
+                s += ViiteBibtex.toBibtex(article);
+                s += "\n\n";
+            }
+            for (Book book : bookDAO.findAll()) {
+                s += ViiteBibtex.toBibtex(book);
+                s += "\n\n";
+            }
+            for (Booklet booklet : bookletDAO.findAll()) {
+                s += ViiteBibtex.toBibtex(booklet);
+                s += "\n\n";
+            }
+        } catch (SQLException e) {
+            io.print("SQL exception. Talennus epäonistui.\n");
+        }
+        try {
+            FileOutputStream outStream = new FileOutputStream(new File(polku));
+            outStream.write(s.getBytes());
+            outStream.flush();
+            outStream.close();
+        } catch (Exception e) {
+            io.print("Tallennus epäonnistui. Tarkista polku");
+        }
     }
 }
