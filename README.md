@@ -11,3 +11,4 @@ Miniprojekti Ohtu 2016
 ## Tiimin jäsenet:
 +  Antti Haapaniemi
 +  Vililassi Ala-Tuuhonen
++  Sebastian Hemmilä
