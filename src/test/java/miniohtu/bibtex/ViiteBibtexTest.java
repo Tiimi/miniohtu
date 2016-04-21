@@ -74,17 +74,17 @@ public class ViiteBibtexTest {
 
     @Test
     public void allFieldsBookToBibTest() {
-        Book book = new Book("book", "Petteri Petterson", "The Title", "The Publisher", 2000, 1, "series", "address", 0, "Month", "This is a note", null);
+        Book book = new Book("book", "Petteri Petterson", "The Title", "The Publisher", 2000, 1, 1, "address", 0, 4, "This is a note", null);
         String expected = "@ARTICLE{book},\n"
                 + "  author = {Petteri Petterson},\n"
                 + "  title = {The Title},\n"
                 + "  publisher = {The Publisher},\n"
                 + "  year = {2000},\n"
                 + "  volume = 1,\n"
-                + "  series = {series},\n"
+                + "  series = 1,\n"
                 + "  address = {address},\n"
                 + "  edition = 0,\n"
-                + "  month = {Month},\n"
+                + "  month = 4,\n"
                 + "  note = {This is a note},\n"
                 + "}";
         assertEquals(expected, ViiteBibtex.toBibtex(book));
@@ -92,13 +92,13 @@ public class ViiteBibtexTest {
 
     @Test
     public void allFieldsBookletToBibTest() {
-        Booklet booklet = new Booklet("book", "The title", "Author", "Somehow", "Address", "Month", 2000, "This is a note.", null);
+        Booklet booklet = new Booklet("book", "The title", "Author", "Somehow", "Address", 4, 2000, "This is a note.", "key");
         String expected = "@BOOKLET{book},\n"
                 + "  title = {The title},\n"
                 + "  author = {Author},\n"
                 + "  howpublished = {Somehow},\n"
                 + "  address = {Address},\n"
-                + "  month = {Month},\n"
+                + "  month = 4,\n"
                 + "  year = {2000},\n"
                 + "  note = {This is a note.},\n"
                 + "}";
@@ -107,12 +107,12 @@ public class ViiteBibtexTest {
     
     @Test
     public void someFieldsMissingBookletToBibTest() {
-        Booklet booklet = new Booklet("book", "The title", "Author", "Somehow", null, "Month", 2000, null, null);
+        Booklet booklet = new Booklet("book", "The title", "Author", "Somehow", null, 4, 2000, null, null);
         String expected = "@BOOKLET{book},\n"
                 + "  title = {The title},\n"
                 + "  author = {Author},\n"
                 + "  howpublished = {Somehow},\n"
-                + "  month = {Month},\n"
+                + "  month = 4,\n"
                 + "  year = {2000},\n"
                 + "}";
         assertEquals(expected, ViiteBibtex.toBibtex(booklet));

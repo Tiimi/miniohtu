@@ -60,7 +60,7 @@ public class DatabaseTest {
         List<Article> articles = articleDAO.findAll();
 //        assertEquals(1, articles.size());
         Article result = articles.get(0);
-        assertEquals("JokuID",result.getId());
+        assertEquals("JokuID",result.getCitationKey());
         assertEquals("Tekijä",result.getAuthor());
         assertEquals("Journaali",result.getJournal());
         assertEquals(2001,result.getYear());

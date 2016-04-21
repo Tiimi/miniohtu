@@ -42,7 +42,7 @@ public class ArticleTest {
 
     @Test
     public void requiredFieldsAreCorrect() {
-        assertEquals("article", requiredFields.getId());
+        assertEquals("article", requiredFields.getCitationKey());
         assertEquals("Ville", requiredFields.getAuthor());
         assertEquals("Artikkeli", requiredFields.getTitle());
         assertEquals("Journaali", requiredFields.getJournal());
@@ -57,7 +57,7 @@ public class ArticleTest {
     
     @Test
     public void allFieldsAreCorrect() {
-        assertEquals("article2", allFields.getId());
+        assertEquals("article2", allFields.getCitationKey());
         assertEquals("Ville", allFields.getAuthor());
         assertEquals("Toinen artikkeli", allFields.getTitle());
         assertEquals("Journaali", allFields.getJournal());

@@ -3,21 +3,21 @@ package miniohtu.entry;
 
 public class Booklet {
     // Required fields
-    private String id;
+    private String citationKey;
     private String title;
     
     // Optional fields
     private String author;
     private String howPublished;
     private String address;
-    private String month;
+    private int month;
     private int year;
     private String note;
     private String key;
     
-    public Booklet(String id, String title, String author, String howPublished, String address,
-            String month, int year, String note, String key) {
-        this.id = id;
+    public Booklet(String citationKey, String title, String author, String howPublished, String address,
+            int month, int year, String note, String key) {
+        this.citationKey = citationKey;
         this.title = title;
         this.author = author;
         this.howPublished = howPublished;
@@ -28,15 +28,16 @@ public class Booklet {
         this.key = key;
     }
     
-    public Booklet(String id, String title) {
-        this.id = id;
+    public Booklet(String citationKey, String title) {
+        this.citationKey = citationKey;
         this.title = title;
         
         this.year = Integer.MAX_VALUE;
+        this.month = Integer.MAX_VALUE;
     }
 
-    public String getId() {
-        return id;
+    public String getCitationKey() {
+        return citationKey;
     }
 
     public String getTitle() {
@@ -55,7 +56,7 @@ public class Booklet {
         return address;
     }
 
-    public String getMonth() {
+    public int getMonth() {
         return month;
     }
 

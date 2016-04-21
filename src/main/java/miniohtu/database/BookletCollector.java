@@ -15,7 +15,7 @@ public class BookletCollector implements Collector<Booklet> {
         String author       = rs.getString("author");
         String howPublished = rs.getString("howPublished");
         String address      = rs.getString("address");
-        String month        = rs.getString("month");
+        int month           = rs.getInt("month");
         int year            = rs.getInt("year");
         String note         = rs.getString("note");
         String key          = rs.getString("key");

@@ -36,17 +36,17 @@ public class Database<Entry> {
         //statement.executeUpdate("DROP TABLE IF EXISTS ARTICLE");
 
         String sql = "CREATE TABLE ARTICLE ("
-                + "id       STRING  NOT NULL,"
-                + "author   STRING  NOT NULL,"
-                + "title    STRING  NOT NULL,"
-                + "journal  STRING  NOT NULL,"
-                + "year     INTEGER NOT NULL,"
-                + "volume   INTEGER,"
-                + "number   INTEGER,"
-                + "pages    STRING,"
-                + "month    INTEGER,"
-                + "note     STRING,"
-                + "key      STRING )";
+                + "citationKey  STRING  NOT NULL,"
+                + "author       STRING  NOT NULL,"
+                + "title        STRING  NOT NULL,"
+                + "journal      STRING  NOT NULL,"
+                + "year         INTEGER NOT NULL,"
+                + "volume       INTEGER,"
+                + "number       INTEGER,"
+                + "pages        STRING,"
+                + "month        INTEGER,"
+                + "note         STRING,"
+                + "key          STRING )";
 
         statement.execute(sql);
         statement.close();
@@ -56,18 +56,18 @@ public class Database<Entry> {
         Statement statement = connection.createStatement();
 
         String sql = "CREATE TABLE BOOK ("
-                + "id       STRING  NOT NULL,"
-                + "author   STRING  NOT NULL,"
-                + "title    STRING  NOT NULL,"
-                + "publisher  STRING  NOT NULL,"
-                + "year     INTEGER NOT NULL,"
-                + "volume   INTEGER,"
-                + "series   STRING,"
-                + "address  STRING,"
-                + "edition  INTEGER,"
-                + "month    STRING,"
-                + "note     STRING,"
-                + "key      STRING )";
+                + "citationKey  STRING  NOT NULL,"
+                + "author       STRING  NOT NULL,"
+                + "title        STRING  NOT NULL,"
+                + "publisher    STRING  NOT NULL,"
+                + "year         INTEGER NOT NULL,"
+                + "volume       INTEGER,"
+                + "series       STRING,"
+                + "address      STRING,"
+                + "edition      INTEGER,"
+                + "month        STRING,"
+                + "note         STRING,"
+                + "key          STRING )";
 
         statement.execute(sql);
         statement.close();
@@ -77,8 +77,7 @@ public class Database<Entry> {
         Statement statement = connection.createStatement();
 
         String sql = "CREATE TABLE BOOKLET ("
-
-                + "id           STRING  NOT NULL,"
+                + "citationKey  STRING  NOT NULL,"
                 + "title        STRING  NOT NULL,"
                 + "author       STRING,"
                 + "howpublished STRING,"

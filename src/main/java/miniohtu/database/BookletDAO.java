@@ -15,13 +15,13 @@ public class BookletDAO implements EntryDAO<Booklet> {
     @Override
     public void add(Booklet entry) throws SQLException {
         String sql = "INSERT INTO BOOKLET"
-                + "(ID, TITLE, AUTHOR, HOWPUBLISHED, ADDRESS, MONTH, YEAR, NOTE, KEY)"
-                + s(entry.getId()) + ", "
+                + "(CITATIONKEY, TITLE, AUTHOR, HOWPUBLISHED, ADDRESS, MONTH, YEAR, NOTE, KEY)"
+                + s(entry.getCitationKey()) + ", "
                 + s(entry.getTitle()) + ", "
                 + s(entry.getAuthor()) + ", "
                 + s(entry.getHowPublished()) + ", "
                 + s(entry.getAddress()) + ", "
-                + s(entry.getMonth()) + ", "
+                + entry.getMonth() + ", "
                 + entry.getYear() + ", "
                 + s(entry.getNote()) + ", "
                 + s(entry.getKey()) + ");";
@@ -37,12 +37,12 @@ public class BookletDAO implements EntryDAO<Booklet> {
     public List<Booklet> findAll() throws SQLException {
         return db.queryAndCollect("SELECT * FROM BOOKLET", rs -> {
            return new Booklet(
-                rs.getString("id"),
+                rs.getString("citationKey"),
                 rs.getString("title"),
                 rs.getString("author"),
                 rs.getString("howPublished"),
                 rs.getString("address"),
-                rs.getString("month"),
+                rs.getInt("month"),
                 rs.getInt("year"),
                 rs.getString("note"),
                 rs.getString("key")); 
@@ -50,15 +50,15 @@ public class BookletDAO implements EntryDAO<Booklet> {
     }
 
     @Override
-    public Booklet find(String id) throws SQLException {
-        List<Booklet> matches = db.queryAndCollect("SELECT * FROM BOOKLET WHERE ID='" + id + "'", rs -> {
+    public Booklet find(String citationKey) throws SQLException {
+        List<Booklet> matches = db.queryAndCollect("SELECT * FROM BOOKLET WHERE CITATIONKEY='" + citationKey + "'", rs -> {
            return new Booklet(
-                rs.getString("id"),
+                rs.getString("citationKey"),
                 rs.getString("title"),
                 rs.getString("author"),
                 rs.getString("howPublished"),
                 rs.getString("address"),
-                rs.getString("month"),
+                rs.getInt("month"),
                 rs.getInt("year"),
                 rs.getString("note"),
                 rs.getString("key"));  

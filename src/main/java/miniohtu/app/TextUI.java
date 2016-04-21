@@ -64,7 +64,7 @@ public class TextUI {
         String komento = io.nextString();
         if (komento.equals("peru")) {
             return;
-        } else if (komento.equals("artikkeli")) {
+        } else if (komento.equals("article")) {
             addArticle();
         } else if (komento.equals("book")) {
             addBook();
@@ -79,7 +79,7 @@ public class TextUI {
     private void addArticle() {
         io.print("Syötä pakolliset kentät:\n");
 
-        String key = askString("citation key");
+        String citationKey = askString("citation key");
         String author = askString("author");
         String title = askString("title");
         String journal = askString("journal");
@@ -92,7 +92,7 @@ public class TextUI {
         int month = askInteger("month");
         String note = askString("note");
 
-        Article a = new Article(key, author, title, journal, year, volume, number, pages, month, note);
+        Article a = new Article(citationKey, author, title, journal, year, volume, number, pages, month, note);
 
         try {
             articleDAO.add(a);
@@ -105,7 +105,7 @@ public class TextUI {
 
     private void addBook() {
             io.print("Syötä pakolliset kentät:\n");
-            String citKey = askString("citation key");
+            String citationKey = askString("citation key");
             String author = askString("author");
             String title = askString("title");
             String publisher = askString("publisher");
@@ -113,15 +113,15 @@ public class TextUI {
             
             io.print("\nSyötä valinnaiset kentät:\n");
             int volume = askInteger("volume");
-            String series = askString("series");
+            int series = askInteger("series");
             String address = askString("address");
             int edition = askInteger("edition");
-            String month = askString("month");
+            int month = askInteger("month");
             String note = askString("note");
-            String ISBN = askString("isbn");
+            String key = askString("key");
             
             try {
-            Book b = new Book(citKey, author, title, publisher, year, volume, series, address, edition, month, note, null);
+            Book b = new Book(citationKey, author, title, publisher, year, volume, series, address, edition, month, note, key);
             bookDAO.add(b);
         } catch (SQLException ex) {
             io.print("SQL EXCEPTION");
@@ -131,18 +131,19 @@ public class TextUI {
     
     private void addBooklet()  {
         io.print("Syötä pakolliset kentät:\n");
-        String key = askString("citation key");
+        String citationKey = askString("citation key");
         String title = askString("title");
         
         io.print("\nSyötä valinnaiset kentät:\n");
         String author = askString("author");
-        String howpublished = askString("howpublished");
+        String howPublished = askString("howPublished");
         String address = askString("address");
-        String month = askString("month");
+        int month = askInteger("month");
         int year = askInteger("year");
         String note = askString("note");
+        String key = askString("key");
         
-        Booklet booklet = new Booklet(key, title, author, howpublished, address, month, year, note, key);
+        Booklet booklet = new Booklet(citationKey, title, author, howPublished, address, month, year, note, key);
         try {
         bookletDAO.add(booklet);
         } catch (SQLException e) {
@@ -174,25 +175,17 @@ public class TextUI {
     private void list() {
         try {
             io.print("ARTICLES:\n\n");
-            for (Article article : articleDAO.findAll()) {
+            for (Article article : articleDAO.findAll())
                 io.print(article.toString() + "\n");
-            }
-        } catch (SQLException ex) {
-            io.print("SQL VIRHE");
-        }
-        try {
+            
             io.print("BOOKS:\n\n");
-            for (Book book : bookDAO.findAll()) {
+            for (Book book : bookDAO.findAll())
                 io.print(book.toString() + "\n");
-            }
-        } catch (SQLException ex) {
-            io.print("SQL VIRHE");
-        }
-                try {
+            
             io.print("BOOKLET:\n\n");
-            for (Booklet booklet : bookletDAO.findAll()) {
+            for (Booklet booklet : bookletDAO.findAll())
                 io.print(booklet.toString() + "\n");
-            }
+            
         } catch (SQLException ex) {
             io.print("SQL VIRHE");
         }

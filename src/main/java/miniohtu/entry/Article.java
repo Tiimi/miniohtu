@@ -4,7 +4,7 @@ public class Article {
 
     // Required fields
 
-    private String id;
+    private String citationKey;
     private String author;
     private String title;
     private String journal;
@@ -17,9 +17,9 @@ public class Article {
     private int month;
     private String note;
 
-    public Article(String id, String author, String title, String journal, int year, int volume,
+    public Article(String citationKey, String author, String title, String journal, int year, int volume,
             int number, String pages, int month, String note) {
-        this.id = id;
+        this.citationKey = citationKey;
         this.author = author;
         this.title = title;
         this.journal = journal;
@@ -33,8 +33,8 @@ public class Article {
     }
 
     // Required fields only.
-    public Article(String id, String author, String title, String journal, int year) {
-        this.id = id;
+    public Article(String citationKey, String author, String title, String journal, int year) {
+        this.citationKey = citationKey;
         this.author = author;
         this.title = title;
         this.journal = journal;
@@ -53,8 +53,8 @@ public class Article {
                 + "\nJournal: " + this.journal + " - volume: " + this.volume;
     }
 
-    public String getId() {
-        return id;
+    public String getCitationKey() {
+        return citationKey;
     }
 
     public String getAuthor() {

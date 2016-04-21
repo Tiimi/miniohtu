@@ -5,7 +5,6 @@ import java.util.List;
 import miniohtu.entry.Article;
 
 public class ArticleDAO implements EntryDAO<Article> {
-
     private Database db;
 
     public ArticleDAO(Database db) {
@@ -15,8 +14,8 @@ public class ArticleDAO implements EntryDAO<Article> {
     @Override
     public void add(Article entry) throws SQLException {
         String sql = "INSERT INTO ARTICLE"
-                + "(ID, AUTHOR, TITLE, JOURNAL, YEAR, VOLUME) VALUES ("
-                + s(entry.getId()) + ", "
+                + "(CITATIONKEY, AUTHOR, TITLE, JOURNAL, YEAR, VOLUME) VALUES ("
+                + s(entry.getCitationKey()) + ", "
                 + s(entry.getAuthor()) + ", "
                 + s(entry.getTitle()) + ", "
                 + s(entry.getJournal()) + ", "
@@ -34,7 +33,7 @@ public class ArticleDAO implements EntryDAO<Article> {
     public List<Article> findAll() throws SQLException {
         return db.queryAndCollect("SELECT * FROM ARTICLE", rs -> {
             return new Article(
-                    rs.getString("id"),
+                    rs.getString("citationKey"),
                     rs.getString("author"),
                     rs.getString("title"),
                     rs.getString("journal"),
@@ -48,10 +47,10 @@ public class ArticleDAO implements EntryDAO<Article> {
     }
 
     @Override
-    public Article find(String id) throws SQLException {
-        List<Article> matches = db.queryAndCollect("SELECT * FROM ARTICLE WHERE ID='"+ id + "'", rs -> {
+    public Article find(String citationKey) throws SQLException {
+        List<Article> matches = db.queryAndCollect("SELECT * FROM ARTICLE WHERE CITATIONKEY='"+ citationKey + "'", rs -> {
             return new Article(
-                    rs.getString("id"),
+                    rs.getString("citationKey"),
                     rs.getString("author"),
                     rs.getString("title"),
                     rs.getString("journal"),
