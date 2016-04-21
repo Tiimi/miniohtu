@@ -11,7 +11,7 @@ public class ViiteBibtex {
                 + "  author = {" + article.getAuthor() + "},\n"
                 + "  title = {" + article.getTitle() + "},\n"
                 + "  yournal = {" + article.getJournal() + "},\n"
-                + "  year = {" + article.getYear() + "},\n"
+                + "  year = " + article.getYear() + ",\n"
                 + ((article.getNumber() == Integer.MAX_VALUE) ? "" : "  number = " + article.getNumber() + ",\n")
                 + ((article.getPages() == null) ? "" : "  pages = {" + article.getPages() + "},\n")
                 + ((article.getMonth() == Integer.MAX_VALUE) ? "" : "  month = " + article.getMonth() + ",\n")
@@ -26,12 +26,12 @@ public class ViiteBibtex {
                 + "  author = {" + book.getAuthor() + "},\n"
                 + "  title = {" + book.getTitle() + "},\n"
                 + "  publisher = {" + book.getPublisher() + "},\n"
-                + "  year = {" + book.getYear() + "},\n"
+                + "  year = " + book.getYear() + ",\n"
                 + ((book.getVolume() == Integer.MAX_VALUE) ? "" : "  volume = " + book.getVolume() + ",\n")
-                + ((book.getSeries() == Integer.MAX_VALUE) ? "" : "  series = {" + book.getSeries() + "},\n")
+                + ((book.getSeries() == Integer.MAX_VALUE) ? "" : "  series = " + book.getSeries() + ",\n")
                 + ((book.getAddress() == null) ? "" : "  address = {" + book.getAddress() + "},\n")
                 + ((book.getEdition() == Integer.MAX_VALUE) ? "" : "  edition = " + book.getEdition() + ",\n")
-                + ((book.getMonth() == Integer.MAX_VALUE) ? "" : "  month = {" + book.getMonth() + "},\n")
+                + ((book.getMonth() == Integer.MAX_VALUE) ? "" : "  month = " + book.getMonth() + ",\n")
                 + ((book.getNote() == null) ? "" : "  note = {" + book.getNote() + "},\n")
                 + "}";
 
@@ -44,8 +44,8 @@ public class ViiteBibtex {
                 + ((booklet.getAuthor()== null) ? "" : "  author = {" + booklet.getAuthor() + "},\n")            
                 + ((booklet.getHowPublished()== null) ? "" : "  howpublished = {" + booklet.getHowPublished()+ "},\n")
                 + ((booklet.getAddress() == null) ? "" : "  address = {" + booklet.getAddress() + "},\n")
-                + ((booklet.getMonth() == Integer.MAX_VALUE) ? "" : "  month = {" + booklet.getMonth() + "},\n")
-                + ((booklet.getYear() == Integer.MAX_VALUE) ? "" : "  year = {" + booklet.getYear() + "},\n")
+                + ((booklet.getMonth() == Integer.MAX_VALUE) ? "" : "  month = " + booklet.getMonth() + ",\n")
+                + ((booklet.getYear() == Integer.MAX_VALUE) ? "" : "  year = " + booklet.getYear() + ",\n")
                 + ((booklet.getNote() == null) ? "" : "  note = {" + booklet.getNote() + "},\n")
                 + "}";
         return bibtex;

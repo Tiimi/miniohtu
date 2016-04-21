@@ -38,7 +38,7 @@ public class ViiteBibtexTest {
                 + "  author = {Petteri Petterinen},\n"
                 + "  title = {The Title},\n"
                 + "  yournal = {The Journal},\n"
-                + "  year = {2000},\n"
+                + "  year = 2000,\n"
                 + "}";
         assertEquals(expected, ViiteBibtex.toBibtex(article));
     }
@@ -50,7 +50,7 @@ public class ViiteBibtexTest {
                 + "  author = {Petteri Petterinen},\n"
                 + "  title = {The Title},\n"
                 + "  yournal = {The Journal},\n"
-                + "  year = {2000},\n"
+                + "  year = 2000,\n"
                 + "  number = 1,\n"
                 + "  pages = {1-2},\n"
                 + "  month = 2,\n"
@@ -67,7 +67,7 @@ public class ViiteBibtexTest {
                 + "  author = {Petteri Petterson},\n"
                 + "  title = {The Title},\n"
                 + "  publisher = {The Publisher},\n"
-                + "  year = {2000},\n"
+                + "  year = 2000,\n"
                 + "}";
         assertEquals(expected, ViiteBibtex.toBibtex(book));
     }
@@ -79,7 +79,7 @@ public class ViiteBibtexTest {
                 + "  author = {Petteri Petterson},\n"
                 + "  title = {The Title},\n"
                 + "  publisher = {The Publisher},\n"
-                + "  year = {2000},\n"
+                + "  year = 2000,\n"
                 + "  volume = 1,\n"
                 + "  series = 1,\n"
                 + "  address = {address},\n"
@@ -99,7 +99,7 @@ public class ViiteBibtexTest {
                 + "  howpublished = {Somehow},\n"
                 + "  address = {Address},\n"
                 + "  month = 4,\n"
-                + "  year = {2000},\n"
+                + "  year = 2000,\n"
                 + "  note = {This is a note.},\n"
                 + "}";
         assertEquals(expected, ViiteBibtex.toBibtex(booklet));
@@ -113,7 +113,7 @@ public class ViiteBibtexTest {
                 + "  author = {Author},\n"
                 + "  howpublished = {Somehow},\n"
                 + "  month = 4,\n"
-                + "  year = {2000},\n"
+                + "  year = 2000,\n"
                 + "}";
         assertEquals(expected, ViiteBibtex.toBibtex(booklet));
     }
