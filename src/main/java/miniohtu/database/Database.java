@@ -82,17 +82,7 @@ public class Database<Entry> {
         Statement statement = connection.createStatement();
 
         String sql = "CREATE TABLE BOOKLET ("
-<<<<<<< HEAD
-                + "id       STRING  NOT NULL,"
-                + "title    STRING  NOT NULL,"
-                + "author   STRING,"
-                + "howpublished   STRING,"
-                + "address  STRING,"
-                + "month    STRING,"
-                + "year INTEGER,"
-                + "note     STRING,"
-                + "key      STRING )";
-=======
+
                 + "id           STRING  NOT NULL,"
                 + "title        STRING  NOT NULL,"
                 + "author       STRING,"
@@ -102,7 +92,6 @@ public class Database<Entry> {
                 + "year         INTEGER,"
                 + "note         STRING,"
                 + "key          STRING )";      
->>>>>>> 95eeb684773902a692e9caa04eb9f6b4f14a3607
         statement.execute(sql);
         statement.close();
     }
@@ -129,7 +118,6 @@ public class Database<Entry> {
         statement.close();
         connection.commit();
     }
-<<<<<<< HEAD
 
     public static void resetDB(String dbname) throws ClassNotFoundException {
         // load the sqlite-JDBC driver using the current class loader
@@ -200,7 +188,4 @@ public class Database<Entry> {
             }
         }
     }
-
-=======
->>>>>>> 95eeb684773902a692e9caa04eb9f6b4f14a3607
 }
