@@ -79,6 +79,20 @@ public class Database<Entry> {
     }
     
     private void createBookletTable() throws SQLException {
+        Statement statement = connection.createStatement();
+        
+        String sql = "CREATE TABLE BOOKLET ("
+                + "id       STRING  NOT NULL,"
+                + "title    STRING  NOT NULL,"
+                + "author   STRING,"
+                + "howpublished   STRING,"
+                + "address  STRING,"
+                + "month    STRING,"
+                + "year INTEGER,"
+                + "note     STRING,"
+                + "key      STRING )";      
+        statement.execute(sql);
+        statement.close();
     }
 
     public List<Entry> queryAndCollect(String query, Collector<Entry> col) throws SQLException {
