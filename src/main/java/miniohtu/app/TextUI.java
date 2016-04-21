@@ -9,7 +9,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import miniohtu.IO.IO;
 import miniohtu.database.BookDAO;
+import miniohtu.database.BookletDAO;
 import miniohtu.entry.Book;
+import miniohtu.entry.Booklet;
 
 public class TextUI {
 
@@ -21,12 +23,14 @@ public class TextUI {
 
     private final ArticleDAO articleDAO;
     private final BookDAO bookDAO;
+    private final BookletDAO bookletDAO;
 
     public TextUI(IO io, Database db) {
         this.io = io;
         this.db = db;
         this.articleDAO = new ArticleDAO(this.db);
         this.bookDAO = new BookDAO(this.db);
+        this.bookletDAO = new BookletDAO(this.db);   
     }
 
     public void run() {
@@ -125,7 +129,7 @@ public class TextUI {
         }
     }
     
-    private void addBooklet() {
+    private void addBooklet()  {
         io.print("Syötä pakolliset kentät:\n");
         String key = askString("citation key");
         String title = askString("title");
@@ -133,9 +137,18 @@ public class TextUI {
         io.print("\nSyötä valinnaiset kentät:\n");
         String author = askString("author");
         String howpublished = askString("howpublished");
-        int month = askInteger("month");
+        String address = askString("address");
+        String month = askString("month");
         int year = askInteger("year");
         String note = askString("note");
+        
+        Booklet booklet = new Booklet(key, title, author, howpublished, address, month, year, note, key);
+        try {
+        bookletDAO.add(booklet);
+        } catch (SQLException e) {
+            io.print("SQL exception\n");
+            io.print(e.getMessage() + "\n");
+        }
     }
 
     private int askInteger(String kentanNimi) {
@@ -171,6 +184,14 @@ public class TextUI {
             io.print("BOOKS:\n\n");
             for (Book book : bookDAO.findAll()) {
                 io.print(book.toString() + "\n");
+            }
+        } catch (SQLException ex) {
+            io.print("SQL VIRHE");
+        }
+                try {
+            io.print("BOOKLET:\n\n");
+            for (Booklet booklet : bookletDAO.findAll()) {
+                io.print(booklet.toString() + "\n");
             }
         } catch (SQLException ex) {
             io.print("SQL VIRHE");
