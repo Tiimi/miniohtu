@@ -12,3 +12,4 @@ Miniprojekti Ohtu 2016
 +  Antti Haapaniemi
 +  Vililassi Ala-Tuuhonen
 +  Sebastian Hemmilä
++  Ville Tanttu
