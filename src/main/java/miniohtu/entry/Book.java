@@ -6,12 +6,11 @@ public class Book {
     private String id;
     private String author;
     private String title;
-    private String journal;
+    private String publisher;
     private int year;
-    private int volume;
     
     // Optional fields
-    private int number;
+    private int volume;
     private String series;
     private String address;
     private int edition;
@@ -19,16 +18,15 @@ public class Book {
     private String note;
     private String key;
     
-    public Book(String id, String author, String title, String journal, int year, int volume,
-            int number, String series, String address, int edition, String month, String note, String key) {
+    public Book(String id, String author, String title, String publisher, int year, int volume,
+            String series, String address, int edition, String month, String note, String key) {
         this.id = id;
         this.author = author;
         this.title = title;
-        this.journal = journal;
+        this.publisher = publisher;
         this.year = year;
-        this.volume = volume;
         
-        this.number = number;
+        this.volume = volume;
         this.series = series;
         this.address = address;
         this.edition = edition;
@@ -37,13 +35,15 @@ public class Book {
         this.key = key;
     }
     
-    public Book(String id, String author, String title, String journal, int year, int volume) {
+    public Book(String id, String author, String title, String publisher, int year) {
         this.id = id;
         this.author = author;
         this.title = title;
-        this.journal = journal;
+        this.publisher = publisher;
         this.year = year;
-        this.volume = volume;
+        
+        this.volume = Integer.MAX_VALUE;
+        this.edition = Integer.MAX_VALUE;
     }
 
     public String getId() {
@@ -58,8 +58,8 @@ public class Book {
         return title;
     }
 
-    public String getJournal() {
-        return journal;
+    public String getPublisher() {
+        return publisher;
     }
 
     public int getYear() {
@@ -68,10 +68,6 @@ public class Book {
 
     public int getVolume() {
         return volume;
-    }
-
-    public int getNumber() {
-        return number;
     }
 
     public String getSeries() {
@@ -89,7 +85,7 @@ public class Book {
     public String getMonth() {
         return month;
     }
- 
+
     public String getNote() {
         return note;
     }
@@ -97,6 +93,13 @@ public class Book {
     public String getKey() {
         return key;
     }
+
+    @Override
+    public String toString() {
+        return "Book{" + "id=" + id + ", author=" + author + ", title=" + title + ", publisher=" + publisher + ", year=" + year + ", volume=" + volume + ", series=" + series + ", address=" + address + ", edition=" + edition + ", month=" + month + ", note=" + note + ", key=" + key + '}';
+    }
+
+
     
     
 }
