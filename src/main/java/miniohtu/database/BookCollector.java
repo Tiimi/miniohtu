@@ -25,5 +25,4 @@ public class BookCollector implements Collector<Book> {
         
         return new Book(id, author, title, author, year, volume, key, address, edition, month, note, key);
     }
-    
 }

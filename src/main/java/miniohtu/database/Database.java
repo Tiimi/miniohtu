@@ -82,15 +82,15 @@ public class Database<Entry> {
         Statement statement = connection.createStatement();
         
         String sql = "CREATE TABLE BOOKLET ("
-                + "id       STRING  NOT NULL,"
-                + "title    STRING  NOT NULL,"
-                + "author   STRING,"
-                + "howpublished   STRING,"
-                + "address  STRING,"
-                + "month    STRING,"
-                + "year INTEGER,"
-                + "note     STRING,"
-                + "key      STRING )";      
+                + "id           STRING  NOT NULL,"
+                + "title        STRING  NOT NULL,"
+                + "author       STRING,"
+                + "howpublished STRING,"
+                + "address      STRING,"
+                + "month        STRING,"
+                + "year         INTEGER,"
+                + "note         STRING,"
+                + "key          STRING )";      
         statement.execute(sql);
         statement.close();
     }
@@ -117,45 +117,4 @@ public class Database<Entry> {
         statement.close();
         connection.commit();
     }
-
-    public static void resetDB(String dbname) throws ClassNotFoundException {
-        // load the sqlite-JDBC driver using the current class loader
-        Connection connection = null;
-        Class.forName("org.sqlite.JDBC");
-        try {
-            // create a database connection
-            connection = DriverManager.getConnection(String.format("jdbc:sqlite:%s", dbname));
-            Statement statement = connection.createStatement();
-            statement.setQueryTimeout(30);  // set timeout to 30 sec.
-
-            statement.executeUpdate("DROP TABLE IF EXISTS article");
-            statement.executeUpdate(
-                    "CREATE TABLE article ("
-                    + "id string,"
-                    + "author string,"
-                    + "title string,"
-                    + "journal string,"
-                    + "volume integer,"
-                    + "number integer,"
-                    + "year integer,"
-                    + "pages string,"
-                    + "publisher string,"
-                    + "address string)"
-            );
-        } catch (SQLException e) {
-            // if the error message is "out of memory", 
-            // it probably means no database file is found
-            System.err.println(e.getMessage());
-        } finally {
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                // connection close failed.
-                System.err.println(e);
-            }
-        }
-    }
-
 }
