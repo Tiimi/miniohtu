@@ -16,6 +16,6 @@ scenario "add a new article", {
     }
 
     then 'new article is in the system', {
-        io.getPrintouts().shouldHave("Article title: title \nWritten by: pentti - year: 2000\nJournal: journal - volume: 1")
+        io.getPrintouts().shouldHave("Article title: title\nWritten by: pentti - year: 2000\nJournal: journal - volume: 1")
     }
 }
