@@ -206,17 +206,16 @@ public class TextUI {
         entryDAOs.add(articleDAO);
         entryDAOs.add(bookDAO);
         entryDAOs.add(bookletDAO);
-        
-        try {
-            for (EntryDAO entryDAO : entryDAOs) {
-                List<BaseEntry> daos = entryDAO.findAll();
-                for (BaseEntry entry : daos) {
+        for (EntryDAO entryDAO : entryDAOs) {
+            try {
+                List<BaseEntry> entries = entryDAO.findAll();
+                for (BaseEntry entry : entries) {
                     s += entry.toBibtex();
                     s += "\n\n";
                 }
+            } catch (SQLException e) {
+                io.print("Tallennus epäonistui.\n" + e.getMessage() + "\n");
             }
-        } catch (SQLException e) {
-            io.print("SQL exception. Talennus epäonistui.\n");
         }
         try {
             FileOutputStream outStream = new FileOutputStream(new File(polku));
