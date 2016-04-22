@@ -64,7 +64,7 @@ public class Database<Entry> {
                 + "series       STRING,"
                 + "address      STRING,"
                 + "edition      INTEGER,"
-                + "month        STRING,"
+                + "month        INTEGER,"
                 + "note         STRING,"
                 + "key          STRING )";
 
