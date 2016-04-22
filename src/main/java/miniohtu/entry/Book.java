@@ -1,7 +1,7 @@
 
 package miniohtu.entry;
 
-public class Book {
+public class Book implements BaseEntry{
     // Required fields
     private String citationKey;
     private String author;
@@ -94,6 +94,23 @@ public class Book {
 
     public String getKey() {
         return key;
+    }
+    
+    public String toBibtex() {
+        String bibtex = "@ARTICLE{" + this.getCitationKey() + "},\n"
+                + "  author = {" + this.getAuthor() + "},\n"
+                + "  title = {" + this.getTitle() + "},\n"
+                + "  publisher = {" + this.getPublisher() + "},\n"
+                + "  year = " + this.getYear() + ",\n"
+                + ((this.getVolume() == Integer.MAX_VALUE) ? "" : "  volume = " + this.getVolume() + ",\n")
+                + ((this.getSeries() == Integer.MAX_VALUE) ? "" : "  series = " + this.getSeries() + ",\n")
+                + ((this.getAddress() == null) ? "" : "  address = {" + this.getAddress() + "},\n")
+                + ((this.getEdition() == Integer.MAX_VALUE) ? "" : "  edition = " + this.getEdition() + ",\n")
+                + ((this.getMonth() == Integer.MAX_VALUE) ? "" : "  month = " + this.getMonth() + ",\n")
+                + ((this.getNote() == null) ? "" : "  note = {" + this.getNote() + "},\n")
+                + "}";
+
+        return bibtex;
     }
 
     @Override

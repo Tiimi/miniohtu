@@ -1,3 +1,7 @@
+/* 
+
+// Not needed?
+
 package miniohtu.bibtex;
 
 import miniohtu.entry.Article;
@@ -51,3 +55,6 @@ public class ViiteBibtex {
         return bibtex;
     }
 }
+
+
+*/

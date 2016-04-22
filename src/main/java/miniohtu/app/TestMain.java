@@ -5,9 +5,6 @@
  */
 package miniohtu.app;
 
-import miniohtu.bibtex.ViiteBibtex;
-import miniohtu.entry.Article;
-
 /**
  *
  * @author antti

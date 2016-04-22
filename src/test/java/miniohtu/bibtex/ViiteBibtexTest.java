@@ -40,7 +40,7 @@ public class ViiteBibtexTest {
                 + "  yournal = {The Journal},\n"
                 + "  year = 2000,\n"
                 + "}";
-        assertEquals(expected, ViiteBibtex.toBibtex(article));
+        assertEquals(expected, article.toBibtex());
     }
 
     @Test
@@ -57,7 +57,7 @@ public class ViiteBibtexTest {
                 + "  note = {This is a note},\n"
                 + "  volume = 1,\n"
                 + "}";
-        assertEquals(expected, ViiteBibtex.toBibtex(article));
+        assertEquals(expected, article.toBibtex());
     }
 
     @Test
@@ -69,7 +69,7 @@ public class ViiteBibtexTest {
                 + "  publisher = {The Publisher},\n"
                 + "  year = 2000,\n"
                 + "}";
-        assertEquals(expected, ViiteBibtex.toBibtex(book));
+        assertEquals(expected, book.toBibtex());
     }
 
     @Test
@@ -87,7 +87,7 @@ public class ViiteBibtexTest {
                 + "  month = 4,\n"
                 + "  note = {This is a note},\n"
                 + "}";
-        assertEquals(expected, ViiteBibtex.toBibtex(book));
+        assertEquals(expected, book.toBibtex());
     }
 
     @Test
@@ -102,7 +102,7 @@ public class ViiteBibtexTest {
                 + "  year = 2000,\n"
                 + "  note = {This is a note.},\n"
                 + "}";
-        assertEquals(expected, ViiteBibtex.toBibtex(booklet));
+        assertEquals(expected, booklet.toBibtex());
     }
     
     @Test
@@ -115,7 +115,7 @@ public class ViiteBibtexTest {
                 + "  month = 4,\n"
                 + "  year = 2000,\n"
                 + "}";
-        assertEquals(expected, ViiteBibtex.toBibtex(booklet));
+        assertEquals(expected, booklet.toBibtex());
     }
 
     @Test
@@ -124,6 +124,6 @@ public class ViiteBibtexTest {
         String expected = "@BOOKLET{book},\n"
                 + "  title = {The title},\n"
                 + "}";
-        assertEquals(expected, ViiteBibtex.toBibtex(booklet));
+        assertEquals(expected, booklet.toBibtex());
     }
 }

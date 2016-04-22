@@ -1,6 +1,6 @@
 package miniohtu.entry;
 
-public class Article {
+public class Article implements BaseEntry{
 
     // Required fields
 
@@ -45,6 +45,21 @@ public class Article {
         this.pages = null;
         this.month = Integer.MAX_VALUE;
         this.note = null;
+    }
+    
+    public String toBibtex() {
+        String bibtex = "@ARTICLE{" + this.getCitationKey() + "},\n"
+                + "  author = {" + this.getAuthor() + "},\n"
+                + "  title = {" + this.getTitle() + "},\n"
+                + "  yournal = {" + this.getJournal() + "},\n"
+                + "  year = " + this.getYear() + ",\n"
+                + ((this.getNumber() == Integer.MAX_VALUE) ? "" : "  number = " + this.getNumber() + ",\n")
+                + ((this.getPages() == null) ? "" : "  pages = {" + this.getPages() + "},\n")
+                + ((this.getMonth() == Integer.MAX_VALUE) ? "" : "  month = " + this.getMonth() + ",\n")
+                + ((this.getNote() == null) ? "" : "  note = {" + this.getNote() + "},\n")
+                + ((this.getVolume() == Integer.MAX_VALUE) ? "" : "  volume = " + this.getVolume() + ",\n")
+                + "}";
+        return bibtex;
     }
 
     @Override

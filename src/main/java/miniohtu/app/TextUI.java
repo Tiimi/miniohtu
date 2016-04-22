@@ -6,13 +6,13 @@ import miniohtu.database.Database;
 import miniohtu.entry.Article;
 import miniohtu.database.ArticleDAO;
 import java.sql.SQLException;
-import java.util.InputMismatchException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
 import miniohtu.IO.IO;
-import miniohtu.bibtex.ViiteBibtex;
 import miniohtu.database.BookDAO;
 import miniohtu.database.BookletDAO;
+import miniohtu.database.EntryDAO;
+import miniohtu.entry.BaseEntry;
 import miniohtu.entry.Book;
 import miniohtu.entry.Booklet;
 
@@ -202,18 +202,18 @@ public class TextUI {
         io.print("Anna polku tiedostoon (esim. /home/pentti/tiedostonnimi.tex)\n");
         String polku = askString("polku");
         String s = "";
+        List<EntryDAO> entryDAOs = new ArrayList<>();
+        entryDAOs.add(articleDAO);
+        entryDAOs.add(bookDAO);
+        entryDAOs.add(bookletDAO);
+        
         try {
-            for (Article article : articleDAO.findAll()) {
-                s += ViiteBibtex.toBibtex(article);
-                s += "\n\n";
-            }
-            for (Book book : bookDAO.findAll()) {
-                s += ViiteBibtex.toBibtex(book);
-                s += "\n\n";
-            }
-            for (Booklet booklet : bookletDAO.findAll()) {
-                s += ViiteBibtex.toBibtex(booklet);
-                s += "\n\n";
+            for (EntryDAO entryDAO : entryDAOs) {
+                List<BaseEntry> daos = entryDAO.findAll();
+                for (BaseEntry entry : daos) {
+                    s += entry.toBibtex();
+                    s += "\n\n";
+                }
             }
         } catch (SQLException e) {
             io.print("SQL exception. Talennus epäonistui.\n");
