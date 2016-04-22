@@ -56,7 +56,7 @@ public class BookDAO implements EntryDAO<Book> {
     
     @Override
     public Book find(String citationKey) throws SQLException {
-        List<Book> matches = db.queryAndCollect("SELECT * FROM ARTICLE WHERE CITATIONKEY='" + citationKey + "'", rs -> {
+        List<Book> matches = db.queryAndCollect("SELECT * FROM BOOK WHERE CITATIONKEY='" + citationKey + "'", rs -> {
             return new Book(
                 rs.getString("citationKey"),
                 rs.getString("author"),

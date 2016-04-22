@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+
 package miniohtu.entry;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -17,27 +11,14 @@ import static org.junit.Assert.*;
  * @author antti
  */
 public class ArticleTest {
-    
     private Article requiredFields;
     private Article allFields;
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
     
     @Before
     public void setUp() {
         requiredFields = new Article("article", "Ville", "Artikkeli", "Journaali", 2016);
         allFields = new Article("article2", "Ville", "Toinen artikkeli", "Journaali", 2016, 1, 
                 2, "1-10", 4, "Note");
-    }
-    
-    @After
-    public void tearDown() {
     }
 
     @Test
