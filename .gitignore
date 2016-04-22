@@ -15,3 +15,6 @@ hs_err_pid*
 # SQLite database files
 *.db
 /nbproject/
+
+# .tex files
+*.tex
