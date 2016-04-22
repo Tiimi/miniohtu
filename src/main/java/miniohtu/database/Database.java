@@ -1,6 +1,6 @@
 package miniohtu.database;
 
-import miniohtu.database.Collector;
+import miniohtu.collectors.Collector;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;

@@ -1,6 +1,7 @@
 
-package miniohtu.database;
+package miniohtu.collectors;
 
+import miniohtu.collectors.Collector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import miniohtu.entry.Article;
