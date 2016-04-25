@@ -40,17 +40,17 @@ public class BibtexEncodingTest {
 
     @Test
     public void emptyReturnsEmpty() {
-        assertEquals("", BibtexEncoding.encodeBibtexEncoding(""));
+        assertEquals("", BibtexEncoding.encodeToBibtex(""));
     }
     
     @Test
     public void emptryStringReturnsEmptyTest() {
-        assertEquals("", BibtexEncoding.encodeBibtexEncoding(""));
+        assertEquals("", BibtexEncoding.encodeToBibtex(""));
     }
     
     @Test
     public void allSpecialCharactersTest() {
-        assertEquals("{\\\"a}{\\\"A}{\\\"o}{\\\"O}{\\aa}{\\AA}",BibtexEncoding.encodeBibtexEncoding("äÄöÖåÅ"));
+        assertEquals("{\\\"a}{\\\"A}{\\\"o}{\\\"O}{\\aa}{\\AA}",BibtexEncoding.encodeToBibtex("äÄöÖåÅ"));
     }
     
     @Test
@@ -60,13 +60,13 @@ public class BibtexEncodingTest {
             sb.append(i);
         }
         String expected = sb.toString();
-        assertEquals(expected, BibtexEncoding.encodeBibtexEncoding(expected));
+        assertEquals(expected, BibtexEncoding.encodeToBibtex(expected));
     }
     
     @Test
     public void notDefinedCharactersTest() {
         String input = "" + (char) 1000 + (char) 9999 + (char) 102141;
         System.out.println(input);
-        assertEquals("{???}{???}{???}", BibtexEncoding.encodeBibtexEncoding(input));
+        assertEquals("{???}{???}{???}", BibtexEncoding.encodeToBibtex(input));
     }
 }

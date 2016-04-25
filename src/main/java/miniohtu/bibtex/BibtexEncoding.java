@@ -11,7 +11,7 @@ package miniohtu.bibtex;
  */
 public class BibtexEncoding {
     
-    public static String encodeBibtexEncoding(String s) {
+    public static String encodeToBibtex(String s) {
         StringBuilder sb = new StringBuilder("");
         for (char c : s.toCharArray()) {
             //Character is ASCII.

@@ -62,7 +62,7 @@ public class Article implements BaseEntry{
                 + ((this.getNote() == null) ? "" : "  note = {" + this.getNote() + "},\n")
                 + ((this.getVolume() == Integer.MAX_VALUE) ? "" : "  volume = " + this.getVolume() + ",\n")
                 + "}";
-        return BibtexEncoding.encodeBibtexEncoding(bibtex);
+        return BibtexEncoding.encodeToBibtex(bibtex);
     }
 
     @Override

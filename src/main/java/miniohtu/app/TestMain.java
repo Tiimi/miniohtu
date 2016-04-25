@@ -18,7 +18,7 @@ public class TestMain {
      */
     public static void main(String[] args) {
         String s = "" + (char) 1000;
-        System.out.println(BibtexEncoding.encodeBibtexEncoding(s));
+        System.out.println(BibtexEncoding.encodeToBibtex(s));
     }
     
 }

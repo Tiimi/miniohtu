@@ -85,7 +85,7 @@ public class Booklet implements BaseEntry{
                 + ((this.getYear() == Integer.MAX_VALUE) ? "" : "  year = " + this.getYear() + ",\n")
                 + ((this.getNote() == null) ? "" : "  note = {" + this.getNote() + "},\n")
                 + "}";
-        return BibtexEncoding.encodeBibtexEncoding(bibtex);
+        return BibtexEncoding.encodeToBibtex(bibtex);
     }
     
     @Override
