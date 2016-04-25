@@ -89,11 +89,11 @@ public class TextUI {
         int year = askInteger("year");
 
         io.print("\nSyötä valinnaiset kentät:\n");
-        int volume = askInteger("volume");
-        int number = askInteger("number");
-        String pages = askString("pages");
-        int month = askInteger("month");
-        String note = askString("note");
+        int volume = askOptionalInteger("volume");
+        int number = askOptionalInteger("number");
+        String pages = askOptionalString("pages");
+        int month = askOptionalInteger("month");
+        String note = askOptionalString("note");
 
         Article a = new Article(citationKey, author, title, journal, year, volume, number, pages, month, note);
 
@@ -115,13 +115,13 @@ public class TextUI {
         int year = askInteger("year");
 
         io.print("\nSyötä valinnaiset kentät:\n");
-        int volume = askInteger("volume");
-        int series = askInteger("series");
-        String address = askString("address");
-        int edition = askInteger("edition");
-        int month = askInteger("month");
-        String note = askString("note");
-        String key = askString("key");
+        int volume = askOptionalInteger("volume");
+        int series = askOptionalInteger("series");
+        String address = askOptionalString("address");
+        int edition = askOptionalInteger("edition");
+        int month = askOptionalInteger("month");
+        String note = askOptionalString("note");
+        String key = askOptionalString("key");
 
         try {
             Book b = new Book(citationKey, author, title, publisher, year, volume, series, address, edition, month, note, key);
@@ -138,13 +138,13 @@ public class TextUI {
         String title = askString("title");
 
         io.print("\nSyötä valinnaiset kentät:\n");
-        String author = askString("author");
-        String howPublished = askString("howPublished");
-        String address = askString("address");
-        int month = askInteger("month");
-        int year = askInteger("year");
-        String note = askString("note");
-        String key = askString("key");
+        String author = askOptionalString("author");
+        String howPublished = askOptionalString("howPublished");
+        String address = askOptionalString("address");
+        int month = askOptionalInteger("month");
+        int year = askOptionalInteger("year");
+        String note = askOptionalString("note");
+        String key = askOptionalString("key");
 
         Booklet booklet = new Booklet(citationKey, title, author, howPublished, address, month, year, note, key);
         try {
@@ -163,7 +163,7 @@ public class TextUI {
                 kokonaisluku = io.nextInt();
                 break;
             } catch (NumberFormatException e) {
-                io.print("Virhe: anna kokonaisluku");
+                io.print("Virhe: anna kokonaisluku\n");
             }
         }
 
@@ -173,6 +173,28 @@ public class TextUI {
     private String askString(String kentanNimi) {
         io.print(kentanNimi + ": ");
         return io.nextString();
+    }
+    
+    private String askOptionalString(String fieldValue) {
+        String s = askString(fieldValue);
+        if (s.isEmpty()) {
+            return null;
+        }
+        return s;
+    }
+    
+    private int askOptionalInteger(String fieldValue) {
+        while(true) {
+            String s = askOptionalString(fieldValue);
+            if (s == null) {
+                return Integer.MAX_VALUE;
+            }
+            try {
+                return Integer.parseInt(s);
+            } catch (NumberFormatException e) {
+                io.print("Virhe: anna kokonaisluku tai tyhjä.\n");
+            }
+        }        
     }
 
     private void list() {
