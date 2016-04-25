@@ -5,6 +5,8 @@
  */
 package miniohtu.app;
 
+import miniohtu.bibtex.BibtexEncoding;
+
 /**
  *
  * @author antti
@@ -15,9 +17,8 @@ public class TestMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String test = null;
-        //Article a = new Article(null,"Peter Adams", "The title", "The journal", 2000, 4, 2, "1-2", "jan", "This is a note.", "article");
-        //System.out.println(ViiteBibtex.toBibtexEntry(a));
+        String s = "" + (char) 1000;
+        System.out.println(BibtexEncoding.encodeBibtexEncoding(s));
     }
     
 }

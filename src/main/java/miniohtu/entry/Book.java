@@ -1,6 +1,8 @@
 
 package miniohtu.entry;
 
+import miniohtu.bibtex.BibtexEncoding;
+
 public class Book implements BaseEntry{
     // Required fields
     private String citationKey;
@@ -96,6 +98,7 @@ public class Book implements BaseEntry{
         return key;
     }
     
+    @Override
     public String toBibtex() {
         String bibtex = "@ARTICLE{" + this.getCitationKey() + "},\n"
                 + "  author = {" + this.getAuthor() + "},\n"
@@ -110,7 +113,7 @@ public class Book implements BaseEntry{
                 + ((this.getNote() == null) ? "" : "  note = {" + this.getNote() + "},\n")
                 + "}";
 
-        return bibtex;
+        return BibtexEncoding.encodeBibtexEncoding(bibtex);
     }
 
     @Override

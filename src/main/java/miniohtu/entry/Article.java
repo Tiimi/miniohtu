@@ -1,5 +1,7 @@
 package miniohtu.entry;
 
+import miniohtu.bibtex.BibtexEncoding;
+
 public class Article implements BaseEntry{
 
     // Required fields
@@ -47,6 +49,7 @@ public class Article implements BaseEntry{
         this.note = null;
     }
     
+    @Override
     public String toBibtex() {
         String bibtex = "@ARTICLE{" + this.getCitationKey() + "},\n"
                 + "  author = {" + this.getAuthor() + "},\n"
@@ -59,7 +62,7 @@ public class Article implements BaseEntry{
                 + ((this.getNote() == null) ? "" : "  note = {" + this.getNote() + "},\n")
                 + ((this.getVolume() == Integer.MAX_VALUE) ? "" : "  volume = " + this.getVolume() + ",\n")
                 + "}";
-        return bibtex;
+        return BibtexEncoding.encodeBibtexEncoding(bibtex);
     }
 
     @Override
