@@ -74,7 +74,7 @@ public class TextUI {
         } else if (komento.equals("booklet")) {
             addBooklet();
         } else {
-            io.print("Viite tyyppiä: " + komento + "\n\n");
+            io.print("Viite tyyppiä: " + komento + " ei ole.\n\n");
         }
 
     }

@@ -21,3 +21,20 @@ scenario "save bibtex", {
         new File("testBibtex.db").delete()
     }
 }
+
+scenario "save bibtex to an invalid path", {
+    given 'command to save is selected', {
+        database = new Database("testBibtex.db")
+        io = new IOStub("tallenna", "invalid/invalid.tex", "lopeta")
+        test = new TextUI(io, database)
+    }
+    
+    when 'bibtex is saved', {
+        test.run();
+    }
+
+    then 'error message should be displayed', {
+        io.getPrintouts().shouldHave("Tallennus epäonnistui. Tarkista polku")
+        new File("testBibtex.db").delete()
+    }
+}
