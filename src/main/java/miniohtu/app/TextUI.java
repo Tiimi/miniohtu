@@ -270,7 +270,7 @@ public class TextUI {
     
     private String askOptionalString(String fieldValue) {
         String s = askString(fieldValue);
-        if (s.isEmpty()) {
+        if (s.isEmpty() || s == "") {
             return null;
         }
         return s;

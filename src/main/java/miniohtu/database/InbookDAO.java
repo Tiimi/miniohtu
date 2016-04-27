@@ -33,6 +33,7 @@ public class InbookDAO implements EntryDAO<Inbook> {
     }
     
     private String s(String s) {
+        if (s == null) return null;
         return "'" + s + "'";
     }
 
