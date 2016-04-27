@@ -26,6 +26,7 @@ public class ArticleDAO implements EntryDAO<Article> {
     }
 
     private String s(String s) {
+        if (s == null) return null;
         return "'" + s + "'";
     }
 

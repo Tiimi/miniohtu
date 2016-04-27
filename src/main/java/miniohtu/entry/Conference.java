@@ -120,8 +120,15 @@ public class Conference implements BaseEntry {
     @Override
     public String toString() {
         return "Conference{" + "citationKey=" + citationKey + ", author=" + author + ", title=" + title
-                + ", bookTitle=" + bookTitle + ", year=" + year + ", editor=" + editor
-                + ", pages=" + pages + ", organization=" + organization + ", publisher=" + publisher
-                + ", address=" + address + ", month=" + month + ", note=" + note + ", key=" + key + "}";
+                + ", bookTitle=" + bookTitle + ", year=" + year 
+                + ((this.getEditor() == null) ? "" : ", editor=" + this.getEditor())
+                + ((this.getPages() == Integer.MAX_VALUE) ? "" : ", pages=" + this.getPages())
+                + ((this.getOrganization() == null) ? "" : ", organization=" + this.getOrganization())
+                + ((this.getPublisher() == null) ? "" : ", publisher=" + this.getPublisher())
+                + ((this.getAddress() == null) ? "" : ", address=" + this.getAddress())
+                + ((this.getMonth() == Integer.MAX_VALUE) ? "" : ", month=" + this.getMonth())
+                + ((this.getNote() == null) ? "" : ", note=" + this.getNote())
+                + ((this.getKey() == null) ? "" : ", key=" + this.getKey())
+                + "}";
     }
 }

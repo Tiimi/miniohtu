@@ -33,6 +33,7 @@ public class ConferenceDAO implements EntryDAO<Conference> {
     }
 
     private String s(String s) {
+        if (s == null) return null;
         return "'" + s + "'";
     }
     
