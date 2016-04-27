@@ -53,4 +53,11 @@ public class BookDAOTest {
         assertEquals("publisher", book.get(0).getPublisher());
         assertEquals(2016, book.get(0).getYear());
     }
+    
+    @Test
+    public void removeTest() throws SQLException {
+        bookDAO.add(new Book("this_is_citationKey", "author", "title", "publisher", 2016));
+        bookDAO.remove("this_is_citationKey");
+        assertNull(bookDAO.find("this_is_citationKey"));
+    }
 }
