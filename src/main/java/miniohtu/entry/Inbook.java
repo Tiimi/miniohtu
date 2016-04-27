@@ -1,7 +1,7 @@
 
 package miniohtu.entry;
 
-public class Inbook {
+public class Inbook implements BaseEntry {
     // Required fields
     private String citationKey;
     private String author;
@@ -100,5 +100,10 @@ public class Inbook {
     
     public String getKey() {
         return key;
+    }
+
+    @Override
+    public String toBibtex() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

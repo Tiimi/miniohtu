@@ -1,7 +1,7 @@
 
 package miniohtu.entry;
 
-public class Conference {
+public class Conference implements BaseEntry {
     // Required fields
     private String citationKey;
     private String author;
@@ -26,7 +26,7 @@ public class Conference {
         this.bookTitle = bookTitle;
         this.year = year;
         
-        int pages = Integer.MAX_VALUE;
+        this.pages = Integer.MAX_VALUE;
         this.month = Integer.MAX_VALUE;
     }
     
@@ -38,6 +38,7 @@ public class Conference {
         this.title = title;
         this.bookTitle = bookTitle;
         this.year = year;
+        
         this.editor = editor;
         this.pages = pages;
         this.organization = organization;
@@ -98,5 +99,10 @@ public class Conference {
     
     public String getKey() {
         return key;
+    }
+
+    @Override
+    public String toBibtex() {
+        return null;
     }
 }
