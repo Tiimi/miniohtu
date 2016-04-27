@@ -38,6 +38,7 @@ public class ArticleDAOTest {
     public void findTest() throws SQLException {
         articleDAO.add(new Article("i_am_citationKey", "author", "title", "journal", 2016));
         Article article = articleDAO.find("i_am_citationKey");
+        
         assertEquals("i_am_citationKey", article.getCitationKey());
         assertEquals("author", article.getAuthor());
         assertEquals("title", article.getTitle());
