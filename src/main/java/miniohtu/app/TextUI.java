@@ -8,25 +8,35 @@ import miniohtu.database.ArticleDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import miniohtu.IO.IO;
 import miniohtu.database.BookDAO;
 import miniohtu.database.BookletDAO;
+import miniohtu.database.ConferenceDAO;
 import miniohtu.database.EntryDAO;
+import miniohtu.database.InbookDAO;
 import miniohtu.entry.BaseEntry;
 import miniohtu.entry.Book;
 import miniohtu.entry.Booklet;
+import miniohtu.entry.Conference;
+import miniohtu.entry.Inbook;
 
 public class TextUI {
 
     private final String help = "Komennot\n lisaa\n listaa\n tallenna\nlopeta\n";
-    private final String addHelp = "\nValitse lisättävä viite typpi:\n article\n book\n booklet\n\n(peru peruu toiminnon)\n>";
+    private final String addHelp = "\nValitse lisättävä viite typpi:\n article\n book\n booklet\n conference\n inbook\n\n(peru peruu toiminnon)\n>";
     private final String wrongCommand = "Väärä komento: ";
+    private final String mandatoryFields = "Syötä pakolliset kentät\n";
+    private final String optionalFields = "\nSyötä valinnaiset kentät:\n";
     private final IO io;
     private final Database db;
 
     private final ArticleDAO articleDAO;
     private final BookDAO bookDAO;
     private final BookletDAO bookletDAO;
+    private final ConferenceDAO conferenceDAO;
+    private final InbookDAO inbookDAO;
 
     public TextUI(IO io, Database db) {
         this.io = io;
@@ -34,6 +44,8 @@ public class TextUI {
         this.articleDAO = new ArticleDAO(this.db);
         this.bookDAO = new BookDAO(this.db);
         this.bookletDAO = new BookletDAO(this.db);
+        this.conferenceDAO = new ConferenceDAO(this.db);
+        this.inbookDAO = new InbookDAO(this.db);
     }
 
     public void run() {
@@ -73,6 +85,10 @@ public class TextUI {
             addBook();
         } else if (komento.equals("booklet")) {
             addBooklet();
+        } else if (komento.equals("conference")) {
+            addConference();
+        } else if (komento.equals("inbook")) {
+            addInbook();
         } else {
             io.print("Viite tyyppiä: " + komento + " ei ole.\n\n");
         }
@@ -80,7 +96,7 @@ public class TextUI {
     }
 
     private void addArticle() {
-        io.print("Syötä pakolliset kentät:\n");
+        io.print(mandatoryFields);
 
         String citationKey = askString("citation key");
         String author = askString("author");
@@ -107,7 +123,7 @@ public class TextUI {
     }
 
     private void addBook() {
-        io.print("Syötä pakolliset kentät:\n");
+        io.print(mandatoryFields);
         String citationKey = askString("citation key");
         String author = askString("author");
         String title = askString("title");
@@ -133,7 +149,7 @@ public class TextUI {
     }
 
     private void addBooklet() {
-        io.print("Syötä pakolliset kentät:\n");
+        io.print(mandatoryFields);
         String citationKey = askString("citation key");
         String title = askString("title");
 
@@ -152,6 +168,59 @@ public class TextUI {
         } catch (SQLException e) {
             io.print("SQL exception\n");
             io.print(e.getMessage() + "\n");
+        }
+    }
+    
+    private void addConference() {
+        io.print(mandatoryFields);
+        String citationKey = askString("citation key");
+        String title = askString("title");
+        String booktitle = askString("booktitle");
+        int year = askInteger("year");
+        
+        io.print(optionalFields);
+        String editor = askOptionalString("editor");
+        int pages = askOptionalInteger("pages");
+        String organization = askOptionalString("organization");
+        String publisher = askOptionalString("publisher");
+        String address = askOptionalString("address");
+        int month = askOptionalInteger("month");
+        String note = askOptionalString("note");
+        String key = askOptionalString("key");
+        
+        Conference conference = new Conference(citationKey, editor, title, booktitle, year, editor, pages, organization, publisher, address, month, note, key);
+        try {
+            conferenceDAO.add(conference);
+        } catch (SQLException ex) {
+            io.print("Lisäys epäonnistui.");
+        }
+        
+    }
+    
+    private void addInbook() {
+        io.print(mandatoryFields);
+        String citationKey = askString("citation key");
+        String author = askString("author");
+        String title = askString("title");
+        int chapter = askInteger("chapter");
+        String publisher = askString("publisher");
+        int year = askInteger("year");
+        
+        io.print(optionalFields);
+        int volume = askOptionalInteger("volume");
+        int series = askOptionalInteger("series");
+        String address = askOptionalString("addres");
+        int edition = askOptionalInteger("edition");
+        int month = askOptionalInteger("month");
+        String note = askOptionalString("note");
+        String key = askOptionalString("key");
+        
+        Inbook inbook = new Inbook(citationKey, author, title, chapter, publisher, year, volume, series, address, edition, month, note, key);
+        
+        try {
+            inbookDAO.add(inbook);
+        } catch (SQLException ex) {
+            io.print("SQL exception\n");
         }
     }
 
@@ -213,6 +282,14 @@ public class TextUI {
             for (Booklet booklet : bookletDAO.findAll()) {
                 io.print(booklet.toString() + "\n");
             }
+            io.print("CONFERENCE:\n\n");
+            for (Conference conf : conferenceDAO.findAll()) {
+                io.print(conf.toString() + "\n");
+            }
+            io.print("INBOOK:\n\n");
+            for (Inbook inbook : inbookDAO.findAll()) {
+                io.print(inbook.toString() + "\n");
+            }
 
         } catch (SQLException ex) {
             io.print("SQL VIRHE");
@@ -228,6 +305,8 @@ public class TextUI {
         entryDAOs.add(articleDAO);
         entryDAOs.add(bookDAO);
         entryDAOs.add(bookletDAO);
+        entryDAOs.add(conferenceDAO);
+        entryDAOs.add(inbookDAO);
         for (EntryDAO entryDAO : entryDAOs) {
             try {
                 List<BaseEntry> entries = entryDAO.findAll();
