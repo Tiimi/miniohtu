@@ -18,7 +18,7 @@ scenario "add a new article", {
 
     then 'new article is in the system', {
         io.getPrintouts().shouldHave("Article title: title")
-        io.getPrintouts().shouldHave("Written by: pentti - year: 2000")
+        io.getPrintouts().shouldHave("Written by: penttiasd - year: 2000")
         io.getPrintouts().shouldHave("Journal: journal - volume: 1")
         new File("test1.db").delete()
     }
