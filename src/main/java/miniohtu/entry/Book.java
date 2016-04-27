@@ -118,7 +118,10 @@ public class Book implements BaseEntry{
 
     @Override
     public String toString() {
-        return "Book{" + "citationKey=" + citationKey + ", author=" + author + ", title=" + title + ", publisher=" + publisher + ", year=" + year + ", volume=" + volume + ", series=" + series + ", address=" + address + ", edition=" + edition + ", month=" + month + ", note=" + note + ", key=" + key + '}';
+        return "Book{" + "citationKey=" + citationKey + ", author=" + author + ", title=" + title 
+                + ", publisher=" + publisher + ", year=" + year + ", volume=" + volume 
+                + ", series=" + series + ", address=" + address + ", edition=" + edition 
+                + ", month=" + month + ", note=" + note + ", key=" + key + "}";
     }
 
 

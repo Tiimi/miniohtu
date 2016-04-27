@@ -106,4 +106,12 @@ public class Inbook implements BaseEntry {
     public String toBibtex() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    @Override
+    public String toString() {
+        return "Inbook{" + "citationKey=" + citationKey + ", author=" + author + ", title=" + title
+                + ", chapter=" + chapter + ", publisher=" + publisher + ", year=" + year
+                + ", volume=" + volume + ", series=" + series + ", address=" + address
+                + ", edition=" + edition + ", month=" + month + ", note=" + note + ", key=" + key + "}";
+    }
 }
