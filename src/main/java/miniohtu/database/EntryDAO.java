@@ -7,5 +7,5 @@ import java.util.List;
 public interface EntryDAO<Entry> {
     void add(Entry entry) throws SQLException;
     List<Entry> findAll() throws SQLException;
-    Entry find(String id) throws SQLException;
+    Entry find(String citationKey) throws SQLException;
 }

@@ -2,7 +2,6 @@ package miniohtu.database;
 
 import miniohtu.collectors.Collector;
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,6 +28,8 @@ public class Database<Entry> {
         createArticleTable();
         createBookTable();
         createBookletTable();
+        createConferenceTable();
+        createInbookTable();
     }
 
     private void createArticleTable() throws SQLException {
@@ -85,6 +86,48 @@ public class Database<Entry> {
                 + "year         INTEGER,"
                 + "note         STRING,"
                 + "key          STRING )";      
+        statement.execute(sql);
+        statement.close();
+    }
+    
+    private void createConferenceTable() throws SQLException {
+        Statement statement = connection.createStatement();
+        
+        String sql = "CREATE TABLE CONFERENCE ("
+                + "citationKey  STRING  NOT NULL,"
+                + "author       STRING  NOT NULL,"
+                + "title        STRING  NOT NULL,"
+                + "bookTitle    STRING  NOT NULL,"
+                + "year         INTEGER NOT NULL,"
+                + "editor       STRING,"
+                + "pages        INTEGER,"
+                + "organization STRING,"
+                + "publisher    STRING,"
+                + "address      STRING,"
+                + "month        INTEGER,"
+                + "note         STRING"
+                + "key          STRING )";
+        statement.execute(sql);
+        statement.close();
+    }
+    
+    private void createInbookTable() throws SQLException {
+        Statement statement = connection.createStatement();
+        
+        String sql = "CREATE TABLE INBOOK ("
+                + "citationKey  STRING  NOT NULL,"
+                + "author       STRING  NOT NULL,"
+                + "title        STRING  NOT NULL,"
+                + "chapter      INTEGER NOT NULL,"
+                + "publisher    STRING  NOT NULL,"
+                + "year         INTEGER NOT NULL,"
+                + "volume       INTEGER,"
+                + "series       INTEGER,"
+                + "address      STRING,"
+                + "edition      INTEGER,"
+                + "month        INTEGER,"
+                + "note         STRING,"
+                + "key          STRING )";
         statement.execute(sql);
         statement.close();
     }

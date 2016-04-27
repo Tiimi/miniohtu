@@ -22,6 +22,5 @@ public class ArticleCollector implements Collector<Article> {
         String note         = rs.getString("note");
         
         return new Article(citationKey, author, title, journal, volume, number, year, pages, month, note);
-    }
-    
+    }   
 }
