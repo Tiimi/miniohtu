@@ -185,6 +185,8 @@ public class Database<Entry> {
         statement.executeUpdate("DROP TABLE IF EXISTS article");
         statement.executeUpdate("DROP TABLE IF EXISTS book");
         statement.executeUpdate("DROP TABLE IF EXISTS booklet");
+        statement.executeUpdate("DROP TABLE IF EXISTS conference");
+        statement.executeUpdate("DROP TABLE IF EXISTS inbook");
         statement.close();
     }
 }
