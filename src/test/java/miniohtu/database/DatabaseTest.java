@@ -58,12 +58,38 @@ public class DatabaseTest {
         Article expected = new Article("JokuID", "Tekijä", "Titteli", "Journaali", 2001);      
         articleDAO.add(expected);
         List<Article> articles = articleDAO.findAll();
-//        assertEquals(1, articles.size());
-        Article result = articles.get(0);
-        assertEquals("JokuID",result.getCitationKey());
-        assertEquals("Tekijä",result.getAuthor());
-        assertEquals("Journaali",result.getJournal());
-        assertEquals(2001,result.getYear());
+        assertEquals(1, articles.size());
+        articleEqualsForMandatoryFields(expected,articles.get(0));
         new File(dbName).delete();
+    }
+    
+    @Test
+    public void resetDBTest() throws SQLException {
+        String dbName = "/tmp/unit_test1.db";
+        Database db = new Database(dbName);
+        ArticleDAO articleDAO = new ArticleDAO(db);
+        
+        //Add an article to db.
+        Article newArticle = new Article("asd", "asdAuthor", "asdTitle", "asdJournal", 9001);
+        articleDAO.add(newArticle);
+        
+        //One Article should be found:
+        List<Article> articles = articleDAO.findAll();
+        Article foundArticle = articles.get(0);
+        articleEqualsForMandatoryFields(newArticle, foundArticle);
+        
+        //Nothing should be found after reset:
+        db.resetDB();
+        assertEquals(0,articleDAO.findAll().size());
+        
+        new File(dbName).delete();
+    }
+    
+    public void articleEqualsForMandatoryFields(Article expected, Article actual) {
+        assertEquals(expected.getCitationKey(),actual.getCitationKey());
+        assertEquals(expected.getAuthor(),actual.getAuthor());
+        assertEquals(expected.getTitle(),actual.getTitle());
+        assertEquals(expected.getJournal(),actual.getJournal());
+        assertEquals(expected.getYear(), actual.getYear());
     }
 }
