@@ -11,7 +11,7 @@ public class InbookDAO implements EntryDAO<Inbook> {
     public InbookDAO(Database db) {
         this.db = db;
     }
-    
+     
     @Override
     public void add(Inbook entry) throws SQLException {
         String sql = "INSERT INTO INBOOK VALUES ("

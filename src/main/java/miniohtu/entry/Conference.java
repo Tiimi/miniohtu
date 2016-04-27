@@ -105,4 +105,12 @@ public class Conference implements BaseEntry {
     public String toBibtex() {
         return null;
     }
+    
+    @Override
+    public String toString() {
+        return "Conference{" + "citationKey=" + citationKey + ", author=" + author + ", title=" + title
+                + ", bookTitle=" + bookTitle + ", year=" + year + ", editor=" + editor
+                + ", pages=" + pages + ", organization=" + organization + ", publisher=" + publisher
+                + ", address=" + address + ", month=" + month + ", note=" + note + ", key=" + key + "}";
+    }
 }

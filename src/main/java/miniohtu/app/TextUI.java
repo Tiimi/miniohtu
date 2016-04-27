@@ -174,6 +174,7 @@ public class TextUI {
     private void addConference() {
         io.print(mandatoryFields);
         String citationKey = askString("citation key");
+        String author = askString("author");
         String title = askString("title");
         String booktitle = askString("booktitle");
         int year = askInteger("year");
@@ -188,7 +189,7 @@ public class TextUI {
         String note = askOptionalString("note");
         String key = askOptionalString("key");
         
-        Conference conference = new Conference(citationKey, editor, title, booktitle, year, editor, pages, organization, publisher, address, month, note, key);
+        Conference conference = new Conference(citationKey, author, title, booktitle, year, editor, pages, organization, publisher, address, month, note, key);
         try {
             conferenceDAO.add(conference);
         } catch (SQLException ex) {

@@ -128,4 +128,12 @@ public class Inbook implements BaseEntry {
     public String toString() {
         return "Inbook{" + "citationKey=" + citationKey + ", author=" + author + ", title=" + title + ", chapter=" + chapter + ", publisher=" + publisher + ", year=" + year + ", volume=" + volume + ", series=" + series + ", address=" + address + ", edition=" + edition + ", month=" + month + ", note=" + note + ", key=" + key + '}';
     }
+    
+    @Override
+    public String toString() {
+        return "Inbook{" + "citationKey=" + citationKey + ", author=" + author + ", title=" + title
+                + ", chapter=" + chapter + ", publisher=" + publisher + ", year=" + year
+                + ", volume=" + volume + ", series=" + series + ", address=" + address
+                + ", edition=" + edition + ", month=" + month + ", note=" + note + ", key=" + key + "}";
+    }
 }

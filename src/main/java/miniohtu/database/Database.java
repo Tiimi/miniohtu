@@ -105,7 +105,7 @@ public class Database<Entry> {
                 + "publisher    STRING,"
                 + "address      STRING,"
                 + "month        INTEGER,"
-                + "note         STRING"
+                + "note         STRING,"
                 + "key          STRING )";
         statement.execute(sql);
         statement.close();

@@ -23,6 +23,7 @@ public class ConferenceDAO implements EntryDAO<Conference> {
                 + s(entry.getEditor()) + ", "
                 + entry.getPages() + ", "
                 + s(entry.getOrganization()) + ", "
+                + s(entry.getPublisher()) + ", "
                 + s(entry.getAddress()) + ", "
                 + entry.getMonth() + ", "
                 + s(entry.getNote()) + ", "
