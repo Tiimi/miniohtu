@@ -1,6 +1,8 @@
 
 package miniohtu.entry;
 
+import miniohtu.bibtex.BibtexEncoding;
+
 public class Conference implements BaseEntry {
     // Required fields
     private String citationKey;
@@ -33,12 +35,7 @@ public class Conference implements BaseEntry {
     public Conference(String citationKey, String author, String title, String bookTitle, int year,
             String editor, int pages, String organization, String publisher, String address, int month,
             String note, String key) {
-        this.citationKey = citationKey;
-        this.author = author;
-        this.title = title;
-        this.bookTitle = bookTitle;
-        this.year = year;
-        
+        this(citationKey, author, title, bookTitle, year);
         this.editor = editor;
         this.pages = pages;
         this.organization = organization;
@@ -103,7 +100,21 @@ public class Conference implements BaseEntry {
 
     @Override
     public String toBibtex() {
-        return null;
+        String bibtex = "@CONFERENCE{" + this.getCitationKey() + "},\n"
+                + "  author = {" + this.getAuthor() + "},\n"
+                + "  title = {" + this.getTitle() + "},\n"
+                + "  booktitle = {" + this.getBookTitle() + "},\n"
+                + "  year = " + this.getYear() + ",\n"
+                + ((this.getEditor() == null) ? "" : "  editor = " + this.getEditor() + ",\n")
+                + ((this.getPages() == Integer.MAX_VALUE) ? "" : "  pages = {" + this.getPages() + "},\n")
+                + ((this.getOrganization() == null) ? "" : "  organization = " + this.getOrganization() + ",\n")
+                + ((this.getPublisher() == null) ? "" : "  publisher = " + this.getPublisher() + ",\n")
+                + ((this.getAddress() == null) ? "" : "  address = " + this.getAddress() + ",\n")
+                + ((this.getMonth() == Integer.MAX_VALUE) ? "" : "  month = " + this.getMonth() + ",\n")
+                + ((this.getNote() == null) ? "" : "  note = {" + this.getNote() + "},\n")
+                + ((this.getKey() == null) ? "" : "  key = " + this.getKey() + ",\n")
+                + "}";
+        return BibtexEncoding.encodeToBibtex(bibtex);
     }
     
     @Override
