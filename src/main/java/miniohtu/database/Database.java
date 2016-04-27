@@ -2,6 +2,7 @@ package miniohtu.database;
 
 import miniohtu.collectors.Collector;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,13 +18,37 @@ public class Database<Entry> {
         try {
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:" + name);
-            createTables();
+            checkTablesExcist();
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
+    
+    private void checkTablesExcist() throws SQLException {
+        if (!tableExcists("ARTICLE")) {
+            createArticleTable();
+        }
+        if (!tableExcists("BOOK")) {
+            createBookTable();
+        }
+        if (!tableExcists("BOOKLET")) {
+            createBookletTable();
+        }
+        if (!tableExcists("CONFERENCE")) {
+            createConferenceTable();
+        }
+        if (!tableExcists("INBOOK")) {
+            createInbookTable();
+        }
+    }
+    
+    private boolean tableExcists(String table) throws SQLException {
+        DatabaseMetaData meta = connection.getMetaData();
+        ResultSet results = meta.getTables(null, null, table, null);
+        return results.next();
+    }
 
-    public void createTables() throws SQLException {
+    public void resetDB() throws SQLException {
         dropTables();
         createArticleTable();
         createBookTable();
@@ -155,7 +180,7 @@ public class Database<Entry> {
         connection.commit();
     }
     
-    public void dropTables() throws SQLException {
+    private void dropTables() throws SQLException {
         Statement statement = connection.createStatement();
         statement.executeUpdate("DROP TABLE IF EXISTS article");
         statement.executeUpdate("DROP TABLE IF EXISTS book");
