@@ -73,5 +73,10 @@ public class BookDAO implements EntryDAO<Book> {
         });
         
         return matches.isEmpty() ? null : matches.get(0);
-    }    
+    }
+    
+    @Override
+    public void remove(String citationKey) throws SQLException {
+        db.removeRowFromTable("book", citationKey);
+    }
 }

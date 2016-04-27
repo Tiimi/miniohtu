@@ -8,4 +8,5 @@ public interface EntryDAO<Entry> {
     void add(Entry entry) throws SQLException;
     List<Entry> findAll() throws SQLException;
     Entry find(String citationKey) throws SQLException;
+    void remove(String citationKey) throws SQLException;
 }

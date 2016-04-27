@@ -64,4 +64,9 @@ public class ArticleDAO implements EntryDAO<Article> {
 
         return matches.isEmpty() ? null : matches.get(0);
     }
+    
+    @Override
+    public void remove(String citationKey) throws SQLException {
+        db.removeRowFromTable("article", citationKey);
+    }
 }

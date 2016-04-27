@@ -77,4 +77,9 @@ public class ConferenceDAO implements EntryDAO<Conference> {
         
         return matches.isEmpty() ? null : matches.get(0);
     }
+    
+    @Override
+    public void remove(String citationKey) throws SQLException {
+        db.removeRowFromTable("conference", citationKey);
+    }
 }

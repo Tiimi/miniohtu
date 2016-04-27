@@ -66,4 +66,9 @@ public class BookletDAO implements EntryDAO<Booklet> {
         
         return matches.isEmpty() ? null : matches.get(0);
     }
+    
+    @Override
+    public void remove(String citationKey) throws SQLException {
+        db.removeRowFromTable("booklet", citationKey);
+    }
 }

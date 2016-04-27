@@ -77,4 +77,9 @@ public class InbookDAO implements EntryDAO<Inbook> {
         
         return matches.isEmpty() ? null : matches.get(0);
     }
+    
+    @Override
+    public void remove(String citationKey) throws SQLException {
+        db.removeRowFromTable("inbook", citationKey);
+    }
 }

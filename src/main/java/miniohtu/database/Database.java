@@ -31,12 +31,12 @@ public class Database<Entry> {
         createConferenceTable();
         createInbookTable();
     }
-
+    
     private void createArticleTable() throws SQLException {
         Statement statement = connection.createStatement();
 
         String sql = "CREATE TABLE ARTICLE ("
-                + "citationKey  STRING  NOT NULL,"
+                + "citationKey  STRING  NOT NULL UNIQUE,"
                 + "author       STRING  NOT NULL,"
                 + "title        STRING  NOT NULL,"
                 + "journal      STRING  NOT NULL,"
@@ -56,7 +56,7 @@ public class Database<Entry> {
         Statement statement = connection.createStatement();
 
         String sql = "CREATE TABLE BOOK ("
-                + "citationKey  STRING  NOT NULL,"
+                + "citationKey  STRING  NOT NULL UNIQUE,"
                 + "author       STRING  NOT NULL,"
                 + "title        STRING  NOT NULL,"
                 + "publisher    STRING  NOT NULL,"
@@ -77,7 +77,7 @@ public class Database<Entry> {
         Statement statement = connection.createStatement();
 
         String sql = "CREATE TABLE BOOKLET ("
-                + "citationKey  STRING  NOT NULL,"
+                + "citationKey  STRING  NOT NULL UNIQUE,"
                 + "title        STRING  NOT NULL,"
                 + "author       STRING,"
                 + "howPublished STRING,"
@@ -94,7 +94,7 @@ public class Database<Entry> {
         Statement statement = connection.createStatement();
         
         String sql = "CREATE TABLE CONFERENCE ("
-                + "citationKey  STRING  NOT NULL,"
+                + "citationKey  STRING  NOT NULL UNIQUE,"
                 + "author       STRING  NOT NULL,"
                 + "title        STRING  NOT NULL,"
                 + "bookTitle    STRING  NOT NULL,"
@@ -115,7 +115,7 @@ public class Database<Entry> {
         Statement statement = connection.createStatement();
         
         String sql = "CREATE TABLE INBOOK ("
-                + "citationKey  STRING  NOT NULL,"
+                + "citationKey  STRING  NOT NULL UNIQUE,"
                 + "author       STRING  NOT NULL,"
                 + "title        STRING  NOT NULL,"
                 + "chapter      INTEGER NOT NULL,"
@@ -128,6 +128,16 @@ public class Database<Entry> {
                 + "month        INTEGER,"
                 + "note         STRING,"
                 + "key          STRING )";
+        statement.execute(sql);
+        statement.close();
+    }
+    
+    public void removeRowFromTable(String table, String citationKey) throws SQLException {
+        Statement statement = connection.createStatement();
+        
+        String sql = "DELETE FROM '" + table + "'"
+                + "WHERE CITATIONKEY='" + citationKey + "';";
+        
         statement.execute(sql);
         statement.close();
     }
@@ -160,6 +170,8 @@ public class Database<Entry> {
         statement.executeUpdate("DROP TABLE IF EXISTS article");
         statement.executeUpdate("DROP TABLE IF EXISTS book");
         statement.executeUpdate("DROP TABLE IF EXISTS booklet");
+        statement.executeUpdate("DROP TABLE IF EXISTS conference");
+        statement.executeUpdate("DROP TABLE IF EXISTS inbook");
         statement.close();
     }
 }

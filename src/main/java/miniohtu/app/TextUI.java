@@ -8,8 +8,6 @@ import miniohtu.database.ArticleDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import miniohtu.IO.IO;
 import miniohtu.database.BookDAO;
 import miniohtu.database.BookletDAO;
@@ -24,7 +22,7 @@ import miniohtu.entry.Inbook;
 
 public class TextUI {
 
-    private final String help = "Komennot\n lisaa\n listaa\n tallenna\nlopeta\n";
+    private final String help = "Komennot\n lisaa\n poista\n listaa\n tallenna\nlopeta\n";
     private final String addHelp = "\nValitse lisättävä viite typpi:\n article\n book\n booklet\n conference\n inbook\n\n(peru peruu toiminnon)\n>";
     private final String wrongCommand = "Väärä komento: ";
     private final String mandatoryFields = "Syötä pakolliset kentät\n";
@@ -48,7 +46,7 @@ public class TextUI {
         this.inbookDAO = new InbookDAO(this.db);
     }
 
-    public void run() {
+    public void run() throws SQLException {
 
         while (true) {
             io.print(help);
@@ -61,19 +59,44 @@ public class TextUI {
         }
     }
 
-    public void runCommand(String komento) {
+    public void runCommand(String komento) throws SQLException {
         if (komento.equals("lisaa")) {
             add();
         } else if (komento.equals("listaa")) {
             list();
         } else if (komento.equals("tallenna")) {
             save();
+        } else if (komento.equals("poista")) {
+            remove();
         } else {
             io.print(wrongCommand + komento + "\n");
         }
 
     }
 
+    public void remove() throws SQLException {
+        io.print(addHelp);
+        String komento = io.nextString();
+        if (komento.equals("peru"))
+            return;
+        
+        io.print("Anna poistettavan viitteen citation key\n> ");
+        String citationKey = io.nextString();
+        
+        if (komento.equals("article"))
+            articleDAO.remove(citationKey);
+        else if (komento.equals("book"))
+            bookDAO.remove(citationKey);
+        else if (komento.equals("booklet"))
+            bookletDAO.remove(citationKey);
+        else if (komento.equals("conference"))
+            conferenceDAO.remove(citationKey);
+        else if (komento.equals("inbook"))
+            inbookDAO.remove(citationKey);
+        else
+            io.print("Viite tyyppiä: " + komento + " ei ole.\n\n");
+    }
+    
     public void add() {
         io.print(addHelp);
         String komento = io.nextString();
