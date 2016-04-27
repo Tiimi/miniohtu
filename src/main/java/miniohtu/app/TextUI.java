@@ -25,7 +25,7 @@ import miniohtu.entry.Inbook;
 public class TextUI {
 
     private final String help = "Komennot\n lisaa\n listaa\n tallenna\nlopeta\n";
-    private final String addHelp = "\nValitse lisättävä viite typpi:\n article\n book\n booklet\n conference\n\n(peru peruu toiminnon)\n>";
+    private final String addHelp = "\nValitse lisättävä viite typpi:\n article\n book\n booklet\n conference\n inbook\n\n(peru peruu toiminnon)\n>";
     private final String wrongCommand = "Väärä komento: ";
     private final String mandatoryFields = "Syötä pakolliset kentät\n";
     private final String optionalFields = "\nSyötä valinnaiset kentät:\n";
