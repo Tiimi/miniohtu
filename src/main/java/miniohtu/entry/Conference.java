@@ -13,11 +13,11 @@ public class Conference implements BaseEntry {
     
     // Optional fields
     private String editor;
-    private int pages;
+    private int pages = Integer.MAX_VALUE;
     private String organization;
     private String publisher;
     private String address;
-    private int month;
+    private int month = Integer.MAX_VALUE;
     private String note;
     private String key;
     
@@ -27,9 +27,6 @@ public class Conference implements BaseEntry {
         this.title = title;
         this.bookTitle = bookTitle;
         this.year = year;
-        
-        this.pages = Integer.MAX_VALUE;
-        this.month = Integer.MAX_VALUE;
     }
     
     public Conference(String citationKey, String author, String title, String bookTitle, int year,
@@ -45,7 +42,7 @@ public class Conference implements BaseEntry {
         this.note = note;
         this.key = key;
     }
-
+    
     public String getCitationKey() {
         return citationKey;
     }

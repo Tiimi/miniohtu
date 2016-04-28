@@ -3,9 +3,8 @@ package miniohtu.entry;
 import miniohtu.bibtex.BibtexEncoding;
 
 public class Article implements BaseEntry{
-
+    
     // Required fields
-
     private String citationKey;
     private String author;
     private String title;
@@ -13,27 +12,12 @@ public class Article implements BaseEntry{
     private int year;
 
     // Optional fields
-    private int volume;
-    private int number;
-    private String pages;
-    private int month;
-    private String note;
-
-    public Article(String citationKey, String author, String title, String journal, int year, int volume,
-            int number, String pages, int month, String note) {
-        this.citationKey = citationKey;
-        this.author = author;
-        this.title = title;
-        this.journal = journal;
-        this.year = year;
-
-        this.volume = volume;
-        this.number = number;
-        this.pages = pages;
-        this.month = month;
-        this.note = note;
-    }
-
+    private int volume = Integer.MAX_VALUE;
+    private int number = Integer.MAX_VALUE;
+    private String pages = null;
+    private int month = Integer.MAX_VALUE;
+    private String note = null;
+    
     // Required fields only.
     public Article(String citationKey, String author, String title, String journal, int year) {
         this.citationKey = citationKey;
@@ -41,14 +25,19 @@ public class Article implements BaseEntry{
         this.title = title;
         this.journal = journal;
         this.year = year;
-
-        this.volume = Integer.MAX_VALUE;
-        this.number = Integer.MAX_VALUE;
-        this.pages = null;
-        this.month = Integer.MAX_VALUE;
-        this.note = null;
     }
-    
+
+    // Required and optional fields
+    public Article(String citationKey, String author, String title, String journal, int year,
+            int volume, int number, String pages, int month, String note) {
+        this(citationKey, author, title, journal, year);
+        this.volume = volume;
+        this.number = number;
+        this.pages = pages;
+        this.month = month;
+        this.note = note;
+    }
+
     @Override
     public String toBibtex() {
         String bibtex = "@ARTICLE{" + this.getCitationKey() + "},\n"

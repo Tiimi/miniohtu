@@ -12,15 +12,20 @@ public class Booklet implements BaseEntry{
     private String author;
     private String howPublished;
     private String address;
-    private int month;
-    private int year;
+    private int month = Integer.MAX_VALUE;
+    private int year = Integer.MAX_VALUE;
     private String note;
     private String key;
     
-    public Booklet(String citationKey, String title, String author, String howPublished, String address,
-            int month, int year, String note, String key) {
+    public Booklet(String citationKey, String title) {
         this.citationKey = citationKey;
-        this.title = title;
+        this.title = title;  
+    }
+    
+    public Booklet(String citationKey, String title,
+            String author, String howPublished, String address, int month,
+            int year, String note, String key) {
+        this(citationKey, title);     
         this.author = author;
         this.howPublished = howPublished;
         this.address = address;
@@ -28,15 +33,7 @@ public class Booklet implements BaseEntry{
         this.year = year;
         this.note = note;
         this.key = key;
-    }
-    
-    public Booklet(String citationKey, String title) {
-        this.citationKey = citationKey;
-        this.title = title;
-        
-        this.year = Integer.MAX_VALUE;
-        this.month = Integer.MAX_VALUE;
-    }
+    } 
 
     public String getCitationKey() {
         return citationKey;

@@ -12,30 +12,13 @@ public class Book implements BaseEntry{
     private int year;
     
     // Optional fields
-    private int volume;
-    private int series;
+    private int volume = Integer.MAX_VALUE;
+    private int series = Integer.MAX_VALUE;
     private String address;
-    private int edition;
-    private int month;
+    private int edition = Integer.MAX_VALUE;
+    private int month = Integer.MAX_VALUE;
     private String note;
     private String key;
-    
-    public Book(String citationKey, String author, String title, String publisher, int year, 
-            int volume, int series, String address, int edition, int month, String note, String key) {
-        this.citationKey = citationKey;
-        this.author = author;
-        this.title = title;
-        this.publisher = publisher;
-        this.year = year;
-        
-        this.volume = volume;
-        this.series = series;
-        this.address = address;
-        this.edition = edition;
-        this.month = month;
-        this.note = note;
-        this.key = key;
-    }
     
     public Book(String citationKey, String author, String title, String publisher, int year) {
         this.citationKey = citationKey;
@@ -43,11 +26,18 @@ public class Book implements BaseEntry{
         this.title = title;
         this.publisher = publisher;
         this.year = year;
-        
-        this.volume = Integer.MAX_VALUE;
-        this.series = Integer.MAX_VALUE;
-        this.edition = Integer.MAX_VALUE;
-        this.month = Integer.MAX_VALUE;
+    }
+    
+    public Book(String citationKey, String author, String title, String publisher, int year, 
+            int volume, int series, String address, int edition, int month, String note, String key) {
+        this(citationKey, author, title, publisher, year);
+        this.volume = volume;
+        this.series = series;
+        this.address = address;
+        this.edition = edition;
+        this.month = month;
+        this.note = note;
+        this.key = key;
     }
 
     public String getCitationKey() {
