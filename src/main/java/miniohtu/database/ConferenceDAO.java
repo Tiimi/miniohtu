@@ -21,7 +21,7 @@ public class ConferenceDAO extends BaseDAO<Conference> {
                 + s(entry.getBookTitle()) + ", "
                 + entry.getYear() + ", "
                 + s(entry.getEditor()) + ", "
-                + entry.getPages() + ", "
+                + s(entry.getPages()) + ", "
                 + s(entry.getOrganization()) + ", "
                 + s(entry.getPublisher()) + ", "
                 + s(entry.getAddress()) + ", "
@@ -47,7 +47,7 @@ public class ConferenceDAO extends BaseDAO<Conference> {
                 rs.getString("bookTitle"),
                 rs.getInt("year"),
                 rs.getString("editor"),
-                rs.getInt("pages"),
+                rs.getString("pages"),
                 rs.getString("organization"),
                 rs.getString("publisher"),
                 rs.getString("address"),
@@ -67,7 +67,7 @@ public class ConferenceDAO extends BaseDAO<Conference> {
                 rs.getString("bookTitle"),
                 rs.getInt("year"),
                 rs.getString("editor"),
-                rs.getInt("pages"),
+                rs.getString("pages"),
                 rs.getString("organization"),
                 rs.getString("publisher"),
                 rs.getString("address"),

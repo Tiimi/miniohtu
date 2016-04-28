@@ -17,7 +17,7 @@ public class test {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Conference conf = new Conference("cit_key", "author", "title", "booktitle", 1, "editor", 0, "org", "pub", null, 0, null, "key");
+        Conference conf = new Conference("cit_key", "author", "title", "booktitle", 1, "editor", "32-35", "org", "pub", null, 0, null, "key");
         System.out.println(conf);
     }
     

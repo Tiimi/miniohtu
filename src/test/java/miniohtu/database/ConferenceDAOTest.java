@@ -33,7 +33,7 @@ public class ConferenceDAOTest {
     @Test
     public void findTest() throws SQLException {
         conferenceDAO.add(new Conference("i_am_CitationKey", "author", "title", "bookTitle", 2016, 
-                "editor", 10, "organization", "publisher", "address", 4, "note", "key"));
+                "editor", "10", "organization", "publisher", "address", 4, "note", "key"));
         Conference conference = conferenceDAO.find("i_am_CitationKey");
         
         assertEquals("i_am_CitationKey", conference.getCitationKey());
@@ -42,7 +42,7 @@ public class ConferenceDAOTest {
         assertEquals("bookTitle", conference.getBookTitle());
         assertEquals(2016, conference.getYear());
         assertEquals("editor", conference.getEditor());
-        assertEquals(10, conference.getPages());
+        assertEquals("10", conference.getPages());
         assertEquals("organization", conference.getOrganization());
         assertEquals("publisher", conference.getPublisher());
         assertEquals("address", conference.getAddress());
@@ -54,7 +54,7 @@ public class ConferenceDAOTest {
     @Test
     public void findAllTest() throws SQLException {
         conferenceDAO.add(new Conference("i_am_CitationKey", "author", "title", "bookTitle", 2016, 
-                "editor", 10, "organization", "publisher", "address", 4, "note", "key"));
+                "editor", "10", "organization", "publisher", "address", 4, "note", "key"));
         List<Conference> conference = conferenceDAO.findAll();
         
         assertEquals("i_am_CitationKey", conference.get(0).getCitationKey());
@@ -63,7 +63,7 @@ public class ConferenceDAOTest {
         assertEquals("bookTitle", conference.get(0).getBookTitle());
         assertEquals(2016, conference.get(0).getYear());
         assertEquals("editor", conference.get(0).getEditor());
-        assertEquals(10, conference.get(0).getPages());
+        assertEquals("10", conference.get(0).getPages());
         assertEquals("organization", conference.get(0).getOrganization());
         assertEquals("publisher", conference.get(0).getPublisher());
         assertEquals("address", conference.get(0).getAddress());
@@ -75,7 +75,7 @@ public class ConferenceDAOTest {
     @Test
     public void removeTest() throws SQLException {
         conferenceDAO.add(new Conference("i_am_CitationKey", "author", "title", "bookTitle", 2016, 
-                "editor", 10, "organization", "publisher", "address", 4, "note", "key"));
+                "editor", "10", "organization", "publisher", "address", 4, "note", "key"));
         conferenceDAO.remove("i_am_CitationKey", "conference");
         assertNull(conferenceDAO.find("i_am_CitationKey"));
     }

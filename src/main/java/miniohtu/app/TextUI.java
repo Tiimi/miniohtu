@@ -202,7 +202,7 @@ public class TextUI {
         
         io.print(optionalFields);
         String editor = askOptionalString("editor");
-        int pages = askOptionalInteger("pages");
+        String pages = askOptionalString("pages");
         String organization = askOptionalString("organization");
         String publisher = askOptionalString("publisher");
         String address = askOptionalString("address");

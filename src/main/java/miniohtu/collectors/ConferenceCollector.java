@@ -16,7 +16,7 @@ public class ConferenceCollector implements Collector<Conference> {
         int year            = rs.getInt("year");
         
         String editor       = rs.getString("editor");
-        int pages           = rs.getInt("pages");
+        String pages        = rs.getString("pages");
         String organization = rs.getString("organization");
         String publisher    = rs.getString("publisher");
         String address      = rs.getString("address");

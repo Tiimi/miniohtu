@@ -13,7 +13,7 @@ public class Conference implements BaseEntry {
     
     // Optional fields
     private String editor;
-    private int pages = Integer.MAX_VALUE;
+    private String pages;
     private String organization;
     private String publisher;
     private String address;
@@ -30,7 +30,7 @@ public class Conference implements BaseEntry {
     }
     
     public Conference(String citationKey, String author, String title, String bookTitle, int year,
-            String editor, int pages, String organization, String publisher, String address, int month,
+            String editor, String pages, String organization, String publisher, String address, int month,
             String note, String key) {
         this(citationKey, author, title, bookTitle, year);
         this.editor = editor;
@@ -67,7 +67,7 @@ public class Conference implements BaseEntry {
         return editor;
     }
     
-    public int getPages() {
+    public String getPages() {
         return pages;
     }
     
@@ -103,7 +103,7 @@ public class Conference implements BaseEntry {
                 + "  booktitle = {" + this.getBookTitle() + "},\n"
                 + "  year = " + this.getYear() + ",\n"
                 + ((this.getEditor() == null) ? "" : "  editor = {" + this.getEditor() + "},\n")
-                + ((this.getPages() == Integer.MAX_VALUE) ? "" : "  pages = " + this.getPages() + ",\n")
+                + ((this.getPages() == null) ? "" : "  pages = " + this.getPages() + ",\n")
                 + ((this.getOrganization() == null) ? "" : "  organization = {" + this.getOrganization() + "},\n")
                 + ((this.getPublisher() == null) ? "" : "  publisher = {" + this.getPublisher() + "},\n")
                 + ((this.getAddress() == null) ? "" : "  address = {" + this.getAddress() + "},\n")
@@ -119,7 +119,7 @@ public class Conference implements BaseEntry {
         return "Conference{" + "citationKey=" + citationKey + ", author=" + author + ", title=" + title
                 + ", bookTitle=" + bookTitle + ", year=" + year 
                 + ((this.getEditor() == null) ? "" : ", editor=" + this.getEditor())
-                + ((this.getPages() == Integer.MAX_VALUE) ? "" : ", pages=" + this.getPages())
+                + ((this.getPages() == null) ? "" : ", pages=" + this.getPages())
                 + ((this.getOrganization() == null) ? "" : ", organization=" + this.getOrganization())
                 + ((this.getPublisher() == null) ? "" : ", publisher=" + this.getPublisher())
                 + ((this.getAddress() == null) ? "" : ", address=" + this.getAddress())

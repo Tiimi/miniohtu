@@ -125,7 +125,7 @@ public class Database<Entry> {
                 + "bookTitle    STRING  NOT NULL,"
                 + "year         INTEGER NOT NULL,"
                 + "editor       STRING,"
-                + "pages        INTEGER,"
+                + "pages        STRING,"
                 + "organization STRING,"
                 + "publisher    STRING,"
                 + "address      STRING,"

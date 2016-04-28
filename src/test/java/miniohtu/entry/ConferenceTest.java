@@ -15,7 +15,7 @@ public class ConferenceTest {
     public void setUp() {
         requiredFields = new Conference("1234", "Vili", "Titteli", "Book titteli", 2016);
         allFields = new Conference("12342", "Vili2", "Titteli2", "Book titteli2", 20162,
-                "Editori", 100, "Organisaatio", "Publisheri", "Addressi", 1, "Nootti", "Key");
+                "Editori", "100", "Organisaatio", "Publisheri", "Addressi", 1, "Nootti", "Key");
     }
 
     @Test
@@ -27,7 +27,7 @@ public class ConferenceTest {
         assertEquals(2016, requiredFields.getYear());
         
         assertEquals(null, requiredFields.getEditor());
-        assertEquals(Integer.MAX_VALUE, requiredFields.getPages());
+        assertEquals(null, requiredFields.getPages());
         assertEquals(null, requiredFields.getOrganization());
         assertEquals(null, requiredFields.getPublisher());
         assertEquals(null, requiredFields.getAddress());
@@ -45,7 +45,7 @@ public class ConferenceTest {
         assertEquals(20162, allFields.getYear());
         
         assertEquals("Editori", allFields.getEditor());
-        assertEquals(100, allFields.getPages());
+        assertEquals("100", allFields.getPages());
         assertEquals("Organisaatio", allFields.getOrganization());
         assertEquals("Publisheri", allFields.getPublisher());
         assertEquals("Addressi", allFields.getAddress());
