@@ -77,7 +77,7 @@ public class DatabaseTest {
         ArticleDAO articleDAO = new ArticleDAO(db);
         Article article = new Article("citationKey", "author", "title", "journal", 2000);
         articleDAO.add(article);
-        articleDAO.remove("citationKey");
+        articleDAO.remove("citationKey", "article");
         assertNull(articleDAO.find("citationKey"));
     }
 }

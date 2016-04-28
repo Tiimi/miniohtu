@@ -76,7 +76,7 @@ public class InbookDAOTest {
     public void removeTest() throws SQLException {
         inbookDAO.add(new Inbook("i_am_CitationKey", "author", "title", 1, 
                 "publisher", 2016, 2, 3, "address", 1, 4, "note", "key"));
-        inbookDAO.remove("i_am_CitationKey");
+        inbookDAO.remove("i_am_CitationKey", "inbook");
         assertNull(inbookDAO.find("i_am_CitationKey"));
     }
 }

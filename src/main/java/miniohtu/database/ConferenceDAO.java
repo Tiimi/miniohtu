@@ -1,15 +1,15 @@
 
 package miniohtu.database;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import miniohtu.entry.Conference;
 
-public class ConferenceDAO implements EntryDAO<Conference> {
-    private Database db;
-    
+public class ConferenceDAO extends BaseDAO<Conference> {
+
     public ConferenceDAO(Database db) {
-        this.db = db;
+        super(db);
     }
     
     @Override
@@ -29,7 +29,7 @@ public class ConferenceDAO implements EntryDAO<Conference> {
                 + s(entry.getNote()) + ", "
                 + s(entry.getKey()) + " );";
         
-        db.update(sql);
+        this.db.update(sql);
     }
 
     private String s(String s) {
@@ -39,7 +39,7 @@ public class ConferenceDAO implements EntryDAO<Conference> {
     
     @Override
     public List<Conference> findAll() throws SQLException {
-        return db.queryAndCollect("SELECT * FROM CONFERENCE", rs -> {
+        return db.queryAndCollect("SELECT * FROM CONFERENCE", (ResultSet rs) -> {
            return new Conference(
                 rs.getString("citationKey"),
                 rs.getString("author"),
@@ -77,10 +77,5 @@ public class ConferenceDAO implements EntryDAO<Conference> {
         });
         
         return matches.isEmpty() ? null : matches.get(0);
-    }
-    
-    @Override
-    public void remove(String citationKey) throws SQLException {
-        db.removeRowFromTable("conference", citationKey);
     }
 }

@@ -82,19 +82,17 @@ public class TextUI {
         
         io.print("Anna poistettavan viitteen citation key\n> ");
         String citationKey = io.nextString();
-        
-        if (komento.equals("article"))
-            articleDAO.remove(citationKey);
-        else if (komento.equals("book"))
-            bookDAO.remove(citationKey);
-        else if (komento.equals("booklet"))
-            bookletDAO.remove(citationKey);
-        else if (komento.equals("conference"))
-            conferenceDAO.remove(citationKey);
-        else if (komento.equals("inbook"))
-            inbookDAO.remove(citationKey);
-        else
-            io.print("Viite tyyppiä: " + komento + " ei ole.\n\n");
+        try {
+            if (!articleDAO.remove(citationKey, komento)) {
+                io.print("Viitettä " + citationKey + " ei ole.\n\n");
+            }else {
+                io.print("Viite " + citationKey + " poistettiin.\n\n");
+            }
+        } catch (SQLException ex) {
+            io.print("Viitetyyppiä " + komento + " ei ole.\n\n");
+            io.print("Error: " + ex.getMessage() + "\n\n");  
+        }
+
     }
     
     public void add() {

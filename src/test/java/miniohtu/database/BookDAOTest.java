@@ -57,7 +57,7 @@ public class BookDAOTest {
     @Test
     public void removeTest() throws SQLException {
         bookDAO.add(new Book("this_is_citationKey", "author", "title", "publisher", 2016));
-        bookDAO.remove("this_is_citationKey");
+        bookDAO.remove("this_is_citationKey", "book");
         assertNull(bookDAO.find("this_is_citationKey"));
     }
 }

@@ -39,10 +39,10 @@
         <version>2.7</version>
         <configuration>
           <instrumentation>
-            <ignores>
-              <ignore>miniohtu.IO.*</ignore>
-              <ignore>miniohtu.collectors.*</ignore>
-            </ignores>
+            <excludes>
+              <exclude>miniohtu/IO/**/*.class</exclude>
+              <exclude>miniohtu/collectors/**/*.class</exclude>
+            </excludes>
           </instrumentation>
           <formats>
             <format>html</format>

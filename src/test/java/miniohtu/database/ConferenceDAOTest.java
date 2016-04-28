@@ -76,7 +76,7 @@ public class ConferenceDAOTest {
     public void removeTest() throws SQLException {
         conferenceDAO.add(new Conference("i_am_CitationKey", "author", "title", "bookTitle", 2016, 
                 "editor", 10, "organization", "publisher", "address", 4, "note", "key"));
-        conferenceDAO.remove("i_am_CitationKey");
+        conferenceDAO.remove("i_am_CitationKey", "conference");
         assertNull(conferenceDAO.find("i_am_CitationKey"));
     }
 }

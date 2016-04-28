@@ -4,11 +4,10 @@ import java.sql.SQLException;
 import java.util.List;
 import miniohtu.entry.Book;
 
-public class BookDAO implements EntryDAO<Book> {
-    private Database db;
+public class BookDAO extends BaseDAO<Book> {
     
     public BookDAO(Database db) {
-        this.db = db;
+        super(db);
     }
     
     @Override
@@ -74,10 +73,5 @@ public class BookDAO implements EntryDAO<Book> {
         });
         
         return matches.isEmpty() ? null : matches.get(0);
-    }
-    
-    @Override
-    public void remove(String citationKey) throws SQLException {
-        db.removeRowFromTable("book", citationKey);
     }
 }

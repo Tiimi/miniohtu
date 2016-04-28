@@ -49,7 +49,7 @@ public class BookletDAOTest {
     @Test
     public void removeTest() throws SQLException {
         bookletDAO.add(new Booklet("i_am_citationKey", "title"));
-        bookletDAO.remove("this_is_citationKey");
+        bookletDAO.remove("this_is_citationKey", "booklet");
         assertNull(bookletDAO.find("this_is_citationKey"));
     }
 }

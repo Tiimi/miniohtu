@@ -157,14 +157,16 @@ public class Database<Entry> {
         statement.close();
     }
     
-    public void removeRowFromTable(String table, String citationKey) throws SQLException {
+    public int removeRowFromTable(String table, String citationKey) throws SQLException {
         Statement statement = connection.createStatement();
         
         String sql = "DELETE FROM '" + table + "'"
                 + "WHERE CITATIONKEY='" + citationKey + "';";
         
         statement.execute(sql);
+        int updateCount = statement.getUpdateCount();
         statement.close();
+        return updateCount;
     }
 
     public List<Entry> queryAndCollect(String query, Collector<Entry> col) throws SQLException {

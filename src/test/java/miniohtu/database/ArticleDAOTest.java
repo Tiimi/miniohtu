@@ -62,7 +62,7 @@ public class ArticleDAOTest {
     @Test
     public void removeTest() throws SQLException {
         articleDAO.add(new Article("i_am_citationKey", "author", "title", "journal", 2016));
-        articleDAO.remove("i_am_citationKey");
+        articleDAO.remove("i_am_citationKey", "article");
         assertNull(articleDAO.find("i_am_citationKey"));
     }
 }

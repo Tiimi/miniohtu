@@ -5,11 +5,10 @@ import java.sql.SQLException;
 import java.util.List;
 import miniohtu.entry.Booklet;
 
-public class BookletDAO implements EntryDAO<Booklet> {
-    private Database db;
+public class BookletDAO extends BaseDAO<Booklet> {
     
     public BookletDAO(Database db) {
-        this.db = db;
+        super(db);
     }
 
     @Override
@@ -66,10 +65,5 @@ public class BookletDAO implements EntryDAO<Booklet> {
         });
         
         return matches.isEmpty() ? null : matches.get(0);
-    }
-    
-    @Override
-    public void remove(String citationKey) throws SQLException {
-        db.removeRowFromTable("booklet", citationKey);
     }
 }
