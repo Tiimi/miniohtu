@@ -70,8 +70,7 @@ public class Database<Entry> {
                 + "number       INTEGER,"
                 + "pages        STRING,"
                 + "month        INTEGER,"
-                + "note         STRING,"
-                + "key          STRING )";
+                + "note         STRING )";
 
         statement.execute(sql);
         statement.close();

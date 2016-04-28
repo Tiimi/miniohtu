@@ -13,13 +13,17 @@ public class ArticleDAO extends BaseDAO<Article> {
     @Override
     public void add(Article entry) throws SQLException {
         String sql = "INSERT INTO ARTICLE"
-                + "(CITATIONKEY, AUTHOR, TITLE, JOURNAL, YEAR, VOLUME) VALUES ("
+                + "(CITATIONKEY, AUTHOR, TITLE, JOURNAL, YEAR, VOLUME, NUMBER, PAGES, MONTH, NOTE) VALUES ("
                 + s(entry.getCitationKey()) + ", "
                 + s(entry.getAuthor()) + ", "
                 + s(entry.getTitle()) + ", "
                 + s(entry.getJournal()) + ", "
                 + entry.getYear() + ", "
-                + entry.getVolume() + " );";
+                + entry.getVolume() + ", "
+                + entry.getNumber() + ", "
+                + s(entry.getPages()) + ", "
+                + entry.getMonth() + ", "
+                + s(entry.getNote())+ " );";
 
         db.update(sql);
     }
