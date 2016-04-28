@@ -6,9 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 import miniohtu.entry.Booklet;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -46,5 +44,12 @@ public class BookletDAOTest {
         List<Booklet> booklet = bookletDAO.findAll();
         assertEquals("i_am_citationKey", booklet.get(0).getCitationKey());
         assertEquals("title", booklet.get(0).getTitle());
+    }
+    
+    @Test
+    public void removeTest() throws SQLException {
+        bookletDAO.add(new Booklet("i_am_citationKey", "title"));
+        bookletDAO.remove("this_is_citationKey");
+        assertNull(bookletDAO.find("this_is_citationKey"));
     }
 }

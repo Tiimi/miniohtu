@@ -32,6 +32,7 @@ public class BookDAO implements EntryDAO<Book> {
     }
     
     private String s(String s) {
+        if (s == null) return null;
         return "'" + s + "'";
     }
     

@@ -3,6 +3,7 @@ package miniohtu.database;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.util.List;
 import miniohtu.entry.Article;
 import org.junit.After;
 import org.junit.Before;
@@ -44,5 +45,24 @@ public class ArticleDAOTest {
         assertEquals("title", article.getTitle());
         assertEquals("journal", article.getJournal());
         assertEquals(2016, article.getYear());
+    }
+    
+    @Test
+    public void findAllTest() throws SQLException {
+        articleDAO.add(new Article("i_am_citationKey", "author", "title", "journal", 2016));
+        List<Article> article = articleDAO.findAll();
+        
+        assertEquals("i_am_citationKey", article.get(0).getCitationKey());
+        assertEquals("author", article.get(0).getAuthor());
+        assertEquals("title", article.get(0).getTitle());
+        assertEquals("journal", article.get(0).getJournal());
+        assertEquals(2016, article.get(0).getYear());
+    }
+    
+    @Test
+    public void removeTest() throws SQLException {
+        articleDAO.add(new Article("i_am_citationKey", "author", "title", "journal", 2016));
+        articleDAO.remove("i_am_citationKey");
+        assertNull(articleDAO.find("i_am_citationKey"));
     }
 }

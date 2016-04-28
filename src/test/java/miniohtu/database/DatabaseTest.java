@@ -6,9 +6,6 @@
 package miniohtu.database;
 
 import java.io.File;
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 import miniohtu.entry.Article;
@@ -24,35 +21,22 @@ import static org.junit.Assert.*;
  * @author antti
  */
 public class DatabaseTest {
-    
-    public DatabaseTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
+    private String dbName;
+    private Database db;
     
     @Before
     public void setUp() {
+        dbName = "unit_test.db";
+        db = new Database(dbName);
     }
     
     @After
     public void tearDown() {
-    }
-
-    @Test
-    public void createArticleTest() throws SQLException {
-
+        new File(dbName).delete();
     }
     
     @Test
     public void articleIsAdded() throws SQLException, ClassNotFoundException {
-        String dbName = "/tmp/unit_test.db";
-        Database db = new Database(dbName);
         ArticleDAO articleDAO = new ArticleDAO(db);
         
         Article expected = new Article("JokuID", "Tekijä", "Titteli", "Journaali", 2001);      
@@ -60,13 +44,10 @@ public class DatabaseTest {
         List<Article> articles = articleDAO.findAll();
         assertEquals(1, articles.size());
         articleEqualsForMandatoryFields(expected,articles.get(0));
-        new File(dbName).delete();
     }
     
     @Test
     public void resetDBTest() throws SQLException {
-        String dbName = "/tmp/unit_test1.db";
-        Database db = new Database(dbName);
         ArticleDAO articleDAO = new ArticleDAO(db);
         
         //Add an article to db.
@@ -81,15 +62,22 @@ public class DatabaseTest {
         //Nothing should be found after reset:
         db.resetDB();
         assertEquals(0,articleDAO.findAll().size());
-        
-        new File(dbName).delete();
     }
     
-    public void articleEqualsForMandatoryFields(Article expected, Article actual) {
+    private void articleEqualsForMandatoryFields(Article expected, Article actual) {
         assertEquals(expected.getCitationKey(),actual.getCitationKey());
         assertEquals(expected.getAuthor(),actual.getAuthor());
         assertEquals(expected.getTitle(),actual.getTitle());
         assertEquals(expected.getJournal(),actual.getJournal());
         assertEquals(expected.getYear(), actual.getYear());
+    }
+    
+    @Test
+    public void articleIsRemovedFromDatabase() throws SQLException {
+        ArticleDAO articleDAO = new ArticleDAO(db);
+        Article article = new Article("citationKey", "author", "title", "journal", 2000);
+        articleDAO.add(article);
+        articleDAO.remove("citationKey");
+        assertNull(articleDAO.find("citationKey"));
     }
 }
