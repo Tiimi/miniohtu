@@ -109,9 +109,15 @@ public class Book implements BaseEntry{
     @Override
     public String toString() {
         return "Book{" + "citationKey=" + citationKey + ", author=" + author + ", title=" + title 
-                + ", publisher=" + publisher + ", year=" + year + ", volume=" + volume 
-                + ", series=" + series + ", address=" + address + ", edition=" + edition 
-                + ", month=" + month + ", note=" + note + ", key=" + key + "}";
+                + ", publisher=" + publisher + ", year=" + year 
+                + ((this.getVolume() == Integer.MAX_VALUE) ? "" : ", volume=" + this.getVolume())
+                + ((this.getSeries()== Integer.MAX_VALUE) ? "" : ", series=" + this.getSeries())
+                + ((this.getAddress() == null) ? "" : ", address=" + this.getAddress())
+                + ((this.getEdition()== Integer.MAX_VALUE) ? "" : ", edition=" + this.getEdition())
+                + ((this.getMonth() == Integer.MAX_VALUE) ? "" : ", month=" + this.getMonth())
+                + ((this.getNote() == null) ? "" : ", note=" + this.getNote())
+                + ((this.getKey() == null) ? "" : ", key=" + this.getKey())
+                + "}";
     }
 
 

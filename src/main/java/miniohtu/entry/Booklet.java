@@ -87,7 +87,14 @@ public class Booklet implements BaseEntry{
     
     @Override
     public String toString() {
-        return "Booklet{" + "citationKey=" + citationKey + ", title=" + title + ", author=" + author + ", howPublished=" + howPublished 
-                + ", address=" + address + ", month=" + month + ", year=" + year + ", note=" + note + ", key=" + key + "}";
+        return "Booklet{" + "citationKey=" + citationKey + ", title=" + title                
+                + ((this.getAuthor() == null) ? "" : ", author=" + this.getAuthor())
+                + ((this.getHowPublished()== null) ? "" : ", howpublished=" + this.getHowPublished())
+                + ((this.getAddress() == null) ? "" : ", address=" + this.getAddress())
+                + ((this.getMonth() == Integer.MAX_VALUE) ? "" : ", month=" + this.getMonth())
+                + ((this.getYear() == Integer.MAX_VALUE) ? "" : ", year=" + this.getYear())
+                + ((this.getNote() == null) ? "" : ", note=" + this.getNote())
+                + ((this.getKey() == null) ? "" : ", key=" + this.getKey())
+                + "}";
     }
 }

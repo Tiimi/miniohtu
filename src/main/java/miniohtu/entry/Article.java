@@ -2,8 +2,8 @@ package miniohtu.entry;
 
 import miniohtu.bibtex.BibtexEncoding;
 
-public class Article implements BaseEntry{
-    
+public class Article implements BaseEntry {
+
     // Required fields
     private String citationKey;
     private String author;
@@ -17,7 +17,7 @@ public class Article implements BaseEntry{
     private String pages = null;
     private int month = Integer.MAX_VALUE;
     private String note = null;
-    
+
     // Required fields only.
     public Article(String citationKey, String author, String title, String journal, int year) {
         this.citationKey = citationKey;
@@ -56,8 +56,13 @@ public class Article implements BaseEntry{
 
     @Override
     public String toString() {
-        return "Article title: " + this.title + " \nWritten by: " + this.author + " - year: " + this.year
-                + "\nJournal: " + this.journal + " - volume: " + this.volume;
+        return "Article{" + "citationKey=" + this.citationKey + ", author=" + this.author + ", title=" + this.title + ", journal=" + this.journal + ", year=" + this.year
+                + ((this.getVolume() == Integer.MAX_VALUE) ? "" : ", volume=" + this.getVolume())
+                + ((this.getNumber() == Integer.MAX_VALUE) ? "" : ", number=" + this.getNumber())
+                + ((this.getPages() == null) ? "" : ", pages=" + this.getPages())
+                + ((this.getMonth() == Integer.MAX_VALUE) ? "" : ", month=" + this.getMonth())
+                + ((this.getNote() == null) ? "" : ", note=" + this.getNote())
+                + "}";
     }
 
     public String getCitationKey() {
