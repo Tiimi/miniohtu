@@ -14,15 +14,7 @@ scenario "listing references", {
         test.run()
     }
     then 'articles are listed on the screen', {
-        io.getPrintouts().shouldHave("Article title: title")
-        io.getPrintouts().shouldHave("Written by: pentti - year: 2000")
-        io.getPrintouts().shouldHave("Journal: journal - volume: 1")
-        io.getPrintouts().shouldHave("Article title: TheMainArticle")
-        io.getPrintouts().shouldHave("Written by: erkki - year: 1999")
-        io.getPrintouts().shouldHave("Journal: LeMagazine - volume: 3")
-        io.getPrintouts().shouldHave("Article title: SecondArticle")
-        io.getPrintouts().shouldHave("Written by: jari - year: 1985")
-        io.getPrintouts().shouldHave("Journal: journalize - volume: 4")
+        io.getPrintouts().shouldHave("Article{citationKey=abc123, author=pentti, title=title, journal=journal, year=2000, volume=1, number=1, pages=1-2, month=2, note=note}")        
         new File("test2.db").delete()
     }
 }
