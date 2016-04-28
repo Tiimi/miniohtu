@@ -5,7 +5,6 @@
  */
 package miniohtu.bibtex;
 
-import java.util.Random;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

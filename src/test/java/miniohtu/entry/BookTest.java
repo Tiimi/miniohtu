@@ -39,4 +39,34 @@ public class BookTest {
         assertEquals("note", allFields.getNote());
         assertEquals("key", allFields.getKey());
     }
+
+    @Test
+    public void mandatoryFieldsBookToBibtest() {
+        Book book = new Book("book", "Petteri Petterson", "The Title", "The Publisher", 2000);
+        String expected = "@ARTICLE{book},\n"
+                + "  author = {Petteri Petterson},\n"
+                + "  title = {The Title},\n"
+                + "  publisher = {The Publisher},\n"
+                + "  year = 2000,\n"
+                + "}";
+        assertEquals(expected, book.toBibtex());
+    }
+
+    @Test
+    public void allFieldsBookToBibTest() {
+        Book book = new Book("book", "Petteri Petterson", "The Title", "The Publisher", 2000, 1, 1, "address", 0, 4, "This is a note", null);
+        String expected = "@ARTICLE{book},\n"
+                + "  author = {Petteri Petterson},\n"
+                + "  title = {The Title},\n"
+                + "  publisher = {The Publisher},\n"
+                + "  year = 2000,\n"
+                + "  volume = 1,\n"
+                + "  series = 1,\n"
+                + "  address = {address},\n"
+                + "  edition = 0,\n"
+                + "  month = 4,\n"
+                + "  note = {This is a note},\n"
+                + "}";
+        assertEquals(expected, book.toBibtex());
+    }
 }

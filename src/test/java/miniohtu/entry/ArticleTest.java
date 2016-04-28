@@ -50,4 +50,33 @@ public class ArticleTest {
         assertEquals(4, allFields.getMonth());
         assertEquals("Note", allFields.getNote());
     }
+
+    @Test
+    public void mandatoryFieldArticleToBibTest() {
+        Article article = new Article("article", "Petteri Petterinen", "The Title", "The Journal", 2000);
+        String expected = "@ARTICLE{article},\n"
+                + "  author = {Petteri Petterinen},\n"
+                + "  title = {The Title},\n"
+                + "  yournal = {The Journal},\n"
+                + "  year = 2000,\n"
+                + "}";
+        assertEquals(expected, article.toBibtex());
+    }
+
+    @Test
+    public void allFieldsArticleToBibTest() {
+        Article article = new Article("article", "Petteri Petterinen", "The Title", "The Journal", 2000, 1, 1, "1-2", 2, "This is a note");
+        String expected = "@ARTICLE{article},\n"
+                + "  author = {Petteri Petterinen},\n"
+                + "  title = {The Title},\n"
+                + "  yournal = {The Journal},\n"
+                + "  year = 2000,\n"
+                + "  number = 1,\n"
+                + "  pages = {1-2},\n"
+                + "  month = 2,\n"
+                + "  note = {This is a note},\n"
+                + "  volume = 1,\n"
+                + "}";
+        assertEquals(expected, article.toBibtex());
+    }
 }

@@ -53,4 +53,34 @@ public class ConferenceTest {
         assertEquals("Nootti", allFields.getNote());
         assertEquals("Key", allFields.getKey());
     }
+    
+    @Test
+    public void mandatoryFieldsToBibtex() {
+        String expected = "@CONFERENCE{1234},\n"
+                + "  author = {Vili},\n"
+                + "  title = {Titteli},\n"
+                + "  booktitle = {Book titteli},\n"
+                + "  year = 2016,\n"
+                + "}";
+        assertEquals(expected, requiredFields.toBibtex());
+    }
+
+    @Test
+    public void allFieldsToBibTex() {
+        String expected = "@CONFERENCE{12342},\n"
+                + "  author = {Vili2},\n"
+                + "  title = {Titteli2},\n"
+                + "  booktitle = {Book titteli2},\n"
+                + "  year = 20162,\n"
+                + "  editor = {Editori},\n"
+                + "  pages = 100,\n"
+                + "  organization = {Organisaatio},\n"
+                + "  publisher = {Publisheri},\n"
+                + "  address = {Addressi},\n"
+                + "  month = 1,\n"
+                + "  note = {Nootti},\n"
+                + "  key = {Key},\n"
+                + "}";
+        assertEquals(expected, allFields.toBibtex());
+    }
 }

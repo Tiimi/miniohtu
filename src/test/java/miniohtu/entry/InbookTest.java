@@ -1,10 +1,7 @@
 
 package miniohtu.entry;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -37,6 +34,7 @@ public class InbookTest {
         assertEquals(9, allFields.getChapter());
         assertEquals("publisher", allFields.getPublisher());
         assertEquals(2016, allFields.getYear());
+        
         assertEquals(4, allFields.getVolume());
         assertEquals(3, allFields.getSeries());
         assertEquals("address", allFields.getAddress());
@@ -44,5 +42,36 @@ public class InbookTest {
         assertEquals(6, allFields.getMonth());
         assertEquals("note", allFields.getNote());
         assertEquals("key", allFields.getKey());
+    }
+    
+    @Test
+    public void mandatoryFieldsToBibtex() {
+        String expected = "@INBOOK{citationkey},\n"
+                + "  author = {author},\n"
+                + "  title = {title},\n"
+                + "  chapter = 4,\n"
+                + "  publisher = {publisher},\n"
+                + "  year = 2016,\n"
+                + "}";
+        assertEquals(expected, requiredFields.toBibtex());
+    }
+
+    @Test
+    public void allFieldsToBibTex() {
+        String expected = "@INBOOK{citationkey},\n"
+                + "  author = {author},\n"
+                + "  title = {title},\n"
+                + "  chapter = 9,\n"
+                + "  publisher = {publisher},\n"
+                + "  year = 2016,\n"
+                + "  volume = 4,\n"
+                + "  series = 3,\n"
+                + "  address = {address},\n"
+                + "  edition = 5,\n"
+                + "  month = 6,\n"
+                + "  note = {note},\n"
+                + "  key = {key},\n"
+                + "}";
+        assertEquals(expected, allFields.toBibtex());
     }
 }

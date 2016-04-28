@@ -105,14 +105,14 @@ public class Conference implements BaseEntry {
                 + "  title = {" + this.getTitle() + "},\n"
                 + "  booktitle = {" + this.getBookTitle() + "},\n"
                 + "  year = " + this.getYear() + ",\n"
-                + ((this.getEditor() == null) ? "" : "  editor = " + this.getEditor() + ",\n")
-                + ((this.getPages() == Integer.MAX_VALUE) ? "" : "  pages = {" + this.getPages() + "},\n")
-                + ((this.getOrganization() == null) ? "" : "  organization = " + this.getOrganization() + ",\n")
-                + ((this.getPublisher() == null) ? "" : "  publisher = " + this.getPublisher() + ",\n")
-                + ((this.getAddress() == null) ? "" : "  address = " + this.getAddress() + ",\n")
+                + ((this.getEditor() == null) ? "" : "  editor = {" + this.getEditor() + "},\n")
+                + ((this.getPages() == Integer.MAX_VALUE) ? "" : "  pages = " + this.getPages() + ",\n")
+                + ((this.getOrganization() == null) ? "" : "  organization = {" + this.getOrganization() + "},\n")
+                + ((this.getPublisher() == null) ? "" : "  publisher = {" + this.getPublisher() + "},\n")
+                + ((this.getAddress() == null) ? "" : "  address = {" + this.getAddress() + "},\n")
                 + ((this.getMonth() == Integer.MAX_VALUE) ? "" : "  month = " + this.getMonth() + ",\n")
                 + ((this.getNote() == null) ? "" : "  note = {" + this.getNote() + "},\n")
-                + ((this.getKey() == null) ? "" : "  key = " + this.getKey() + ",\n")
+                + ((this.getKey() == null) ? "" : "  key = {" + this.getKey() + "},\n")
                 + "}";
         return BibtexEncoding.encodeToBibtex(bibtex);
     }

@@ -108,11 +108,11 @@ public class Inbook implements BaseEntry {
     @Override
     public String toBibtex() {
         String bibtex = "@INBOOK{" + this.getCitationKey() + "},\n"
-                + " author = {" + this.getChapter() + "},\n"
-                + " title = {" + this.getTitle() + "},\n"
-                + " chapter = {" + this.getChapter() + "},\n"
-                + " publisher = {" + this.getPublisher() + "},\n"
-                + " year = {" + this.getYear() + "},\n"
+                + "  author = {" + this.getAuthor() + "},\n"
+                + "  title = {" + this.getTitle() + "},\n"
+                + "  chapter = " + this.getChapter() + ",\n"
+                + "  publisher = {" + this.getPublisher() + "},\n"
+                + "  year = " + this.getYear() + ",\n"
                 + ((this.getVolume() == Integer.MAX_VALUE) ? "" : "  volume = " + this.getVolume() + ",\n")
                 + ((this.getSeries() == Integer.MAX_VALUE) ? "" : "  series = " + this.getSeries() + ",\n")
                 + ((this.getAddress() == null) ? "" : "  address = {" + this.getAddress() + "},\n")
