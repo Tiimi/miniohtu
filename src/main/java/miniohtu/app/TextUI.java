@@ -287,7 +287,7 @@ public class TextUI {
             }
         }        
     }
-
+    // Listaa kaikki sitaatit konsolille
     private void list() {
         try {
             io.print("ARTICLES:\n\n");
