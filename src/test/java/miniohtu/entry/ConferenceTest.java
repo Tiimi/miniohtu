@@ -56,7 +56,7 @@ public class ConferenceTest {
     
     @Test
     public void mandatoryFieldsToBibtex() {
-        String expected = "@CONFERENCE{1234},\n"
+        String expected = "@CONFERENCE{1234,\n"
                 + "  author = {Vili},\n"
                 + "  title = {Titteli},\n"
                 + "  booktitle = {Book titteli},\n"
@@ -67,7 +67,7 @@ public class ConferenceTest {
 
     @Test
     public void allFieldsToBibTex() {
-        String expected = "@CONFERENCE{12342},\n"
+        String expected = "@CONFERENCE{12342,\n"
                 + "  author = {Vili2},\n"
                 + "  title = {Titteli2},\n"
                 + "  booktitle = {Book titteli2},\n"

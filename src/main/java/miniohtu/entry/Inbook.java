@@ -96,7 +96,7 @@ public class Inbook implements BaseEntry {
 
     @Override
     public String toBibtex() {
-        String bibtex = "@INBOOK{" + this.getCitationKey() + "},\n"
+        String bibtex = "@INBOOK{" + this.getCitationKey() + ",\n"
                 + "  author = {" + this.getAuthor() + "},\n"
                 + "  title = {" + this.getTitle() + "},\n"
                 + "  chapter = " + this.getChapter() + ",\n"

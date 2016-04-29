@@ -90,7 +90,7 @@ public class Book implements BaseEntry{
     
     @Override
     public String toBibtex() {
-        String bibtex = "@ARTICLE{" + this.getCitationKey() + "},\n"
+        String bibtex = "@BOOK{" + this.getCitationKey() + ",\n"
                 + "  author = {" + this.getAuthor() + "},\n"
                 + "  title = {" + this.getTitle() + "},\n"
                 + "  publisher = {" + this.getPublisher() + "},\n"

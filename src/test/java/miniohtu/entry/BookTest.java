@@ -43,7 +43,7 @@ public class BookTest {
     @Test
     public void mandatoryFieldsBookToBibtest() {
         Book book = new Book("book", "Petteri Petterson", "The Title", "The Publisher", 2000);
-        String expected = "@ARTICLE{book},\n"
+        String expected = "@BOOK{book,\n"
                 + "  author = {Petteri Petterson},\n"
                 + "  title = {The Title},\n"
                 + "  publisher = {The Publisher},\n"
@@ -55,7 +55,7 @@ public class BookTest {
     @Test
     public void allFieldsBookToBibTest() {
         Book book = new Book("book", "Petteri Petterson", "The Title", "The Publisher", 2000, 1, 1, "address", 0, 4, "This is a note", null);
-        String expected = "@ARTICLE{book},\n"
+        String expected = "@BOOK{book,\n"
                 + "  author = {Petteri Petterson},\n"
                 + "  title = {The Title},\n"
                 + "  publisher = {The Publisher},\n"

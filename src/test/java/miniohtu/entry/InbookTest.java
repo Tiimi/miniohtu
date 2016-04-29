@@ -46,7 +46,7 @@ public class InbookTest {
     
     @Test
     public void mandatoryFieldsToBibtex() {
-        String expected = "@INBOOK{citationkey},\n"
+        String expected = "@INBOOK{citationkey,\n"
                 + "  author = {author},\n"
                 + "  title = {title},\n"
                 + "  chapter = 4,\n"
@@ -58,7 +58,7 @@ public class InbookTest {
 
     @Test
     public void allFieldsToBibTex() {
-        String expected = "@INBOOK{citationkey},\n"
+        String expected = "@INBOOK{citationkey,\n"
                 + "  author = {author},\n"
                 + "  title = {title},\n"
                 + "  chapter = 9,\n"

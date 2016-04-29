@@ -40,7 +40,7 @@ public class Article implements BaseEntry {
 
     @Override
     public String toBibtex() {
-        String bibtex = "@ARTICLE{" + this.getCitationKey() + "},\n"
+        String bibtex = "@ARTICLE{" + this.getCitationKey() + ",\n"
                 + "  author = {" + this.getAuthor() + "},\n"
                 + "  title = {" + this.getTitle() + "},\n"
                 + "  yournal = {" + this.getJournal() + "},\n"

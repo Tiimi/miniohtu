@@ -73,7 +73,7 @@ public class Booklet implements BaseEntry{
     
     @Override
     public String toBibtex() {
-        String bibtex = "@BOOKLET{" + this.getCitationKey() + "},\n"
+        String bibtex = "@BOOKLET{" + this.getCitationKey() + ",\n"
                 + "  title = {" + this.getTitle() + "},\n"
                 + ((this.getAuthor()== null) ? "" : "  author = {" + this.getAuthor() + "},\n")            
                 + ((this.getHowPublished()== null) ? "" : "  howpublished = {" + this.getHowPublished()+ "},\n")

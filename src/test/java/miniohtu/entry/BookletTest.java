@@ -37,7 +37,7 @@ public class BookletTest {
     @Test
     public void allFieldsBookletToBibTest() {
         Booklet booklet = new Booklet("book", "The title", "Author", "Somehow", "Address", 4, 2000, "This is a note.", "key");
-        String expected = "@BOOKLET{book},\n"
+        String expected = "@BOOKLET{book,\n"
                 + "  title = {The title},\n"
                 + "  author = {Author},\n"
                 + "  howpublished = {Somehow},\n"
@@ -52,7 +52,7 @@ public class BookletTest {
     @Test
     public void someFieldsMissingBookletToBibTest() {
         Booklet booklet = new Booklet("book", "The title", "Author", "Somehow", null, 4, 2000, null, null);
-        String expected = "@BOOKLET{book},\n"
+        String expected = "@BOOKLET{book,\n"
                 + "  title = {The title},\n"
                 + "  author = {Author},\n"
                 + "  howpublished = {Somehow},\n"
@@ -65,7 +65,7 @@ public class BookletTest {
     @Test
     public void mandatoryFieldsBookletToBibTest() {
         Booklet booklet = new Booklet("book", "The title");
-        String expected = "@BOOKLET{book},\n"
+        String expected = "@BOOKLET{book,\n"
                 + "  title = {The title},\n"
                 + "}";
         assertEquals(expected, booklet.toBibtex());

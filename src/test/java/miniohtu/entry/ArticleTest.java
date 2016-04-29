@@ -54,7 +54,7 @@ public class ArticleTest {
     @Test
     public void mandatoryFieldArticleToBibTest() {
         Article article = new Article("article", "Petteri Petterinen", "The Title", "The Journal", 2000);
-        String expected = "@ARTICLE{article},\n"
+        String expected = "@ARTICLE{article,\n"
                 + "  author = {Petteri Petterinen},\n"
                 + "  title = {The Title},\n"
                 + "  yournal = {The Journal},\n"
@@ -66,7 +66,7 @@ public class ArticleTest {
     @Test
     public void allFieldsArticleToBibTest() {
         Article article = new Article("article", "Petteri Petterinen", "The Title", "The Journal", 2000, 1, 1, "1-2", 2, "This is a note");
-        String expected = "@ARTICLE{article},\n"
+        String expected = "@ARTICLE{article,\n"
                 + "  author = {Petteri Petterinen},\n"
                 + "  title = {The Title},\n"
                 + "  yournal = {The Journal},\n"

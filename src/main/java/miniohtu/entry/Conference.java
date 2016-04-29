@@ -97,7 +97,7 @@ public class Conference implements BaseEntry {
 
     @Override
     public String toBibtex() {
-        String bibtex = "@CONFERENCE{" + this.getCitationKey() + "},\n"
+        String bibtex = "@CONFERENCE{" + this.getCitationKey() + ",\n"
                 + "  author = {" + this.getAuthor() + "},\n"
                 + "  title = {" + this.getTitle() + "},\n"
                 + "  booktitle = {" + this.getBookTitle() + "},\n"
