@@ -17,6 +17,7 @@ import miniohtu.database.InbookDAO;
 import miniohtu.entry.BaseEntry;
 import miniohtu.entry.Book;
 import miniohtu.entry.Booklet;
+import miniohtu.entry.CommandFactory;
 import miniohtu.entry.Conference;
 import miniohtu.entry.Inbook;
 
@@ -35,6 +36,8 @@ public class TextUI {
     private final BookletDAO bookletDAO;
     private final ConferenceDAO conferenceDAO;
     private final InbookDAO inbookDAO;
+    
+    private final CommandFactory commandfactory;
 
     public TextUI(IO io, Database db) {
         this.io = io;
@@ -44,6 +47,8 @@ public class TextUI {
         this.bookletDAO = new BookletDAO(this.db);
         this.conferenceDAO = new ConferenceDAO(this.db);
         this.inbookDAO = new InbookDAO(this.db);
+        this.commandfactory = new CommandFactory(io, articleDAO, bookDAO, bookletDAO, 
+                conferenceDAO, inbookDAO);
     }
 
     public void run() throws SQLException {
@@ -98,195 +103,8 @@ public class TextUI {
     public void add() {
         io.print(addHelp);
         String komento = io.nextString();
-        if (komento.equals("peru")) {
-            return;
-        } else if (komento.equals("article")) {
-            addArticle();
-        } else if (komento.equals("book")) {
-            addBook();
-        } else if (komento.equals("booklet")) {
-            addBooklet();
-        } else if (komento.equals("conference")) {
-            addConference();
-        } else if (komento.equals("inbook")) {
-            addInbook();
-        } else {
-            io.print("Viite tyyppiä: " + komento + " ei ole.\n\n");
-        }
-
-    }
-
-    private void addArticle() {
-        io.print(mandatoryFields);
-
-        String citationKey = askString("citation key");
-        String author = askString("author");
-        String title = askString("title");
-        String journal = askString("journal");
-        int year = askInteger("year");
-
-        io.print("\nSyötä valinnaiset kentät:\n");
-        int volume = askOptionalInteger("volume");
-        int number = askOptionalInteger("number");
-        String pages = askOptionalString("pages");
-        int month = askOptionalInteger("month");
-        String note = askOptionalString("note");
-
-        Article a = new Article(citationKey, author, title, journal, year, volume, number, pages, month, note);
-
-        try {
-            articleDAO.add(a);
-            io.print("Artikkeli lisätty.");
-        } catch (SQLException ex) {
-            io.print("Lisäys epäonnistui. SQLException");
-            io.print(ex.getMessage());
-        }
-    }
-
-    private void addBook() {
-        io.print(mandatoryFields);
-        String citationKey = askString("citation key");
-        String author = askString("author");
-        String title = askString("title");
-        String publisher = askString("publisher");
-        int year = askInteger("year");
-
-        io.print("\nSyötä valinnaiset kentät:\n");
-        int volume = askOptionalInteger("volume");
-        int series = askOptionalInteger("series");
-        String address = askOptionalString("address");
-        int edition = askOptionalInteger("edition");
-        int month = askOptionalInteger("month");
-        String note = askOptionalString("note");
-        String key = askOptionalString("key");
-
-        try {
-            Book b = new Book(citationKey, author, title, publisher, year, volume, series, address, edition, month, note, key);
-            bookDAO.add(b);
-        } catch (SQLException ex) {
-            io.print("SQL EXCEPTION");
-            io.print(ex.getMessage() + "\n");
-        }
-    }
-
-    private void addBooklet() {
-        io.print(mandatoryFields);
-        String citationKey = askString("citation key");
-        String title = askString("title");
-
-        io.print("\nSyötä valinnaiset kentät:\n");
-        String author = askOptionalString("author");
-        String howPublished = askOptionalString("howPublished");
-        String address = askOptionalString("address");
-        int month = askOptionalInteger("month");
-        int year = askOptionalInteger("year");
-        String note = askOptionalString("note");
-        String key = askOptionalString("key");
-
-        Booklet booklet = new Booklet(citationKey, title, author, howPublished, address, month, year, note, key);
-        try {
-            bookletDAO.add(booklet);
-        } catch (SQLException e) {
-            io.print("SQL exception\n");
-            io.print(e.getMessage() + "\n");
-        }
-    }
-    
-    private void addConference() {
-        io.print(mandatoryFields);
-        String citationKey = askString("citation key");
-        String author = askString("author");
-        String title = askString("title");
-        String booktitle = askString("booktitle");
-        int year = askInteger("year");
-        
-        io.print(optionalFields);
-        String editor = askOptionalString("editor");
-        String pages = askOptionalString("pages");
-        String organization = askOptionalString("organization");
-        String publisher = askOptionalString("publisher");
-        String address = askOptionalString("address");
-        int month = askOptionalInteger("month");
-        String note = askOptionalString("note");
-        String key = askOptionalString("key");
-        
-        Conference conference = new Conference(citationKey, author, title, booktitle, year, editor, pages, organization, publisher, address, month, note, key);
-        try {
-            conferenceDAO.add(conference);
-        } catch (SQLException ex) {
-            io.print("Lisäys epäonnistui.");
-        }
-        
-    }
-    
-    private void addInbook() {
-        io.print(mandatoryFields);
-        String citationKey = askString("citation key");
-        String author = askString("author");
-        String title = askString("title");
-        int chapter = askInteger("chapter");
-        String publisher = askString("publisher");
-        int year = askInteger("year");
-        
-        io.print(optionalFields);
-        int volume = askOptionalInteger("volume");
-        int series = askOptionalInteger("series");
-        String address = askOptionalString("addres");
-        int edition = askOptionalInteger("edition");
-        int month = askOptionalInteger("month");
-        String note = askOptionalString("note");
-        String key = askOptionalString("key");
-        
-        Inbook inbook = new Inbook(citationKey, author, title, chapter, publisher, year, volume, series, address, edition, month, note, key);
-        
-        try {
-            inbookDAO.add(inbook);
-        } catch (SQLException ex) {
-            io.print("SQL exception\n");
-        }
-    }
-
-    private int askInteger(String kentanNimi) {
-        int kokonaisluku = 0;
-        while (true) {
-            io.print(kentanNimi + ": ");
-            try {
-                kokonaisluku = io.nextInt();
-                break;
-            } catch (NumberFormatException e) {
-                io.print("Virhe: anna kokonaisluku\n");
-            }
-        }
-
-        return kokonaisluku;
-    }
-
-    private String askString(String kentanNimi) {
-        io.print(kentanNimi + ": ");
-        return io.nextString();
-    }
-    
-    private String askOptionalString(String fieldValue) {
-        String s = askString(fieldValue);
-        if (s.isEmpty() || s == "") {
-            return null;
-        }
-        return s;
-    }
-    
-    private int askOptionalInteger(String fieldValue) {
-        while(true) {
-            String s = askOptionalString(fieldValue);
-            if (s == null) {
-                return Integer.MAX_VALUE;
-            }
-            try {
-                return Integer.parseInt(s);
-            } catch (NumberFormatException e) {
-                io.print("Virhe: anna kokonaisluku tai tyhjä.\n");
-            }
-        }        
-    }
+        commandfactory.get(komento).execute();
+    }  
 
     private void list() {
         try {
@@ -348,5 +166,10 @@ public class TextUI {
         } catch (Exception e) {
             io.print("Tallennus epäonnistui. Tarkista polku");
         }
+    }
+    
+    private String askString(String kentanNimi) {
+        io.print(kentanNimi + ": ");
+        return io.nextString();
     }
 }
