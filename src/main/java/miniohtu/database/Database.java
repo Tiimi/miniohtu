@@ -174,7 +174,7 @@ public class Database<Entry> {
                 + "organization STRING,"
                 + "publisher    STRING,"
                 + "address      STRING,"
-                + "month        INTEGER"
+                + "month        INTEGER,"
                 + "note         STRING,"
                 + "key          STRING )";
         statement.execute(sql);
