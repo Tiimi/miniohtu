@@ -14,16 +14,18 @@ import miniohtu.database.BookletDAO;
 import miniohtu.database.ConferenceDAO;
 import miniohtu.database.EntryDAO;
 import miniohtu.database.InbookDAO;
+import miniohtu.database.InproceedingsDAO;
 import miniohtu.entry.BaseEntry;
 import miniohtu.entry.Book;
 import miniohtu.entry.Booklet;
 import miniohtu.entry.Conference;
 import miniohtu.entry.Inbook;
+import miniohtu.entry.Inproceedings;
 
 public class TextUI {
 
     private final String help = "Komennot\n lisaa\n poista\n listaa\n tallenna\nlopeta\n";
-    private final String addHelp = "\nValitse lisättävä viite typpi:\n article\n book\n booklet\n conference\n inbook\n\n(peru peruu toiminnon)\n>";
+    private final String addHelp = "\nValitse lisättävä viite typpi:\n article\n book\n booklet\n conference\n inproceedings\n inbook\n\n(peru peruu toiminnon)\n>";
     private final String wrongCommand = "Väärä komento: ";
     private final IO io;
     private final Database db;
@@ -33,7 +35,8 @@ public class TextUI {
     private final BookletDAO bookletDAO;
     private final ConferenceDAO conferenceDAO;
     private final InbookDAO inbookDAO;
-    
+    private final InproceedingsDAO inproceedingsDAO;
+
     private final CommandFactory commandfactory;
 
     public TextUI(IO io, Database db) {
@@ -44,8 +47,10 @@ public class TextUI {
         this.bookletDAO = new BookletDAO(this.db);
         this.conferenceDAO = new ConferenceDAO(this.db);
         this.inbookDAO = new InbookDAO(this.db);
-        this.commandfactory = new CommandFactory(io, articleDAO, bookDAO, bookletDAO, 
-                conferenceDAO, inbookDAO);
+        this.inproceedingsDAO = new InproceedingsDAO(this.db);
+
+        this.commandfactory = new CommandFactory(io, articleDAO, bookDAO, bookletDAO,
+                conferenceDAO, inbookDAO, inproceedingsDAO);
     }
 
     public void run() throws SQLException {
@@ -79,29 +84,30 @@ public class TextUI {
     public void remove() throws SQLException {
         io.print(addHelp);
         String komento = io.nextString();
-        if (komento.equals("peru"))
+        if (komento.equals("peru")) {
             return;
-        
+        }
+
         io.print("Anna poistettavan viitteen citation key\n> ");
         String citationKey = io.nextString();
         try {
             if (!articleDAO.remove(citationKey, komento)) {
                 io.print("Viitettä " + citationKey + " ei ole.\n\n");
-            }else {
+            } else {
                 io.print("Viite " + citationKey + " poistettiin.\n\n");
             }
         } catch (SQLException ex) {
             io.print("Viitetyyppiä " + komento + " ei ole.\n\n");
-            io.print("Error: " + ex.getMessage() + "\n\n");  
+            io.print("Error: " + ex.getMessage() + "\n\n");
         }
 
     }
-    
+
     public void add() {
         io.print(addHelp);
         String komento = io.nextString();
         commandfactory.get(komento).execute();
-    }  
+    }
 
     private void list() {
         try {
@@ -127,6 +133,10 @@ public class TextUI {
             for (Inbook inbook : inbookDAO.findAll()) {
                 io.print(inbook.toString() + "\n");
             }
+            io.print("INPROCEEDINGS:\n\n");
+            for (Inproceedings inproceedings : inproceedingsDAO.findAll()) {
+                io.print(inproceedings.toString() + "\n");
+            }
 
         } catch (SQLException ex) {
             io.print("SQL VIRHE");
@@ -144,6 +154,7 @@ public class TextUI {
         entryDAOs.add(bookletDAO);
         entryDAOs.add(conferenceDAO);
         entryDAOs.add(inbookDAO);
+        entryDAOs.add(inproceedingsDAO);
         for (EntryDAO entryDAO : entryDAOs) {
             try {
                 List<BaseEntry> entries = entryDAO.findAll();
@@ -164,7 +175,7 @@ public class TextUI {
             io.print("Tallennus epäonnistui. Tarkista polku");
         }
     }
-    
+
     private String askString(String kentanNimi) {
         io.print(kentanNimi + ": ");
         return io.nextString();
