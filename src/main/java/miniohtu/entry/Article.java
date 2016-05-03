@@ -2,15 +2,14 @@ package miniohtu.entry;
 
 import java.util.Map;
 
-
 public class Article extends Entry implements BaseEntry {
 
     public static final String[] mandatoryFields = {"String:citation key", "String:author", "String:title", "String:journal", "Integer:year"};
     public static final String[] optionalFields = {"Integer:volume", "Integer:number", "String:pages", "Integer:month", "String:note"};
-    private final Map<String,String> fieldValues;
+    private final Map<String, String> fieldValues;
 
     public Article(Map<String, String> fieldValues) {
-        super("ARTICLE",mandatoryFields,optionalFields,fieldValues);
+        super("ARTICLE", mandatoryFields, optionalFields, fieldValues);
         this.fieldValues = fieldValues;
     }
 
@@ -49,7 +48,7 @@ public class Article extends Entry implements BaseEntry {
     public int getMonth() {
         return Integer.parseInt(fieldValues.get("month"));
     }
-    
+
     public String getNote() {
         return fieldValues.get("note");
     }
