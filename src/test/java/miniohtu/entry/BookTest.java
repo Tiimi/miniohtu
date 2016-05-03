@@ -11,8 +11,8 @@ public class BookTest {
     
     @Before
     public void setUp() {
-        requiredFields = new Book("citationkey", "author", "title", "publisher", 2016);
-        allFields = new Book("citationkey", "Ville", "title", "publisher", 2016, 2, 1, "address", 2, 4, "note", "key");
+        requiredFields = EntryCreator.book("citationkey", "author", "title", "publisher", 2016);
+        allFields = EntryCreator.book("citationkey", "Ville", "title", "publisher", 2016, 2, 1, "address", 2, 4, "note", "key");
     }
     
     @Test
@@ -42,7 +42,7 @@ public class BookTest {
 
     @Test
     public void mandatoryFieldsBookToBibtest() {
-        Book book = new Book("book", "Petteri Petterson", "The Title", "The Publisher", 2000);
+        Book book = EntryCreator.book("book", "Petteri Petterson", "The Title", "The Publisher", 2000);
         String expected = "@BOOK{book,\n"
                 + "  author = {Petteri Petterson},\n"
                 + "  title = {The Title},\n"
@@ -54,7 +54,7 @@ public class BookTest {
 
     @Test
     public void allFieldsBookToBibTest() {
-        Book book = new Book("book", "Petteri Petterson", "The Title", "The Publisher", 2000, 1, 1, "address", 0, 4, "This is a note", null);
+        Book book = EntryCreator.book("book", "Petteri Petterson", "The Title", "The Publisher", 2000, 1, 1, "address", 0, 4, "This is a note", null);
         String expected = "@BOOK{book,\n"
                 + "  author = {Petteri Petterson},\n"
                 + "  title = {The Title},\n"

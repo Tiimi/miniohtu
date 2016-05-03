@@ -5,6 +5,7 @@ import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 import miniohtu.entry.Book;
+import miniohtu.entry.EntryCreator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +33,7 @@ public class BookDAOTest {
     
     @Test
     public void findTest() throws SQLException {
-        bookDAO.add(new Book("this_is_citationKey", "author", "title", "publisher", 2016));
+        bookDAO.add(EntryCreator.book("this_is_citationKey", "author", "title", "publisher", 2016));
         Book book = bookDAO.find("this_is_citationKey");
         
         assertEquals("this_is_citationKey", book.getCitationKey());
@@ -44,7 +45,7 @@ public class BookDAOTest {
     
     @Test
     public void findAllTest() throws SQLException {
-        bookDAO.add(new Book("this_is_citationKey", "author", "title", "publisher", 2016));
+        bookDAO.add(EntryCreator.book("this_is_citationKey", "author", "title", "publisher", 2016));
         List<Book> book = bookDAO.findAll();
         
         assertEquals("this_is_citationKey", book.get(0).getCitationKey());
@@ -56,7 +57,7 @@ public class BookDAOTest {
     
     @Test
     public void removeTest() throws SQLException {
-        bookDAO.add(new Book("this_is_citationKey", "author", "title", "publisher", 2016));
+        bookDAO.add(EntryCreator.book("this_is_citationKey", "author", "title", "publisher", 2016));
         bookDAO.remove("this_is_citationKey", "book");
         assertNull(bookDAO.find("this_is_citationKey"));
     }

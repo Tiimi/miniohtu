@@ -28,9 +28,6 @@ public class Entry {
         this.optionalFields = optionalFields;
         this.fieldValues = fieldValues;
         this.allFields = Stream.concat(Arrays.stream(mandatoryFields), Arrays.stream(optionalFields)).toArray(String[]::new);
-//        for (String optionalField : allFields) {
-//            System.out.println(optionalField);
-//        }
     }
 
     public String toBibTex() {
