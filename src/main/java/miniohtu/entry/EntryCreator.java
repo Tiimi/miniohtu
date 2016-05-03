@@ -55,5 +55,27 @@ public class EntryCreator {
     public static Book book(String citationKey, String author, String title, String publisher, int year) {
         return book(citationKey, author, title, publisher, year, Integer.MAX_VALUE, Integer.MAX_VALUE, null, Integer.MAX_VALUE, Integer.MAX_VALUE, null, null);
     }
+    
+    public static Booklet booklet(String citationKey, String title,
+            String author, String howPublished, String address, int month,
+            int year, String note, String key) {
+        
+        Map<String,String> fieldValues = new HashMap<>();
+        fieldValues.put("citation key", citationKey);
+        fieldValues.put("title", title);
+        fieldValues.put("author", author);
+        fieldValues.put("howPublished", howPublished);
+        fieldValues.put("address", address );
+        fieldValues.put("month", month + "");
+        fieldValues.put("year", year + "");
+        fieldValues.put("note", note);
+        fieldValues.put("key", key);
+        return new Booklet(fieldValues);
+        
+    }
+    
+    public static Booklet booklet(String citationKey, String title) {
+            return booklet(citationKey, title, null, null, null, Integer.MAX_VALUE, Integer.MAX_VALUE, null, null);
+    }
 
 }

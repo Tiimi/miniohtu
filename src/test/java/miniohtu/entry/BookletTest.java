@@ -11,8 +11,8 @@ public class BookletTest {
     
     @Before
     public void setup() {
-        requiredFields = new Booklet("citationKey", "Ville");
-        allFields = new Booklet("citationKey", "title", "author", "somehow", "address", 4, 2016, "Note", "Key");
+        requiredFields = EntryCreator.booklet("citationKey", "Ville");
+        allFields = EntryCreator.booklet("citationKey", "title", "author", "somehow", "address", 4, 2016, "Note", "Key");
     }
     
     @Test
@@ -36,26 +36,27 @@ public class BookletTest {
     
     @Test
     public void allFieldsBookletToBibTest() {
-        Booklet booklet = new Booklet("book", "The title", "Author", "Somehow", "Address", 4, 2000, "This is a note.", "key");
+        Booklet booklet = EntryCreator.booklet("book", "The title", "Author", "Somehow", "Address", 4, 2000, "This is a note.", "key");
         String expected = "@BOOKLET{book,\n"
                 + "  title = {The title},\n"
                 + "  author = {Author},\n"
-                + "  howpublished = {Somehow},\n"
+                + "  howPublished = {Somehow},\n"
                 + "  address = {Address},\n"
                 + "  month = 4,\n"
                 + "  year = 2000,\n"
                 + "  note = {This is a note.},\n"
+                + "  key = {key},\n"
                 + "}";
         assertEquals(expected, booklet.toBibtex());
     }
     
     @Test
     public void someFieldsMissingBookletToBibTest() {
-        Booklet booklet = new Booklet("book", "The title", "Author", "Somehow", null, 4, 2000, null, null);
+        Booklet booklet = EntryCreator.booklet("book", "The title", "Author", "Somehow", null, 4, 2000, null, null);
         String expected = "@BOOKLET{book,\n"
                 + "  title = {The title},\n"
                 + "  author = {Author},\n"
-                + "  howpublished = {Somehow},\n"
+                + "  howPublished = {Somehow},\n"
                 + "  month = 4,\n"
                 + "  year = 2000,\n"
                 + "}";
@@ -64,7 +65,7 @@ public class BookletTest {
 
     @Test
     public void mandatoryFieldsBookletToBibTest() {
-        Booklet booklet = new Booklet("book", "The title");
+        Booklet booklet = EntryCreator.booklet("book", "The title");
         String expected = "@BOOKLET{book,\n"
                 + "  title = {The title},\n"
                 + "}";

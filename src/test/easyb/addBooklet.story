@@ -16,7 +16,7 @@ scenario "add a new booklet", {
     }
 
     then 'new article is in the system', {
-        io.getPrintouts().shouldHave("Booklet{citationKey=citkey, title=title, author=Ville, howpublished=somehow, address=address, month=4, year=2016, note=note, key=key}")
+        io.getPrintouts().shouldHave("BOOKLET{citationKey=citkey, title=title, author=Ville, howPublished=somehow, address=address, month=4, year=2016, note=note, key=key}")
         new File("test1.db").delete()
     }
 }

@@ -5,6 +5,7 @@ import miniohtu.collectors.Collector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import miniohtu.entry.Booklet;
+import miniohtu.entry.EntryCreator;
 
 public class BookletCollector implements Collector<Booklet> {
 
@@ -21,6 +22,6 @@ public class BookletCollector implements Collector<Booklet> {
         String note         = rs.getString("note");
         String key          = rs.getString("key");
         
-        return new Booklet(citationKey, title, author, howPublished, address, month, year, note, key);
+        return EntryCreator.booklet(citationKey, title, author, howPublished, address, month, year, note, key);
     }
 }
