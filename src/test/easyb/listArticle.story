@@ -1,6 +1,6 @@
 import miniohtu.database.*
 import miniohtu.IO.*
-import miniohtu.app.*
+import miniohtu.UI.*
 
 description """References from the database are listed on the screen when requested"""
 
@@ -14,7 +14,7 @@ scenario "listing references", {
         test.run()
     }
     then 'articles are listed on the screen', {
-        io.getPrintouts().shouldHave("Article{citationKey=abc123, author=pentti, title=title, journal=journal, year=2000, volume=1, number=1, pages=1-2, month=2, note=note}")        
+        io.getPrintouts().shouldHave("ARTICLE{citationKey=abc123, author=pentti, title=title, journal=journal, year=2000, volume=1, number=1, pages=1-2, month=2, note=note}")        
         new File("test2.db").delete()
     }
 }

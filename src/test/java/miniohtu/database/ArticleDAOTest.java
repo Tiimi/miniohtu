@@ -5,6 +5,7 @@ import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 import miniohtu.entry.Article;
+import miniohtu.entry.EntryCreator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,7 +38,7 @@ public class ArticleDAOTest {
     
     @Test
     public void findTest() throws SQLException {
-        articleDAO.add(new Article("i_am_citationKey", "author", "title", "journal", 2016));
+        articleDAO.add(EntryCreator.article("i_am_citationKey", "author", "title", "journal", 2016));
         Article article = articleDAO.find("i_am_citationKey");
         
         assertEquals("i_am_citationKey", article.getCitationKey());
@@ -49,7 +50,7 @@ public class ArticleDAOTest {
     
     @Test
     public void findAllTest() throws SQLException {
-        articleDAO.add(new Article("i_am_citationKey", "author", "title", "journal", 2016));
+        articleDAO.add(EntryCreator.article("i_am_citationKey", "author", "title", "journal", 2016));
         List<Article> article = articleDAO.findAll();
         
         assertEquals("i_am_citationKey", article.get(0).getCitationKey());
@@ -61,7 +62,7 @@ public class ArticleDAOTest {
     
     @Test
     public void removeTest() throws SQLException {
-        articleDAO.add(new Article("i_am_citationKey", "author", "title", "journal", 2016));
+        articleDAO.add(EntryCreator.article("i_am_citationKey", "author", "title", "journal", 2016));
         articleDAO.remove("i_am_citationKey", "article");
         assertNull(articleDAO.find("i_am_citationKey"));
     }

@@ -16,8 +16,8 @@ public class ArticleTest {
     
     @Before
     public void setUp() {
-        requiredFields = new Article("article", "Ville", "Artikkeli", "Journaali", 2016);
-        allFields = new Article("article2", "Ville", "Toinen artikkeli", "Journaali", 2016, 1, 
+        requiredFields = EntryCreator.article("article", "Ville", "Artikkeli", "Journaali", 2016);
+        allFields = EntryCreator.article("article2", "Ville", "Toinen artikkeli", "Journaali", 2016, 1, 
                 2, "1-10", 4, "Note");
     }
 
@@ -53,11 +53,11 @@ public class ArticleTest {
 
     @Test
     public void mandatoryFieldArticleToBibTest() {
-        Article article = new Article("article", "Petteri Petterinen", "The Title", "The Journal", 2000);
+        Article article = EntryCreator.article("article", "Petteri Petterinen", "The Title", "The Journal", 2000);
         String expected = "@ARTICLE{article,\n"
                 + "  author = {Petteri Petterinen},\n"
                 + "  title = {The Title},\n"
-                + "  yournal = {The Journal},\n"
+                + "  journal = {The Journal},\n"
                 + "  year = 2000,\n"
                 + "}";
         assertEquals(expected, article.toBibtex());
@@ -65,18 +65,24 @@ public class ArticleTest {
 
     @Test
     public void allFieldsArticleToBibTest() {
-        Article article = new Article("article", "Petteri Petterinen", "The Title", "The Journal", 2000, 1, 1, "1-2", 2, "This is a note");
+        Article article = EntryCreator.article("article", "Petteri Petterinen", "The Title", "The Journal", 2000, 1, 1, "1-2", 2, "This is a note");
         String expected = "@ARTICLE{article,\n"
                 + "  author = {Petteri Petterinen},\n"
                 + "  title = {The Title},\n"
-                + "  yournal = {The Journal},\n"
+                + "  journal = {The Journal},\n"
                 + "  year = 2000,\n"
+                + "  volume = 1,\n"
                 + "  number = 1,\n"
                 + "  pages = {1-2},\n"
                 + "  month = 2,\n"
                 + "  note = {This is a note},\n"
-                + "  volume = 1,\n"
                 + "}";
         assertEquals(expected, article.toBibtex());
+    }
+    
+    @Test
+    public void toStringTest() {
+        String expected = "ARTICLE{citationKey=article, author=Ville, title=Artikkeli, journal=Journaali, year=2016}";
+        assertEquals(expected,requiredFields.toString());
     }
 }

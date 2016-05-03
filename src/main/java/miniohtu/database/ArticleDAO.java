@@ -3,6 +3,7 @@ package miniohtu.database;
 import java.sql.SQLException;
 import java.util.List;
 import miniohtu.entry.Article;
+import miniohtu.entry.EntryCreator;
 
 public class ArticleDAO extends BaseDAO<Article> {
 
@@ -36,7 +37,7 @@ public class ArticleDAO extends BaseDAO<Article> {
     @Override
     public List<Article> findAll() throws SQLException {
         return db.queryAndCollect("SELECT * FROM ARTICLE", rs -> {
-            return new Article(
+            return EntryCreator.article(
                     rs.getString("citationKey"),
                     rs.getString("author"),
                     rs.getString("title"),
@@ -53,7 +54,7 @@ public class ArticleDAO extends BaseDAO<Article> {
     @Override
     public Article find(String citationKey) throws SQLException {
         List<Article> matches = db.queryAndCollect("SELECT * FROM ARTICLE WHERE CITATIONKEY='"+ citationKey + "'", rs -> {
-            return new Article(
+            return EntryCreator.article(
                     rs.getString("citationKey"),
                     rs.getString("author"),
                     rs.getString("title"),
@@ -67,5 +68,12 @@ public class ArticleDAO extends BaseDAO<Article> {
         });
 
         return matches.isEmpty() ? null : matches.get(0);
+    }
+    
+    private String checkNull(String s) {
+        if (s.equals("null")) {
+            return null;
+        }
+        return s;
     }
 }

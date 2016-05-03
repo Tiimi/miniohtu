@@ -1,6 +1,6 @@
 import miniohtu.database.*
 import miniohtu.IO.*
-import miniohtu.app.*
+import miniohtu.UI.*
 import java.io.File
 
 description """An article is added."""
@@ -17,7 +17,7 @@ scenario "add a new article", {
     }
 
     then 'new article is in the system', {
-        io.getPrintouts().shouldHave("Article{citationKey=abc, author=pentti, title=title, journal=journal, year=2000, volume=2, number=3, pages=1-2, month=9, note=note}")        
+        io.getPrintouts().shouldHave("ARTICLE{citationKey=abc, author=pentti, title=title, journal=journal, year=2000, volume=2, number=3, pages=1-2, month=9, note=note}")        
         new File("test1.db").delete()
     }
 }

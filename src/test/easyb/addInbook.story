@@ -1,6 +1,6 @@
 import miniohtu.database.*
 import miniohtu.IO.*
-import miniohtu.app.*
+import miniohtu.UI.*
 import java.io.File
 
 description """An inbook is added."""

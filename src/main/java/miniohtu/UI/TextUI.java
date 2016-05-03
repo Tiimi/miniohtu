@@ -1,4 +1,4 @@
-package miniohtu.app;
+package miniohtu.UI;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import miniohtu.IO.IO;
-import miniohtu.UI.CommandFactory;
 import miniohtu.database.BookDAO;
 import miniohtu.database.BookletDAO;
 import miniohtu.database.ConferenceDAO;
@@ -21,14 +20,11 @@ import miniohtu.entry.Booklet;
 import miniohtu.entry.Conference;
 import miniohtu.entry.Inbook;
 
-
 public class TextUI {
 
     private final String help = "Komennot\n lisaa\n poista\n listaa\n tallenna\nlopeta\n";
     private final String addHelp = "\nValitse lisättävä viite typpi:\n article\n book\n booklet\n conference\n inbook\n\n(peru peruu toiminnon)\n>";
     private final String wrongCommand = "Väärä komento: ";
-    private final String mandatoryFields = "Syötä pakolliset kentät\n";
-    private final String optionalFields = "\nSyötä valinnaiset kentät:\n";
     private final IO io;
     private final Database db;
 

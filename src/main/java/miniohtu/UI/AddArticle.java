@@ -3,11 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package miniohtu.entry;
+package miniohtu.UI;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import miniohtu.IO.IO;
 import miniohtu.database.ArticleDAO;
+import miniohtu.entry.Article;
 
 /**
  *
@@ -15,6 +18,8 @@ import miniohtu.database.ArticleDAO;
  */
 public class AddArticle extends AddOperation {
     private final ArticleDAO articleDAO;
+    
+    
 
     public AddArticle(IO io, ArticleDAO article) {
         super(io);
@@ -23,22 +28,7 @@ public class AddArticle extends AddOperation {
 
     @Override
     public void execute() {
-        io.print(mandatoryFields);
-
-        String citationKey = askString("citation key");
-        String author = askString("author");
-        String title = askString("title");
-        String journal = askString("journal");
-        int year = askInteger("year");
-
-        io.print("\nSyötä valinnaiset kentät:\n");
-        int volume = askOptionalInteger("volume");
-        int number = askOptionalInteger("number");
-        String pages = askOptionalString("pages");
-        int month = askOptionalInteger("month");
-        String note = askOptionalString("note");
-
-        Article a = new Article(citationKey, author, title, journal, year, volume, number, pages, month, note);
+        Article a = new Article(askAllFields(Article.mandatoryFields, Article.optionalFields));
 
         try {
             articleDAO.add(a);

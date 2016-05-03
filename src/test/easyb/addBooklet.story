@@ -1,6 +1,6 @@
 import miniohtu.database.*
 import miniohtu.IO.*
-import miniohtu.app.*
+import miniohtu.UI.*
 
 description """A booklet is added."""
 

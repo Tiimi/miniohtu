@@ -1,108 +1,61 @@
 package miniohtu.entry;
 
-import miniohtu.bibtex.BibtexEncoding;
+import java.util.Map;
 
-public class Article implements BaseEntry {
 
-    // Required fields
-    private String citationKey;
-    private String author;
-    private String title;
-    private String journal;
-    private int year;
+public class Article extends Entry implements BaseEntry {
 
-    // Optional fields
-    private int volume = Integer.MAX_VALUE;
-    private int number = Integer.MAX_VALUE;
-    private String pages = null;
-    private int month = Integer.MAX_VALUE;
-    private String note = null;
+    public static final String[] mandatoryFields = {"String:citation key", "String:author", "String:title", "String:journal", "Integer:year"};
+    public static final String[] optionalFields = {"Integer:volume", "Integer:number", "String:pages", "Integer:month", "String:note"};
+    private final Map<String,String> fieldValues;
 
-    // Required fields only.
-    public Article(String citationKey, String author, String title, String journal, int year) {
-        this.citationKey = citationKey;
-        this.author = author;
-        this.title = title;
-        this.journal = journal;
-        this.year = year;
+    public Article(Map<String, String> fieldValues) {
+        super("ARTICLE",mandatoryFields,optionalFields,fieldValues);
+        this.fieldValues = fieldValues;
     }
 
-    // Required and optional fields
-    public Article(String citationKey, String author, String title, String journal, int year,
-            int volume, int number, String pages, int month, String note) {
-        this(citationKey, author, title, journal, year);
-        this.volume = volume;
-        this.number = number;
-        this.pages = pages;
-        this.month = month;
-        this.note = note;
+    public String getCitationKey() {
+        return fieldValues.get("citation key");
+    }
+
+    public String getAuthor() {
+        return fieldValues.get("author");
+    }
+
+    public String getTitle() {
+        return fieldValues.get("title");
+    }
+
+    public String getJournal() {
+        return fieldValues.get("journal");
+    }
+
+    public int getYear() {
+        return Integer.parseInt(fieldValues.get("year"));
+    }
+
+    public int getVolume() {
+        return Integer.parseInt(fieldValues.get("volume"));
+    }
+
+    public int getNumber() {
+        return Integer.parseInt(fieldValues.get("number"));
+    }
+
+    public String getPages() {
+        return fieldValues.get("pages");
+    }
+
+    public int getMonth() {
+        return Integer.parseInt(fieldValues.get("month"));
+    }
+    
+    public String getNote() {
+        return fieldValues.get("note");
     }
 
     @Override
     public String toBibtex() {
-        String bibtex = "@ARTICLE{" + this.getCitationKey() + ",\n"
-                + "  author = {" + this.getAuthor() + "},\n"
-                + "  title = {" + this.getTitle() + "},\n"
-                + "  yournal = {" + this.getJournal() + "},\n"
-                + "  year = " + this.getYear() + ",\n"
-                + ((this.getNumber() == Integer.MAX_VALUE) ? "" : "  number = " + this.getNumber() + ",\n")
-                + ((this.getPages() == null) ? "" : "  pages = {" + this.getPages() + "},\n")
-                + ((this.getMonth() == Integer.MAX_VALUE) ? "" : "  month = " + this.getMonth() + ",\n")
-                + ((this.getNote() == null) ? "" : "  note = {" + this.getNote() + "},\n")
-                + ((this.getVolume() == Integer.MAX_VALUE) ? "" : "  volume = " + this.getVolume() + ",\n")
-                + "}";
-        return BibtexEncoding.encodeToBibtex(bibtex);
+        return super.toBibTex();
     }
-
-    @Override
-    public String toString() {
-        return "Article{" + "citationKey=" + this.citationKey + ", author=" + this.author + ", title=" + this.title + ", journal=" + this.journal + ", year=" + this.year
-                + ((this.getVolume() == Integer.MAX_VALUE) ? "" : ", volume=" + this.getVolume())
-                + ((this.getNumber() == Integer.MAX_VALUE) ? "" : ", number=" + this.getNumber())
-                + ((this.getPages() == null) ? "" : ", pages=" + this.getPages())
-                + ((this.getMonth() == Integer.MAX_VALUE) ? "" : ", month=" + this.getMonth())
-                + ((this.getNote() == null) ? "" : ", note=" + this.getNote())
-                + "}";
-    }
-
-    public String getCitationKey() {
-        return citationKey;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getJournal() {
-        return journal;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public int getVolume() {
-        return volume;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public String getPages() {
-        return pages;
-    }
-
-    public int getMonth() {
-        return month;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
 }

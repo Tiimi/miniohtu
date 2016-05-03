@@ -7,8 +7,11 @@ package miniohtu.database;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import miniohtu.entry.Article;
+import miniohtu.entry.EntryCreator;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -37,9 +40,8 @@ public class DatabaseTest {
     
     @Test
     public void articleIsAdded() throws SQLException, ClassNotFoundException {
-        ArticleDAO articleDAO = new ArticleDAO(db);
-        
-        Article expected = new Article("JokuID", "Tekijä", "Titteli", "Journaali", 2001);      
+        ArticleDAO articleDAO = new ArticleDAO(db);        
+        Article expected = EntryCreator.article("JokuID", "Tekijä", "Titteli", "Journaali", 2001);      
         articleDAO.add(expected);
         List<Article> articles = articleDAO.findAll();
         assertEquals(1, articles.size());
@@ -51,7 +53,7 @@ public class DatabaseTest {
         ArticleDAO articleDAO = new ArticleDAO(db);
         
         //Add an article to db.
-        Article newArticle = new Article("asd", "asdAuthor", "asdTitle", "asdJournal", 9001);
+        Article newArticle = EntryCreator.article("asd", "asdAuthor", "asdTitle", "asdJournal", 9001);
         articleDAO.add(newArticle);
         
         //One Article should be found:
@@ -75,7 +77,7 @@ public class DatabaseTest {
     @Test
     public void articleIsRemovedFromDatabase() throws SQLException {
         ArticleDAO articleDAO = new ArticleDAO(db);
-        Article article = new Article("citationKey", "author", "title", "journal", 2000);
+        Article article = EntryCreator.article("citationKey", "author", "title", "journal", 2000);
         articleDAO.add(article);
         articleDAO.remove("citationKey", "article");
         assertNull(articleDAO.find("citationKey"));

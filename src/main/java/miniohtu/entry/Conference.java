@@ -1,6 +1,7 @@
 
 package miniohtu.entry;
 
+import java.util.Map;
 import miniohtu.bibtex.BibtexEncoding;
 
 public class Conference implements BaseEntry {
@@ -20,6 +21,9 @@ public class Conference implements BaseEntry {
     private int month = Integer.MAX_VALUE;
     private String note;
     private String key;
+    
+    public final static String[] mandatoryFields = {"String:citation key","String:author","String:title","String:bookTitle","Integer:year"};
+    public final static String[] optionalFields = {"String:editor","String:pages","String:organization","String:publisher","String:address","Integer:month","String:note","String:key"};
     
     public Conference(String citationKey, String author, String title, String bookTitle, int year) {
         this.citationKey = citationKey;
@@ -41,6 +45,22 @@ public class Conference implements BaseEntry {
         this.month = month;
         this.note = note;
         this.key = key;
+    }
+    
+    public Conference(Map<String,String> fieldValues) {
+        this.citationKey = fieldValues.get("citation key");
+        this.author = fieldValues.get("author");
+        this.title = fieldValues.get("title");
+        this.bookTitle = fieldValues.get("bookTitle");
+        this.year = Integer.parseInt(fieldValues.get("year"));
+        this.editor = fieldValues.get("editor");
+        this.pages = fieldValues.get("pages");
+        this.organization = fieldValues.get("organization");
+        this.publisher = fieldValues.get("publisher");
+        this.address = fieldValues.get("address");
+        this.month = Integer.parseInt(fieldValues.get("month"));
+        this.note = fieldValues.get("note");
+        this.key = fieldValues.get("key");
     }
     
     public String getCitationKey() {

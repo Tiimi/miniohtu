@@ -3,8 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package miniohtu.entry;
+package miniohtu.UI;
 
+import miniohtu.UI.AddInbook;
+import miniohtu.UI.AddConference;
+import miniohtu.UI.AddBooklet;
+import miniohtu.UI.AddBook;
+import miniohtu.UI.AddArticle;
 import java.util.HashMap;
 import miniohtu.IO.IO;
 import miniohtu.database.ArticleDAO;

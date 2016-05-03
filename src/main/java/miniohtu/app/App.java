@@ -1,5 +1,6 @@
 package miniohtu.app;
 
+import miniohtu.UI.TextUI;
 import miniohtu.database.Database;
 import java.sql.SQLException;
 import java.util.Scanner;
