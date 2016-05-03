@@ -14,7 +14,7 @@ public class InproceedingsDAO extends BaseDAO<Inproceedings> {
     @Override
     public void add(Inproceedings entry) throws SQLException {
         String sql = "INSERT INTO INPROCEEDINGS"
-                + "(CITATIONKEY, AUTHOR, TITLE, JOURNAL, YEAR, VOLUME, NUMBER, PAGES, MONTH, NOTE) VALUES ("
+                + "(CITATIONKEY, AUTHOR, TITLE, BOOKTITLE, YEAR, EDITOR, PAGES, ORGANIZATION, PUBLISHER, ADDRESS, MONTH, NOTE, KEY) VALUES ("
                 + s(entry.getCitationKey()) + ", "
                 + s(entry.getAuthor()) + ", "
                 + s(entry.getTitle()) + ", "

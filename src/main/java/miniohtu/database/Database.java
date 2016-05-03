@@ -40,6 +40,9 @@ public class Database<Entry> {
         if (!tableExcists("INBOOK")) {
             createInbookTable();
         }
+        if (!tableExcists("INPROCEEDINGS")) {
+            createInproceedingsTable();
+        }
     }
     
     private boolean tableExcists(String table) throws SQLException {
@@ -55,6 +58,7 @@ public class Database<Entry> {
         createBookletTable();
         createConferenceTable();
         createInbookTable();
+        createInproceedingsTable();
     }
     
     private void createArticleTable() throws SQLException {
@@ -156,6 +160,28 @@ public class Database<Entry> {
         statement.close();
     }
     
+        private void createInproceedingsTable() throws SQLException {
+        Statement statement = connection.createStatement();
+        
+        String sql = "CREATE TABLE INPROCEEDINGS ("
+                + "citationKey  STRING  NOT NULL UNIQUE,"
+                + "author       STRING  NOT NULL,"
+                + "title        STRING  NOT NULL,"
+                + "booktitle    STRING NOT NULL,"
+                + "year         INTEGER NOT NULL,"
+                + "editor       STRING,"
+                + "pages        STRING,"
+                + "organization STRING,"
+                + "publisher    STRING,"
+                + "address      STRING,"
+                + "month        INTEGER"
+                + "note         STRING,"
+                + "key          STRING )";
+        statement.execute(sql);
+        statement.close();
+    }
+    
+    
     public int removeRowFromTable(String table, String citationKey) throws SQLException {
         Statement statement = connection.createStatement();
         
@@ -198,6 +224,7 @@ public class Database<Entry> {
         statement.executeUpdate("DROP TABLE IF EXISTS booklet");
         statement.executeUpdate("DROP TABLE IF EXISTS conference");
         statement.executeUpdate("DROP TABLE IF EXISTS inbook");
+        statement.executeUpdate("DROP TABLE IF EXISTS inproceedings");
         statement.close();
     }
 }
