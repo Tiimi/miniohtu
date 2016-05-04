@@ -5,7 +5,6 @@
  */
 package miniohtu.UI;
 
-import miniohtu.UI.Command;
 import miniohtu.IO.IO;
 
 /**

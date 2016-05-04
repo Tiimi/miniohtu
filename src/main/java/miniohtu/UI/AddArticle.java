@@ -6,8 +6,6 @@
 package miniohtu.UI;
 
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 import miniohtu.IO.IO;
 import miniohtu.database.ArticleDAO;
 import miniohtu.entry.Article;

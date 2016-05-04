@@ -38,13 +38,21 @@ public abstract class AddOperation implements Command {
         return kokonaisluku;
     }
 
-    protected String askString(String kentanNimi) {
-        io.print(kentanNimi + ": ");
-        return io.nextString();
+    protected String askString(String kentanNimi, Boolean mandatory) {
+        while (true) {
+            io.print(kentanNimi + ": ");
+            String nextStr = io.nextString();
+            if (mandatory && (nextStr.isEmpty() || nextStr == "")) {
+                io.print("Virhe: kenttä ei voi olla tyhjä\n");
+            }
+            else {
+                return nextStr;
+            }
+        }  
     }
 
     protected String askOptionalString(String fieldValue) {
-        String s = askString(fieldValue);
+        String s = askString(fieldValue, false);
         if (s.isEmpty() || s == "") {
             return null;
         }
@@ -68,7 +76,7 @@ public abstract class AddOperation implements Command {
     protected Map<String, String> askAllFields(String[] mandatoryFields, String[] optionalFields) {
         io.print(mandatoryFieldsHelp);
 
-        Map<String, String> fieldValueMap = new HashMap<String, String>();
+        Map<String, String> fieldValueMap = new HashMap<>();
         for (String mandatoryField : mandatoryFields) {
             String[] typeField = mandatoryField.split(":");
             String type = typeField[0];
@@ -76,7 +84,7 @@ public abstract class AddOperation implements Command {
             if (type.equals("Integer")) {
                 fieldValueMap.put(Field, "" + askInteger(Field));
             } else if (type.equals("String")) {
-                fieldValueMap.put(Field, askString(Field));
+                fieldValueMap.put(Field, askString(Field, true));
             }
         }
 

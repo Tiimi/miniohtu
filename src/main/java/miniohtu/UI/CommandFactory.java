@@ -5,12 +5,6 @@
  */
 package miniohtu.UI;
 
-import miniohtu.UI.AddInbook;
-import miniohtu.UI.AddConference;
-import miniohtu.UI.AddBooklet;
-import miniohtu.UI.AddBook;
-import miniohtu.UI.AddArticle;
-import miniohtu.UI.AddInproceedings;
 import java.util.HashMap;
 import miniohtu.IO.IO;
 import miniohtu.database.ArticleDAO;
