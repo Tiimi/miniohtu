@@ -78,3 +78,39 @@ scenario "invalid remove input", {
         new File("test1.db").delete()
     }
 }
+
+description """Trying to input string as in on mandatory field"""
+
+scenario "invalid input on mandatory integer year is entered", {
+    given 'an article exists and user tries to remove an article with wrong id', {
+        database = new Database("test1.db")
+        io = new IOStub("lisaa","article","abc","pentti","title","journal",
+            "THIS IS WRONG","2000","2","3","1-2","9","note", "lopeta")
+        test = new TextUI(io, database)
+    }
+    when 'wrong integer year is entered', {
+        test.run()
+    }
+    then 'error message is given', {
+        io.getPrintouts().shouldHave("Virhe: anna kokonaisluku")        
+        new File("test1.db").delete()
+    }
+}
+
+description """Trying to input string as in on optional field"""
+
+scenario "invalid input on optional integer month is entered", {
+    given 'an article exists and user tries to remove an article with wrong id', {
+        database = new Database("test1.db")
+        io = new IOStub("lisaa","article","abc","pentti","title","journal",
+            "THIS IS WRONG","2000","2","3","1-2","WRONG", "9","note", "lopeta")
+        test = new TextUI(io, database)
+    }
+    when 'wrong integer year is entered', {
+        test.run()
+    }
+    then 'error message is given', {
+        io.getPrintouts().shouldHave("Virhe: anna kokonaisluku tai tyhjä.")        
+        new File("test1.db").delete()
+    }
+}
