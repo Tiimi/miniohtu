@@ -28,11 +28,6 @@ public class BookletDAO extends BaseDAO<Booklet> {
         
         db.update(sql);
     }
-    
-    private String s(String s) {
-        if (s == null) return null;
-        return "'" + s + "'";
-    }
 
     @Override
     public List<Booklet> findAll() throws SQLException {

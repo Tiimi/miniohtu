@@ -18,6 +18,12 @@ abstract class BaseDAO<T> implements EntryDAO<T> {
         int updateCount = this.db.removeRowFromTable(tableName, citationKey);
         return (updateCount != 0);
     }
+    
+    public String s(String s) {
+        if (s == null) return null;
+        return "'" + s + "'";
+    }
+    
     @Override
     abstract public void add(T entry) throws SQLException;
     @Override

@@ -32,13 +32,6 @@ public class InproceedingsDAO extends BaseDAO<Inproceedings> {
         db.update(sql);
     }
 
-    private String s(String s) {
-        if (s == null) {
-            return null;
-        }
-        return "'" + s + "'";
-    }
-
     @Override
     public List<Inproceedings> findAll() throws SQLException {
         return db.queryAndCollect("SELECT * FROM INPROCEEDINGS", rs -> {

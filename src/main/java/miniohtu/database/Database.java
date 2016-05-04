@@ -18,34 +18,36 @@ public class Database<Entry> {
         try {
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:" + name);
-            checkTablesExcist();
+            checkTablesExist();
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
     
-    private void checkTablesExcist() throws SQLException {
-        if (!tableExcists("ARTICLE")) {
+    private void checkTablesExist() throws SQLException {
+        if (!tableExists("ARTICLE"))
             createArticleTable();
-        }
-        if (!tableExcists("BOOK")) {
+            
+        if (!tableExists("BOOK"))
             createBookTable();
-        }
-        if (!tableExcists("BOOKLET")) {
+        
+        if (!tableExists("BOOKLET"))
             createBookletTable();
-        }
-        if (!tableExcists("CONFERENCE")) {
+        
+        if (!tableExists("CONFERENCE"))
             createConferenceTable();
-        }
-        if (!tableExcists("INBOOK")) {
+        
+        if (!tableExists("INBOOK"))
             createInbookTable();
-        }
-        if (!tableExcists("INPROCEEDINGS")) {
+        
+        if (!tableExists("INCOLLECTION"))
+            createIncollectionTable();
+        
+        if (!tableExists("INPROCEEDINGS"))
             createInproceedingsTable();
-        }
     }
     
-    private boolean tableExcists(String table) throws SQLException {
+    private boolean tableExists(String table) throws SQLException {
         DatabaseMetaData meta = connection.getMetaData();
         ResultSet results = meta.getTables(null, null, table, null);
         return results.next();
@@ -58,6 +60,7 @@ public class Database<Entry> {
         createBookletTable();
         createConferenceTable();
         createInbookTable();
+        createIncollectionTable();
         createInproceedingsTable();
     }
     
@@ -160,7 +163,29 @@ public class Database<Entry> {
         statement.close();
     }
     
-        private void createInproceedingsTable() throws SQLException {
+    private void createIncollectionTable() throws SQLException {
+        Statement statement = connection.createStatement();
+        
+        String sql = "CREATE TABLE INCOLLECTION ("
+                + "citationKey  STRING  NOT NULL UNIQUE,"
+                + "author       STRING  NOT NULL,"
+                + "title        STRING  NOT NULL,"
+                + "bookTitle    STRING  NOT NULL,"
+                + "year         INTEGER NOT NULL,"
+                + "editor       STRING,"
+                + "pages        STRING,"
+                + "organization STRING,"
+                + "publisher    STRING,"
+                + "address      STRING,"
+                + "month        INTEGER,"
+                + "note         STRING,"
+                + "key          STRING )";
+        
+        statement.execute(sql);
+        statement.close();
+    }
+    
+    private void createInproceedingsTable() throws SQLException {
         Statement statement = connection.createStatement();
         
         String sql = "CREATE TABLE INPROCEEDINGS ("
@@ -224,6 +249,7 @@ public class Database<Entry> {
         statement.executeUpdate("DROP TABLE IF EXISTS booklet");
         statement.executeUpdate("DROP TABLE IF EXISTS conference");
         statement.executeUpdate("DROP TABLE IF EXISTS inbook");
+        statement.executeUpdate("DROP TABLE IF EXISTS incollection");
         statement.executeUpdate("DROP TABLE IF EXISTS inproceedings");
         statement.close();
     }

@@ -31,11 +31,6 @@ public class BookDAO extends BaseDAO<Book> {
         db.update(sql);
     }
     
-    private String s(String s) {
-        if (s == null) return null;
-        return "'" + s + "'";
-    }
-    
     @Override
     public List<Book> findAll() throws SQLException {
         return db.queryAndCollect("SELECT * FROM BOOK", rs -> {

@@ -24,6 +24,7 @@ public class BookCollector implements Collector<Book> {
         String note         = rs.getString("note");
         String key          = rs.getString("key");
         
-        return EntryCreator.book(citationKey, author, title, author, year, volume, series, address, edition, month, note, key);
+        return EntryCreator.book(citationKey, author, title, author, year, volume, series, 
+                address, edition, month, note, key);
     }
 }

@@ -29,11 +29,6 @@ public class ArticleDAO extends BaseDAO<Article> {
         db.update(sql);
     }
 
-    private String s(String s) {
-        if (s == null) return null;
-        return "'" + s + "'";
-    }
-
     @Override
     public List<Article> findAll() throws SQLException {
         return db.queryAndCollect("SELECT * FROM ARTICLE", rs -> {

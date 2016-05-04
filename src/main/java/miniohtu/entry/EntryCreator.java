@@ -27,6 +27,7 @@ public class EntryCreator {
         fieldValues.put("pages", pages);
         fieldValues.put("month", month + "");
         fieldValues.put("note", note);
+        
         return new Article(fieldValues);
     }
 
@@ -49,6 +50,7 @@ public class EntryCreator {
         fieldValues.put("month", month + "");
         fieldValues.put("note", note);
         fieldValues.put("key", key);
+        
         return new Book(fieldValues);
     }
     
@@ -70,8 +72,8 @@ public class EntryCreator {
         fieldValues.put("year", year + "");
         fieldValues.put("note", note);
         fieldValues.put("key", key);
-        return new Booklet(fieldValues);
         
+        return new Booklet(fieldValues);
     }
     
     public static Booklet booklet(String citationKey, String title) {
@@ -97,6 +99,7 @@ public class EntryCreator {
         
         fieldValues.put("note", note);
         fieldValues.put("key", key);
+        
         return new Conference(fieldValues);
     }
     
@@ -122,11 +125,32 @@ public class EntryCreator {
         fieldValues.put("month", month + "");
         fieldValues.put("note", note);
         fieldValues.put("key", key);
+        
         return new Inbook(fieldValues);
     }
     
     public static Inbook inbook(String citationKey, String author, String title, int chapter, String publisher, int year) {
         return inbook(citationKey, author, title, chapter, publisher, year, Integer.MAX_VALUE, Integer.MAX_VALUE, null, Integer.MAX_VALUE, Integer.MAX_VALUE, null, null);
+    }
+    
+    public static Incollection incollection(String citationKey, String author, String title, String bookTitle, int year,
+            String editor, String pages, String organization, String publisher, String address, int month, String note, String key) {
+        Map<String, String> fieldValues = new HashMap<>();
+        fieldValues.put("citation key", citationKey);
+        fieldValues.put("author", author);
+        fieldValues.put("title", title);
+        fieldValues.put("book title", bookTitle);
+        fieldValues.put("year", year + "");
+        fieldValues.put("editor", editor);
+        fieldValues.put("pages", pages);
+        fieldValues.put("organization", organization);
+        fieldValues.put("publisher", publisher);
+        fieldValues.put("address", address);
+        fieldValues.put("month", month + "");
+        fieldValues.put("note", note);
+        fieldValues.put("key", key);
+        
+        return new Incollection(fieldValues);
     }
     
     public static Inproceedings inproceedings(String citationKey, String author,
@@ -148,6 +172,7 @@ public class EntryCreator {
         fieldValues.put("month", month + "");
         fieldValues.put("note", note);
         fieldValues.put("key", key);
+        
         return new Inproceedings(fieldValues);
         
     }

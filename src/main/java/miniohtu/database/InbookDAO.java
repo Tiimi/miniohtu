@@ -31,11 +31,6 @@ public class InbookDAO extends BaseDAO<Inbook> {
         
         db.update(sql);
     }
-    
-    private String s(String s) {
-        if (s == null) return null;
-        return "'" + s + "'";
-    }
 
     @Override
     public List<Inbook> findAll() throws SQLException {

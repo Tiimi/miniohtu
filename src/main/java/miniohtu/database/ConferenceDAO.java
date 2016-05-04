@@ -32,11 +32,6 @@ public class ConferenceDAO extends BaseDAO<Conference> {
         
         this.db.update(sql);
     }
-
-    private String s(String s) {
-        if (s == null) return null;
-        return "'" + s + "'";
-    }
     
     @Override
     public List<Conference> findAll() throws SQLException {

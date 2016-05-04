@@ -17,8 +17,6 @@ import miniohtu.entry.Article;
 public class AddArticle extends AddOperation {
     private final ArticleDAO articleDAO;
     
-    
-
     public AddArticle(IO io, ArticleDAO article) {
         super(io);
         this.articleDAO = article;

@@ -12,6 +12,7 @@ import miniohtu.database.BookDAO;
 import miniohtu.database.BookletDAO;
 import miniohtu.database.ConferenceDAO;
 import miniohtu.database.InbookDAO;
+import miniohtu.database.IncollectionDAO;
 import miniohtu.database.InproceedingsDAO;
 
 /**
@@ -23,7 +24,7 @@ public class CommandFactory {
     private final IO io;
     
     public CommandFactory(IO io, ArticleDAO article, BookDAO book, BookletDAO booklet,
-            ConferenceDAO conference, InbookDAO inbook, InproceedingsDAO inproceedings) {
+            ConferenceDAO conference, InbookDAO inbook, IncollectionDAO incollection, InproceedingsDAO inproceedings) {
         this.io = io;
         commands = new HashMap<>();
         commands.put("peru", new Cancel(io));
@@ -32,6 +33,7 @@ public class CommandFactory {
         commands.put("booklet", new AddBooklet(io, booklet));
         commands.put("conference", new AddConference(io, conference));
         commands.put("inbook", new AddInbook(io, inbook));
+        commands.put("incollection", new AddIncollection(io, incollection));
         commands.put("inproceedings", new AddInproceedings(io, inproceedings));
     }
     
