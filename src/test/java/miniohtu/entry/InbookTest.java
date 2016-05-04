@@ -11,8 +11,8 @@ public class InbookTest {
     
     @Before
     public void setUp() {
-        requiredFields = new Inbook("citationkey", "author", "title", 4, "publisher", 2016);
-        allFields = new Inbook("citationkey", "author", "title", 9, "publisher", 2016,
+        requiredFields = EntryCreator.inbook("citationkey", "author", "title", 4, "publisher", 2016);
+        allFields = EntryCreator.inbook("citationkey", "author", "title", 9, "publisher", 2016,
             4, 3, "address", 5, 6, "note", "key");
     }
     

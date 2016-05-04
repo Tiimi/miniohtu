@@ -17,7 +17,7 @@ scenario "add a new inbook", {
     }
 
     then 'new inbook is in the system', {
-        io.getPrintouts().shouldHave("Inbook{citationKey=citationKey, author=author, title=title, chapter=1, publisher=publisher, year=2016, volume=1, series=2, address=address, edition=2, month=4, note=note, key=key}")
+        io.getPrintouts().shouldHave("INBOOK{citationKey=citationKey, author=author, title=title, chapter=1, publisher=publisher, year=2016, volume=1, series=2, address=address, edition=2, month=4, note=note, key=key}")
         new File("test1.db").delete()
     }
 }

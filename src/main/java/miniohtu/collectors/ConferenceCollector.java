@@ -4,6 +4,7 @@ package miniohtu.collectors;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import miniohtu.entry.Conference;
+import miniohtu.entry.EntryCreator;
 
 public class ConferenceCollector implements Collector<Conference> {
 
@@ -24,7 +25,7 @@ public class ConferenceCollector implements Collector<Conference> {
         String note         = rs.getString("note");
         String key          = rs.getString("key");
         
-        return new Conference(citationKey, author, title, bookTitle, year, 
+        return EntryCreator.conference(citationKey, author, title, bookTitle, year, 
                 editor, pages, organization, publisher, address, month, note, key);
     }
 }

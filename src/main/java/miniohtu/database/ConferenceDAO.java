@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import miniohtu.entry.Conference;
+import miniohtu.entry.EntryCreator;
 
 public class ConferenceDAO extends BaseDAO<Conference> {
 
@@ -40,7 +41,7 @@ public class ConferenceDAO extends BaseDAO<Conference> {
     @Override
     public List<Conference> findAll() throws SQLException {
         return db.queryAndCollect("SELECT * FROM CONFERENCE", (ResultSet rs) -> {
-           return new Conference(
+           return EntryCreator.conference(
                 rs.getString("citationKey"),
                 rs.getString("author"),
                 rs.getString("title"),
@@ -60,7 +61,7 @@ public class ConferenceDAO extends BaseDAO<Conference> {
     @Override
     public Conference find(String citationKey) throws SQLException {
         List<Conference> matches = db.queryAndCollect("SELECT * FROM CONFERENCE WHERE CITATIONKEY='" + citationKey + "'", rs -> {
-           return new Conference(
+           return EntryCreator.conference(
                 rs.getString("citationKey"),
                 rs.getString("author"),
                 rs.getString("title"),

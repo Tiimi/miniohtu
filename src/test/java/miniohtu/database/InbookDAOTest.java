@@ -4,6 +4,7 @@ package miniohtu.database;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
+import miniohtu.entry.EntryCreator;
 import miniohtu.entry.Inbook;
 import org.junit.After;
 import org.junit.Before;
@@ -32,7 +33,7 @@ public class InbookDAOTest {
     
     @Test
     public void findTest() throws SQLException {
-        inbookDAO.add(new Inbook("i_am_CitationKey", "author", "title", 1, 
+        inbookDAO.add(EntryCreator.inbook("i_am_CitationKey", "author", "title", 1, 
                 "publisher", 2016, 2, 3, "address", 1, 4, "note", "key"));
         Inbook inbook = inbookDAO.find("i_am_CitationKey");
         
@@ -53,7 +54,7 @@ public class InbookDAOTest {
     
     @Test
     public void findAllTest() throws SQLException {
-        inbookDAO.add(new Inbook("i_am_CitationKey", "author", "title", 1, 
+        inbookDAO.add(EntryCreator.inbook("i_am_CitationKey", "author", "title", 1, 
                 "publisher", 2016, 2, 3, "address", 1, 4, "note", "key"));
         List<Inbook> inbook = inbookDAO.findAll();
         
@@ -74,7 +75,7 @@ public class InbookDAOTest {
  
     @Test
     public void removeTest() throws SQLException {
-        inbookDAO.add(new Inbook("i_am_CitationKey", "author", "title", 1, 
+        inbookDAO.add(EntryCreator.inbook("i_am_CitationKey", "author", "title", 1, 
                 "publisher", 2016, 2, 3, "address", 1, 4, "note", "key"));
         inbookDAO.remove("i_am_CitationKey", "inbook");
         assertNull(inbookDAO.find("i_am_CitationKey"));

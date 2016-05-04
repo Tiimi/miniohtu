@@ -13,8 +13,8 @@ public class ConferenceTest {
     
     @Before
     public void setUp() {
-        requiredFields = new Conference("1234", "Vili", "Titteli", "Book titteli", 2016);
-        allFields = new Conference("12342", "Vili2", "Titteli2", "Book titteli2", 20162,
+        requiredFields = EntryCreator.conference("1234", "Vili", "Titteli", "Book titteli", 2016);
+        allFields = EntryCreator.conference("12342", "Vili2", "Titteli2", "Book titteli2", 20162,
                 "Editori", "100", "Organisaatio", "Publisheri", "Addressi", 1, "Nootti", "Key");
     }
 
@@ -59,7 +59,7 @@ public class ConferenceTest {
         String expected = "@CONFERENCE{1234,\n"
                 + "  author = {Vili},\n"
                 + "  title = {Titteli},\n"
-                + "  booktitle = {Book titteli},\n"
+                + "  bookTitle = {Book titteli},\n"
                 + "  year = 2016,\n"
                 + "}";
         assertEquals(expected, requiredFields.toBibtex());
@@ -70,10 +70,10 @@ public class ConferenceTest {
         String expected = "@CONFERENCE{12342,\n"
                 + "  author = {Vili2},\n"
                 + "  title = {Titteli2},\n"
-                + "  booktitle = {Book titteli2},\n"
+                + "  bookTitle = {Book titteli2},\n"
                 + "  year = 20162,\n"
                 + "  editor = {Editori},\n"
-                + "  pages = 100,\n"
+                + "  pages = {100},\n"
                 + "  organization = {Organisaatio},\n"
                 + "  publisher = {Publisheri},\n"
                 + "  address = {Addressi},\n"

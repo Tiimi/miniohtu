@@ -17,7 +17,7 @@ scenario "add a new conference with all fields", {
     }
 
     then 'new conference is in the system', {
-        io.getPrintouts().shouldHave("Conference{citationKey=Key, author=author, title=title, bookTitle=bookTitle, year=2016, editor=editor, pages=10, organization=organization, publisher=publisher, address=address, month=4, note=note, key=key}")
+        io.getPrintouts().shouldHave("CONFERENCE{citationKey=Key, author=author, title=title, bookTitle=bookTitle, year=2016, editor=editor, pages=10, organization=organization, publisher=publisher, address=address, month=4, note=note, key=key}")
         new File("test1.db").delete()
     }
 }
@@ -34,7 +34,7 @@ scenario "add a new conference with some optional fields", {
     }
 
     then 'new conference is in the system', {
-        io.getPrintouts().shouldHave("Conference{citationKey=newKey, author=author, title=title, bookTitle=bookTitle, year=2016, editor=editor, pages=21, organization=organization, publisher=publisher, address=address, month=6, note=note, key=key}")
+        io.getPrintouts().shouldHave("CONFERENCE{citationKey=newKey, author=author, title=title, bookTitle=bookTitle, year=2016, editor=editor, pages=21, organization=organization, publisher=publisher, address=address, month=6, note=note, key=key}")
         new File("test2.db").delete()
     }
 }

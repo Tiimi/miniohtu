@@ -5,6 +5,7 @@ import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 import miniohtu.entry.Conference;
+import miniohtu.entry.EntryCreator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +33,7 @@ public class ConferenceDAOTest {
     
     @Test
     public void findTest() throws SQLException {
-        conferenceDAO.add(new Conference("i_am_CitationKey", "author", "title", "bookTitle", 2016, 
+        conferenceDAO.add(EntryCreator.conference("i_am_CitationKey", "author", "title", "bookTitle", 2016, 
                 "editor", "10", "organization", "publisher", "address", 4, "note", "key"));
         Conference conference = conferenceDAO.find("i_am_CitationKey");
         
@@ -53,7 +54,7 @@ public class ConferenceDAOTest {
     
     @Test
     public void findAllTest() throws SQLException {
-        conferenceDAO.add(new Conference("i_am_CitationKey", "author", "title", "bookTitle", 2016, 
+        conferenceDAO.add(EntryCreator.conference("i_am_CitationKey", "author", "title", "bookTitle", 2016, 
                 "editor", "10", "organization", "publisher", "address", 4, "note", "key"));
         List<Conference> conference = conferenceDAO.findAll();
         
@@ -74,7 +75,7 @@ public class ConferenceDAOTest {
     
     @Test
     public void removeTest() throws SQLException {
-        conferenceDAO.add(new Conference("i_am_CitationKey", "author", "title", "bookTitle", 2016, 
+        conferenceDAO.add(EntryCreator.conference("i_am_CitationKey", "author", "title", "bookTitle", 2016, 
                 "editor", "10", "organization", "publisher", "address", 4, "note", "key"));
         conferenceDAO.remove("i_am_CitationKey", "conference");
         assertNull(conferenceDAO.find("i_am_CitationKey"));

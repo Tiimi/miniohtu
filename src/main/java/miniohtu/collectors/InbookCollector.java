@@ -3,6 +3,7 @@ package miniohtu.collectors;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import miniohtu.entry.EntryCreator;
 import miniohtu.entry.Inbook;
 
 public class InbookCollector implements Collector<Inbook> {
@@ -24,7 +25,7 @@ public class InbookCollector implements Collector<Inbook> {
         String note         = rs.getString("note");
         String key          = rs.getString("key");
         
-        return new Inbook(citationKey, author, title, chapter, publisher, year, 
+        return EntryCreator.inbook(citationKey, author, title, chapter, publisher, year, 
                 volume, series, address, edition, month, note, key);
     }
 }
