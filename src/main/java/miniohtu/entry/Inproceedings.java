@@ -9,7 +9,7 @@ public class Inproceedings extends Entry implements BaseEntry {
     private final Map<String, String> fieldValues;
 
     public Inproceedings(Map<String, String> fieldValues) {
-        super("ARTICLE", mandatoryFields, optionalFields, fieldValues);
+        super("INPROCEEDINGS", mandatoryFields, optionalFields, fieldValues);
         this.fieldValues = fieldValues;
     }
 

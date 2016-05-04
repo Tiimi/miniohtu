@@ -72,7 +72,8 @@
                 <configuration>
                     <instrumentation>
                         <excludes>
-                            <exclude>miniohtu/IO/**/*.class</exclude>     
+                            <exclude>miniohtu/IO/**/*.class</exclude>   
+                            <exclude>miniohtu/app/**/*.class</exclude>   
                             <exclude>miniohtu/collectors/**/*.class</exclude>
                         </excludes>
                     </instrumentation>
