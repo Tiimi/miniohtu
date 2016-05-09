@@ -8,6 +8,8 @@ Miniprojekti Ohtu 2016
 
 [Definition of Done](https://docs.google.com/document/d/1DZLk80cb_Rl6WCxi7V8iJ2WGPlqaD6k5EamVSCan2Tc/edit)
 
+[Loppuraportti](https://docs.google.com/document/d/1iZfDoSv9vpGxVWXi1EzODaxSTIDV-_rAHYbVcX2bZYM/edit?usp=sharing)
+
 ## Tiimin jäsenet:
 +  Antti Haapaniemi
 +  Vililassi Ala-Tuuhonen
